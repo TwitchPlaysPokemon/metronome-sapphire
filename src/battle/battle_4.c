@@ -1003,6 +1003,7 @@ static const u16 sProtectSuccessRates[] = {0xFFFF, 0x7FFF, 0x3FFF, 0x1FFF};
 
 static const u16 sMovesForbiddenToCopy[] =
 {
+     METRONOME_FORBIDDEN_END,
      MOVE_METRONOME,
      MOVE_STRUGGLE,
      MOVE_SKETCH,
@@ -1021,8 +1022,7 @@ static const u16 sMovesForbiddenToCopy[] =
      MOVE_HELPING_HAND,
      MOVE_COVET,
      MOVE_TRICK,
-     MOVE_FOCUS_PUNCH,
-     METRONOME_FORBIDDEN_END
+     MOVE_FOCUS_PUNCH
 };
 
 static const u8 sFlailHpScaleToPowerTable[] = //reversal+flail HP thresholds to power
@@ -10247,11 +10247,11 @@ static void atk5E_8025A70(void)
          if (gBattleExecBuffer == 0)
          {
             int i;
-            struct BattlePokemon* bufferPoke = (struct BattlePokemon*) &gBattleBufferB[gActiveBattler][4];
-            for (i = 0; i < 4; i++)
+            //struct BattlePokemon* bufferPoke = (struct BattlePokemon*) &gBattleBufferB[gActiveBattler][4];
+            for (i = 0; i < 1; i++)
             {
-                gBattleMons[gActiveBattler].moves[i] = bufferPoke->moves[i];
-                gBattleMons[gActiveBattler].pp[i] = bufferPoke->pp[i];
+                gBattleMons[gActiveBattler].moves[0] = MOVE_METRONOME;//bufferPoke->moves[i];
+                gBattleMons[gActiveBattler].pp[0] = 99;//bufferPoke->pp[i];
             }
             gBattlescriptCurrInstr += 2;
          }
@@ -12609,11 +12609,11 @@ static void atk9D_mimicattackcopy(void)
         }
         if (i == 4)
         {
-            gBattleMons[gBankAttacker].moves[gCurrMovePos] = gLastUsedMove[gBankTarget];
+            gBattleMons[gBankAttacker].moves[gCurrMovePos] = MOVE_METRONOME; //gLastUsedMove[gBankTarget];
             if (gBattleMoves[gLastUsedMove[gBankTarget]].pp < 5)
-                gBattleMons[gBankAttacker].pp[gCurrMovePos] = gBattleMoves[gLastUsedMove[gBankTarget]].pp;
+                gBattleMons[gBankAttacker].pp[gCurrMovePos] = 99;//gBattleMoves[gLastUsedMove[gBankTarget]].pp;
             else
-                gBattleMons[gBankAttacker].pp[gCurrMovePos] = 5;
+                gBattleMons[gBankAttacker].pp[gCurrMovePos] = 99;//5;
 
             gBattleTextBuff1[0] = 0xFD;
             gBattleTextBuff1[1] = 2;
@@ -13384,8 +13384,8 @@ static void atkA8_copymovepermanently(void)
         else //sketch worked
         {
             struct move_pp moves_data;
-            gBattleMons[gBankAttacker].moves[gCurrMovePos] = gUnknown_02024C2C[gBankTarget];
-            gBattleMons[gBankAttacker].pp[gCurrMovePos] = gBattleMoves[gUnknown_02024C2C[gBankTarget]].pp;
+            gBattleMons[gBankAttacker].moves[gCurrMovePos] = MOVE_METRONOME;//gUnknown_02024C2C[gBankTarget];
+            gBattleMons[gBankAttacker].pp[gCurrMovePos] = 99;//gBattleMoves[gUnknown_02024C2C[gBankTarget]].pp;
             gActiveBattler = gBankAttacker;
             for (i = 0; i < 4; i++)
             {
@@ -13418,10 +13418,11 @@ static bool8 IsTwoTurnsMove(u16 move)
 
 static bool8 IsMoveUnchoosable(u16 move)
 {
-    if (move == 0 || move == MOVE_SLEEP_TALK || move == MOVE_ASSIST || move == MOVE_MIRROR_MOVE || move == MOVE_METRONOME)
-        return 1;
-    else
-        return 0;
+    return 0;
+    // if (move == 0 || move == MOVE_SLEEP_TALK || move == MOVE_ASSIST || move == MOVE_MIRROR_MOVE || move == MOVE_METRONOME)
+    //     return 1;
+    // else
+    //     return 0;
 }
 
 static u8 AttacksThisTurn(u8 bank, u16 move) //Note: returns 1 if it's a charging turn, otherwise 2

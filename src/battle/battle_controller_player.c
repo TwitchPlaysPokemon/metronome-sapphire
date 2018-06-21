@@ -838,17 +838,17 @@ void sub_802CA60(void)
                 totalPPBonuses |= perMovePPBonuses[i] << (i * 2);
             gBattleMons[gActiveBattler].ppBonuses = totalPPBonuses;
 
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < 1; i++)
             {
-                gBattleMons[gActiveBattler].moves[i] = r9->moves[i];
-                gBattleMons[gActiveBattler].pp[i] = r9->pp[i];
+                gBattleMons[gActiveBattler].moves[0] = MOVE_METRONOME; //r9->moves[i];
+                gBattleMons[gActiveBattler].pp[0] = 99; //r9->pp[i];
             }
             if (!(gBattleMons[gActiveBattler].status2 & 0x200000))
             {
                 for (i = 0; i < 4; i++)
                 {
-                    sp0.moves[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + i);
-                    sp0.pp[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PP1 + i);
+                    sp0.moves[0] = i ? 0 : MOVE_METRONOME; //GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + i);
+                    sp0.pp[0] = i ? 0 : 99; //GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PP1 + i);
                 }
 
                 totalPPBonuses = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PP_BONUSES);
@@ -871,11 +871,11 @@ void sub_802CA60(void)
                 for (i = 0; i < 4; i++)
                     totalPPBonuses |= perMovePPBonuses[i] << (i * 2);
 
-                for (i = 0; i < 4; i++)
-                {
-                    SetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + i, &sp0.moves[i]);
-                    SetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PP1 + i, &sp0.pp[i]);
-                }
+                // for (i = 0; i < 4; i++)
+                // {
+                //     SetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + i, &sp0.moves[i]);
+                //     SetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PP1 + i, &sp0.pp[i]);
+                // }
                 SetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_PP_BONUSES, &totalPPBonuses);
             }
         }
@@ -1937,8 +1937,8 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
         battlePokemon.item = GetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM);
         for (size = 0; size < 4; size++)
         {
-            battlePokemon.moves[size] = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + size);
-            battlePokemon.pp[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
+            battlePokemon.moves[size] = size ? 0 : MOVE_METRONOME; //GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + size);
+            battlePokemon.pp[size] = size ? 0 : 99; //GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
         }
         battlePokemon.ppBonuses = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
         battlePokemon.friendship = GetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP);
@@ -1982,8 +1982,8 @@ u32 dp01_getattr_by_ch1_for_player_pokemon_(u8 a, u8 *buffer)
     case 3:
         for (size = 0; size < 4; size++)
         {
-            moveData.moves[size] = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + size);
-            moveData.pp[size] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
+            moveData.moves[size] = size ? 0 : MOVE_METRONOME; //GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + size);
+            moveData.pp[size] = size ? 0 : 99;//GetMonData(&gPlayerParty[a], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES);
         MEMCPY_ALT(&moveData, buffer, sizeof(moveData), size, src);
@@ -2261,7 +2261,7 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBattler][3];
     struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBattler][3];
-    s32 i;
+    //s32 i;
 
     switch (gBattleBufferA[gActiveBattler][1])
     {
@@ -2271,11 +2271,11 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
 
             SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, &battlePokemon->species);
             SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &battlePokemon->item);
-            for (i = 0; i < 4; i++)
-            {
-                SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
-                SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
-            }
+            // for (i = 0; i < 4; i++)
+            // {
+            //     SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
+            //     SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
+            // }
             SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &battlePokemon->ppBonuses);
             SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, &battlePokemon->friendship);
             SetMonData(&gPlayerParty[a], MON_DATA_EXP, &battlePokemon->experience);
@@ -2294,7 +2294,7 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
             SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, &battlePokemon->personality);
             SetMonData(&gPlayerParty[a], MON_DATA_STATUS, &battlePokemon->status1);
             SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, &battlePokemon->level);
-            SetMonData(&gPlayerParty[a], MON_DATA_HP, &battlePokemon->hp);
+            SetMonData(&gPlayerParty[a], MON_DATA_HP, &battlePokemon->maxHP);
             SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, &battlePokemon->maxHP);
             SetMonData(&gPlayerParty[a], MON_DATA_ATK, &battlePokemon->attack);
             SetMonData(&gPlayerParty[a], MON_DATA_DEF, &battlePokemon->defense);
@@ -2310,11 +2310,11 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
         SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 3:
-        for (i = 0; i < 4; i++)
-        {
-            SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &moveData->moves[i]);
-            SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &moveData->pp[i]);
-        }
+        // for (i = 0; i < 4; i++)
+        // {
+        //     SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + i, &moveData->moves[i]);
+        //     SetMonData(&gPlayerParty[a], MON_DATA_PP1 + i, &moveData->pp[i]);
+        // }
         SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
         break;
     case 4:

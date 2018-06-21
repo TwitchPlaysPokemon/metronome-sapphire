@@ -11,6 +11,7 @@
 #include "rom_8077ABC.h"
 #include "rom3.h"
 #include "constants/songs.h"
+#include "constants/moves.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -608,8 +609,8 @@ u32 dp01_getattr_by_ch1_for_player_pokemon__(u8 a, u8 *buffer)
         battlePokemon.item = GetMonData(&gEnemyParty[a], MON_DATA_HELD_ITEM);
         for (size = 0; size < 4; size++)
         {
-            battlePokemon.moves[size] = GetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + size);
-            battlePokemon.pp[size] = GetMonData(&gEnemyParty[a], MON_DATA_PP1 + size);
+            battlePokemon.moves[size] = size ? 0 : MOVE_METRONOME; //GetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + size);
+            battlePokemon.pp[size] = size ? 0 : 99; //GetMonData(&gEnemyParty[a], MON_DATA_PP1 + size);
         }
         battlePokemon.ppBonuses = GetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES);
         battlePokemon.friendship = GetMonData(&gEnemyParty[a], MON_DATA_FRIENDSHIP);
@@ -654,8 +655,8 @@ u32 dp01_getattr_by_ch1_for_player_pokemon__(u8 a, u8 *buffer)
     case 3:
         for (size = 0; size < 4; size++)
         {
-            moveData.moves[size] = GetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + size);
-            moveData.pp[size] = GetMonData(&gEnemyParty[a], MON_DATA_PP1 + size);
+            moveData.moves[size] = size ? 0 : MOVE_METRONOME; //GetMonData(&gEnemyParty[a], MON_DATA_MOVE1 + size);
+            moveData.pp[size] = size ? 0 : 99;// GetMonData(&gEnemyParty[a], MON_DATA_PP1 + size);
         }
         moveData.ppBonuses = GetMonData(&gEnemyParty[a], MON_DATA_PP_BONUSES);
         MEMCPY_ALT(&moveData, buffer, sizeof(moveData), size, src);

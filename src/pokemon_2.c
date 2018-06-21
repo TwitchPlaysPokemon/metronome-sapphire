@@ -1194,8 +1194,8 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
 
     for (i = 0; i < 4; i++)
     {
-        gBattleMons[battleIndex].moves[i] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1 + i, NULL);
-        gBattleMons[battleIndex].pp[i] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PP1 + i, NULL);
+        gBattleMons[battleIndex].moves[i] = i ? 0 : MOVE_METRONOME;//GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1 + i, NULL);
+        gBattleMons[battleIndex].pp[i] = i ? 0 : 99;//GetMonData(&gPlayerParty[partyIndex], MON_DATA_PP1 + i, NULL);
     }
 
     gBattleMons[battleIndex].ppBonuses = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PP_BONUSES, NULL);
