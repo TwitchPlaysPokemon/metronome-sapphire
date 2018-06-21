@@ -627,6 +627,7 @@ static void CB2_EndWildBattle(void)
     }
     else
     {
+        ScrSpecial_HealPlayerParty();
         SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = sub_8080E44;
     }
@@ -639,8 +640,10 @@ void CB2_EndScriptedWildBattle(void)
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
         SetMainCallback2(CB2_WhiteOut);
-    else
+    else {
+        ScrSpecial_HealPlayerParty();
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    }
 }
 
 s8 BattleSetup_GetTerrain(void)
@@ -1107,6 +1110,7 @@ void CB2_EndTrainerBattle(void)
 {
     if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
     {
+        ScrSpecial_HealPlayerParty();
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
@@ -1115,6 +1119,7 @@ void CB2_EndTrainerBattle(void)
     }
     else
     {
+        ScrSpecial_HealPlayerParty();
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
         SetCurrentTrainerBattledFlag();
     }
@@ -1132,6 +1137,7 @@ void CB2_EndTrainerEyeRematchBattle(void)
     }
     else
     {
+        ScrSpecial_HealPlayerParty();
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
         SetCurrentTrainerBattledFlag();
         SetTrainerFlagsAfterTrainerEyeRematch();
