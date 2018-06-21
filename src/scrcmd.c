@@ -43,6 +43,8 @@
 #include "string_util.h"
 #include "tv.h"
 #include "constants/maps.h"
+#include "constants/items.h"
+#include "constants/moves.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -68,6 +70,8 @@ extern u16 gSpecialVar_ContestCategory;
 extern SpecialFunc gSpecials[];
 extern u8 *gStdScripts[];
 extern u8 *gStdScripts_End[];
+
+extern u16 TMHMMoves[];
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
@@ -1580,6 +1584,7 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
 {
     u8 i;
     u16 moveId = ScriptReadHalfword(ctx);
+    u16 itemId = 0;
 
     gSpecialVar_Result = 6;
     for (i = 0; i < PARTY_SIZE; i++)
@@ -1592,9 +1597,22 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
         {
             gSpecialVar_Result = i;
             gSpecialVar_0x8004 = species;
-            break;
+            return TRUE;
         }
     }
+
+    for(i = 0; i < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; i++) {
+        if (TMHMMoves[i] == moveId) {
+            itemId = i + ITEM_TM01_FOCUS_PUNCH;
+            break;
+        }  
+    }
+    if (itemId && CheckBagHasItem(itemId, 1) == TRUE) {
+        gSpecialVar_Result = 0;
+        gSpecialVar_0x8004 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+        return TRUE;
+    }
+
     return FALSE;
 }
 
