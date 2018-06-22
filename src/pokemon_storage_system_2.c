@@ -993,11 +993,11 @@ void sub_8097594(void)
         }
         break;
     case 3:
-        gPokemonStorageSystemPtr->unk_0004 = 8;
-        // sub_809B760();
-        // sub_809801C();
-        // PrintStorageActionText(PC_TEXT_WAS_RELEASED);
-        // gPokemonStorageSystemPtr->unk_0004++;
+        //gPokemonStorageSystemPtr->unk_0004 = 8; //pokemon comes back
+        sub_809B760();
+        sub_809801C();
+        PrintStorageActionText(PC_TEXT_WAS_RELEASED);
+        gPokemonStorageSystemPtr->unk_0004++;
         break;
     case 4:
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
