@@ -3892,8 +3892,8 @@ void Task_TeamMonTMMove2(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gOtherText_LearnedMove);
     sub_806E834(gStringVar4, 1);
     AdjustFriendship(ewram1C000.pokemon, FRIENDSHIP_EVENT_LEARN_TMHM);
-    if (ewram1B000.unk282 == 0 && ewram1C000.secondarySelectedIndex < ITEM_HM01_CUT)
-        RemoveBagItem(ewram1C000.secondarySelectedIndex, 1);
+    // if (ewram1B000.unk282 == 0 && ewram1C000.secondarySelectedIndex < ITEM_HM01_CUT)
+    //     RemoveBagItem(ewram1C000.secondarySelectedIndex, 1);
     gTasks[taskId].func = Task_TeamMonTMMove3;
 }
 
