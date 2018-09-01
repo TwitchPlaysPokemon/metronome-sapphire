@@ -5,7 +5,8 @@ GAME_VERSION  ?= RUBY
 GAME_REVISION ?= 0
 GAME_LANGUAGE ?= ENGLISH
 DEBUG         ?= 0
-COMPARE  ?= 1
+COMPARE       ?= 1
+RANDOMIZE     ?= 1
 
 # For gbafix
 MAKER_CODE  := 01
