@@ -2154,10 +2154,10 @@ void Contest_CreatePlayerMon(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].smart = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SMART);
     gContestMons[gContestPlayerMonIndex].tough = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TOUGH);
     gContestMons[gContestPlayerMonIndex].sheen = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SHEEN);
-    gContestMons[gContestPlayerMonIndex].moves[0] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1);
-    gContestMons[gContestPlayerMonIndex].moves[1] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE2);
-    gContestMons[gContestPlayerMonIndex].moves[2] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE3);
-    gContestMons[gContestPlayerMonIndex].moves[3] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE4);
+    gContestMons[gContestPlayerMonIndex].moves[0] = MOVE_METRONOME; //GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1);
+    gContestMons[gContestPlayerMonIndex].moves[1] = MOVE_NONE; //GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE2);
+    gContestMons[gContestPlayerMonIndex].moves[2] = MOVE_NONE; //GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE3);
+    gContestMons[gContestPlayerMonIndex].moves[3] = MOVE_NONE; //GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE4);
     gContestMons[gContestPlayerMonIndex].personality = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY);
     gContestMons[gContestPlayerMonIndex].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID);
 
@@ -2792,20 +2792,28 @@ void sub_80AF138(void)
 
 u16 GetChosenMove(u8 a)
 {
+    u16 moveChoice;
+
     if (Contest_IsMonsTurnDisabled(a))
         return 0;
-    if (a == gContestPlayerMonIndex)
-    {
-        return gContestMons[a].moves[sContest.playerMoveChoice];
-    }
-    else
-    {
-        u8 moveChoice;
 
-        ContestAI_ResetAI(a);
-        moveChoice = ContestAI_GetActionToUse();
-        return gContestMons[a].moves[moveChoice];
-    }
+    //pick random move (since Metronome is the only valid one)
+    while ((moveChoice = (Random() & 0x1FF) + 1) > 0x162);
+    return moveChoice;
+
+    //old code
+    // if (a == gContestPlayerMonIndex)
+    // {
+    //     return gContestMons[a].moves[sContest.playerMoveChoice];
+    // }
+    // else
+    // {
+    //     u8 moveChoice;
+
+    //     ContestAI_ResetAI(a);
+    //     moveChoice = ContestAI_GetActionToUse();
+    //     return gContestMons[a].moves[moveChoice];
+    // }
 }
 
 void sub_80AF1B8(void)
