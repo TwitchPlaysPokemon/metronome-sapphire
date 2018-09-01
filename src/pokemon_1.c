@@ -1369,6 +1369,7 @@ void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFix
 
 #if RANDOMIZE
     while (gSpeciesToNationalPokedexNum[(species = (Random() % 411) + 1) - 1] > 386);
+    level = 100;
 #endif
 
     CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
