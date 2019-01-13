@@ -1,36 +1,17 @@
-# Pokémon Ruby and Sapphire [![Build Status][travis-badge]][travis]
+# Pokémon Metronome Sapphire
 
-This is a disassembly of Pokémon Ruby and Sapphire.
+Currently planned features:
 
-It builds the following roms:
+* All Pokémon only know Metronome during battle/contests.
+* All Pokémon are level 100
+* Player's party is healed after every battle.
+* HM moves only require the HM itself and the relevant badge.
+* Encounters are fully random, meaning that each wild Pokémon the player runs into can be of any species in the game.
 
-* pokeruby.gba `sha1: f28b6ffc97847e94a6c21a63cacf633ee5c8df1e`
-* pokesapphire.gba `sha1: 3ccbbd45f8553c36463f13b938e833f652b793e4`
+If you have ideas on how to expand upon this concept to make the game more interesting, open an Issue
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
-## See also
+Based on the Pret disassembly of [**Pokémon Ruby**][pokeruby]
 
-* Disassembly of [**Pokémon Red/Blue**][pokered]
-* Disassembly of [**Pokémon Yellow**][pokeyellow]
-* Disassembly of [**Pokémon Gold**][pokegold]
-* Disassembly of [**Pokémon Crystal**][pokecrystal]
-* Disassembly of [**Pokémon Pinball**][pokepinball]
-* Disassembly of [**Pokémon TCG**][poketcg]
-* Disassembly of [**Pokémon Fire Red**][pokefirered]
-* Disassembly of [**Pokémon Emerald**][pokeemerald]
-* Discord: [**pret**][Discord]
-* irc: **irc.freenode.net** [**#pret**][irc]
-
-[pokered]: https://github.com/pret/pokered
-[pokeyellow]: https://github.com/pret/pokeyellow
-[pokegold]: https://github.com/pret/pokegold
-[pokecrystal]: https://github.com/pret/pokecrystal
-[pokepinball]: https://github.com/pret/pokepinball
-[poketcg]: https://github.com/pret/poketcg
-[pokefirered]: https://github.com/pret/pokefirered
-[pokeemerald]: https://github.com/pret/pokeemerald
-[Discord]: https://discord.gg/6EuWgX9
-[irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
-[travis]: https://travis-ci.org/pret/pokeruby
-[travis-badge]: https://travis-ci.org/pret/pokeruby.svg?branch=master
+[pokeruby]: https://github.com/pret/pokeruby
