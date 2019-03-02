@@ -2803,15 +2803,15 @@ Move_MINIMIZE: @ 81CB352
 	end
 
 Move_METRONOME: @ 81CB365
-	loadspritegfx ANIM_TAG_FINGER
-	loadspritegfx ANIM_TAG_THOUGHT_BUBBLE
-	createsprite gBattleAnimSpriteTemplate_83D7220, ANIM_BATTLER_ATTACKER, 11, 0, 100
-	playsewithpan SE_W118, SOUND_PAN_ATTACKER
-	delay 6
-	createsprite gBattleAnimSpriteTemplate_83D72C8, ANIM_BATTLER_ATTACKER, 12, 0
-	delay 24
-	loopsewithpan SE_W039, SOUND_PAN_ATTACKER, 22, 3
-	waitforvisualfinish
+@	loadspritegfx ANIM_TAG_FINGER
+@	loadspritegfx ANIM_TAG_THOUGHT_BUBBLE
+@	createsprite gBattleAnimSpriteTemplate_83D7220, ANIM_BATTLER_ATTACKER, 11, 0, 100
+@	playsewithpan SE_W118, SOUND_PAN_ATTACKER
+@	delay 6
+@	createsprite gBattleAnimSpriteTemplate_83D72C8, ANIM_BATTLER_ATTACKER, 12, 0
+@	delay 24
+@	loopsewithpan SE_W039, SOUND_PAN_ATTACKER, 22, 3
+@	waitforvisualfinish
 	end
 
 Move_SKULL_BASH: @ 81CB38F
