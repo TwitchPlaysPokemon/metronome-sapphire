@@ -33,7 +33,7 @@ CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -und
 
 #### Files ####
 
-ROM := poke$(BUILD_NAME).gba
+ROM := metronome$(BUILD_NAME).gba
 MAP := $(ROM:%.gba=%.map)
 
 BUILD_DIR := build/$(BUILD_NAME)
@@ -131,7 +131,7 @@ tools:
 	@$(MAKE) -C tools/gbafix
 
 tidy:
-	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
+	$(RM) $(ALL_BUILDS:%=metronome%{.gba,.elf,.map})
 	$(RM) -r build
 
 $(ROM): %.gba: %.elf

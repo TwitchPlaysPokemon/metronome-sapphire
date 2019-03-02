@@ -1,8 +1,8 @@
 ### Build Configuration ###
 
 # Default variables
-GAME_VERSION  ?= RUBY
-GAME_REVISION ?= 0
+GAME_VERSION  ?= SAPPHIRE
+GAME_REVISION ?= 2
 GAME_LANGUAGE ?= ENGLISH
 DEBUG         ?= 0
 COMPARE       ?= 1
@@ -34,7 +34,7 @@ ifeq ($(GAME_REVISION), 1)
   BUILD_NAME := $(BUILD_NAME)_rev1
 else
 ifeq ($(GAME_REVISION), 2)
-  BUILD_NAME := $(BUILD_NAME)_rev2
+  #BUILD_NAME := $(BUILD_NAME)_rev2
 else
   $(error unknown revision $(GAME_REVISION))
 endif
