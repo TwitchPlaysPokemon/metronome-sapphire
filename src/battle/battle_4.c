@@ -15654,9 +15654,11 @@ void atkEF_handleballthrow(void)
         }
         if (odds > 254) //poke caught
         {
+            RemoveBagItem(gLastUsedItem, 1);
             EmitBallThrow(0, 4);
             MarkBufferBankForExecution(gActiveBattler);
             gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
+            RemoveBagItem(gLastUsedItem, 1);
             SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankTarget]], MON_DATA_POKEBALL, (const void*) &gLastUsedItem);
             if (CalculatePlayerPartyCount() == 6)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -15676,6 +15678,7 @@ void atkEF_handleballthrow(void)
             if (shakes == 4) //poke caught, copy of the code above
             {
                 gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
+                RemoveBagItem(gLastUsedItem, 1);
                 SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankTarget]], MON_DATA_POKEBALL, (const void*) &gLastUsedItem);
                 if (CalculatePlayerPartyCount() == 6)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;

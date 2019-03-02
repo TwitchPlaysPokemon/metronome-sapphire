@@ -1025,7 +1025,6 @@ void ItemUseInBattle_PokeBall(u8 taskId)
 {
     if (PlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
-        RemoveBagItem(gSpecialVar_ItemId, 1);
         sub_80A7094(taskId);
     }
     else
