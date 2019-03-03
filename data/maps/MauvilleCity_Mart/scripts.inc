@@ -15,7 +15,7 @@ MauvilleCity_Mart_EventScript_1573BE:: @ 81573BE
 MauvilleCity_Mart_Items:: @ 81573D8
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING

@@ -1063,7 +1063,7 @@ static const u16 sWeightToDamageTable[] =
 
 static const u16 sPickupItems[] =
 {
-    ITEM_SUPER_POTION, 30,
+    ITEM_HYPER_POTION, 30,
     ITEM_FULL_HEAL, 40,
     ITEM_ULTRA_BALL, 50,
     ITEM_RARE_CANDY, 60,

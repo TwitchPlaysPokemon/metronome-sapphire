@@ -153,7 +153,7 @@ static const struct YesNoFuncTable ResumeFromWithdrawYesNoFuncList[] = // Resume
 // the use of this struct is meant to be an ItemSlot struct, but NewGameInitPCItems refuses to match without a weird pointer access.
 static const struct ItemSlot gNewGamePCItems[] =
 {
-    { ITEM_POTION, 1 },
+    { ITEM_HYPER_POTION, 1 },
     { ITEM_NONE, 0 }
 };
 

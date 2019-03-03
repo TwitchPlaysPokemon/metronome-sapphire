@@ -1,5 +1,5 @@
 Route102_EventScript_1B1439:: @ 81B1439
-	giveitem_std ITEM_POTION, 1, 1
+	giveitem_std ITEM_HYPER_POTION, 1, 1
 	end
 
 Route103_EventScript_1B1446:: @ 81B1446
@@ -19,7 +19,7 @@ Route104_EventScript_1B146D:: @ 81B146D
 	end
 
 Route104_EventScript_1B147A:: @ 81B147A
-	giveitem_std ITEM_POTION, 1, 1
+	giveitem_std ITEM_HYPER_POTION, 1, 1
 	end
 
 Route105_EventScript_1B1487:: @ 81B1487
@@ -75,7 +75,7 @@ Route114_EventScript_1B1523:: @ 81B1523
 	end
 
 Route115_EventScript_1B1530:: @ 81B1530
-	giveitem_std ITEM_SUPER_POTION, 1, 1
+	giveitem_std ITEM_HYPER_POTION, 1, 1
 	end
 
 Route115_EventScript_1B153D:: @ 81B153D

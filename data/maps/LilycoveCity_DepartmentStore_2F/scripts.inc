@@ -52,16 +52,16 @@ LilycoveCity_DepartmentStore_2F_EventScript_159F5E:: @ 8159F5E
 
 	.align 2
 LilycoveCity_DepartmentStore_2F_Items2:: @ 8159F78
-	.2byte ITEM_POTION
-	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_WAVE_MAIL
+	.2byte ITEM_MECH_MAIL
+	.2byte ITEM_ORANGE_MAIL
+	.2byte ITEM_DREAM_MAIL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION
 	.2byte ITEM_REVIVE
 	.2byte ITEM_REPEL
 	.2byte ITEM_SUPER_REPEL
 	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_WAVE_MAIL
-	.2byte ITEM_MECH_MAIL
 	.2byte ITEM_NONE
 	release
 	end

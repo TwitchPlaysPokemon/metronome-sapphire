@@ -302,7 +302,7 @@ gUnknown_Debug_845E797::
 	me_checkcompat gUnknown_Debug_845E797, 0x4, 0x4, 0x4, 0x80
 	me_crc 0x0, gUnknown_Debug_845E7B5, gUnknown_Debug_845E7B5End
 gUnknown_Debug_845E7B5::
-	me_setrecordmixinggift 0x1, 0x3, ITEM_POTION
+	me_setrecordmixinggift 0x1, 0x3, ITEM_HYPER_POTION
 	me_end
 gUnknown_Debug_845E7B5End:
 	.size gUnknown_Debug_845E7B5, gUnknown_Debug_845E7B5End - gUnknown_Debug_845E7B5

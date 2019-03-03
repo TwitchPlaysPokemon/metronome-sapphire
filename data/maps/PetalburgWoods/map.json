@@ -259,7 +259,7 @@
       "x": 39,
       "y": 35,
       "elevation": 3,
-      "item": "ITEM_POTION",
+      "item": "ITEM_HYPER_POTION",
       "flag": "FLAG_HIDDEN_ITEM_3A"
     },
     {

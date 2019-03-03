@@ -55,10 +55,10 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE7C:: @ 815BE7C
 
 	.align 2
 Route104_PrettyPetalFlowerShop_Items:: @ 815BE94
+	.2byte ITEM_WOOD_MAIL
 	.2byte ITEM_FULL_RESTORE
 	.2byte ITEM_MAX_POTION
 	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_REVIVE
 	.2byte ITEM_NONE

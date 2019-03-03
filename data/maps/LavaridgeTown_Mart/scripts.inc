@@ -14,7 +14,7 @@ LavaridgeTown_Mart_EventScript_1538CB:: @ 81538CB
 	.align 2
 LavaridgeTown_Mart_Items:: @ 81538E4
 	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING

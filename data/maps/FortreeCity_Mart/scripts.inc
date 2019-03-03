@@ -15,7 +15,7 @@ FortreeCity_Mart_EventScript_158067:: @ 8158067
 FortreeCity_Mart_Items:: @ 8158080
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
