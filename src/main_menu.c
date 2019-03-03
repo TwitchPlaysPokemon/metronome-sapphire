@@ -24,10 +24,13 @@
 #include "title_screen.h"
 #include "scanline_effect.h"
 #include "ewram.h"
+#include "random.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)Menu_UpdateWindowTextOverrideLineLength(24))
 
 extern struct PaletteFadeControl gPaletteFade;
+
+extern const u16 gSpeciesToNationalPokedexNum[];
 
 extern const u8 gBirchSpeech_Welcome[];
 extern const u8 gBirchSpeech_ThisIsPokemon[];
@@ -1428,15 +1431,19 @@ void ShrinkPlayerSprite(struct Sprite *sprite)
 
 u8 CreateAzurillSprite(u8 x, u8 y)
 {
+    u16 species;
+
+    while (gSpeciesToNationalPokedexNum[(species = (Random() % NUM_SPECIES) + 1) - 1] > 386) ;
+
     DecompressPicFromTable_2(
-        &gMonFrontPicTable[SPECIES_AZURILL],
-        gMonFrontPicCoords[SPECIES_AZURILL].coords,
-        gMonFrontPicCoords[SPECIES_AZURILL].y_offset,
+        &gMonFrontPicTable[species],
+        gMonFrontPicCoords[species].coords,
+        gMonFrontPicCoords[species].y_offset,
         gUnknown_081FAF4C[0],
         gUnknown_081FAF4C[1],
-        SPECIES_AZURILL);
-    LoadCompressedObjectPalette(&gMonPaletteTable[SPECIES_AZURILL]);
-    GetMonSpriteTemplate_803C56C(SPECIES_AZURILL, 1);
+        species);
+    LoadCompressedObjectPalette(&gMonPaletteTable[species]);
+    GetMonSpriteTemplate_803C56C(species, 1);
     return CreateSprite(&gUnknown_02024E8C, x, y, 0);
 }
 
