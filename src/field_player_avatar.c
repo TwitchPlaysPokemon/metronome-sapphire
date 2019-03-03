@@ -19,13 +19,17 @@
 #include "strings2.h"
 #include "task.h"
 #include "tv.h"
+#include "item.h"
 #include "wild_encounter.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/moves.h"
+#include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+
+extern u16 TMHMMoves[];
 
 EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {0};
 
@@ -1103,6 +1107,7 @@ u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId)
 bool8 PartyHasMonWithSurf(void)
 {
     u8 i;
+    u16 itemId;
 
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
@@ -1112,6 +1117,17 @@ bool8 PartyHasMonWithSurf(void)
                 break;
             if (pokemon_has_move(&gPlayerParty[i], MOVE_SURF))
                 return TRUE;
+        }
+        for(i = 0; i < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; i++) {
+            if (TMHMMoves[i] == MOVE_SURF) {
+                itemId = i + ITEM_TM01_FOCUS_PUNCH;
+                break;
+            }  
+        }
+        if (itemId && CheckBagHasItem(itemId, 1) == TRUE) {
+            gSpecialVar_Result = 0;
+            gSpecialVar_0x8004 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+            return TRUE;
         }
     }
     return FALSE;
