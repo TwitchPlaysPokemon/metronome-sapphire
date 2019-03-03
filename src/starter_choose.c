@@ -257,7 +257,7 @@ u16 GetStarterPokemon(u16 n)
     if (mon == SPECIES_NONE)
     {
         // Randomly generate a mon
-        while (gSpeciesToNationalPokedexNum[(mon = (Random() % 411) + 1) - 1] > 386);
+        RANDOMIZE_SPECIES(mon);
         sRandStarterMons[n] = mon;
     }
     return mon;

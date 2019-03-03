@@ -1433,7 +1433,7 @@ u8 CreateAzurillSprite(u8 x, u8 y)
 {
     u16 species;
 
-    while (gSpeciesToNationalPokedexNum[(species = (Random() % NUM_SPECIES) + 1) - 1] > 386) ;
+    RANDOMIZE_SPECIES(species);
 
     DecompressPicFromTable_2(
         &gMonFrontPicTable[species],

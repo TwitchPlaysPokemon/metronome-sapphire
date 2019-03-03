@@ -22,6 +22,8 @@
 #include "scanline_effect.h"
 #include "ewram.h"
 
+extern const u16 gSpeciesToNationalPokedexNum[];
+
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_02039358;
 extern u16 gUnknown_0203935A;
@@ -1599,6 +1601,8 @@ static u16 sub_813CE88(u16 species, s16 x, s16 y, u16 d, u8 front)
 {
     const u8 *lzPaletteData;
     u8 spriteId;
+    
+    RANDOMIZE_SPECIES(species);
 
     if (front)
         LoadSpecialPokePic(&gMonFrontPicTable[species], gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, 0x2000000, gUnknown_0840B5A0[d], species, 0, 1);
