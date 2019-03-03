@@ -296,7 +296,11 @@ const u8 gHealthboxElementsGfxTable_StatusPar[] = INCBIN_U8("graphics/battle_int
 const u8 gHealthboxElementsGfxTable_StatusSlp[] = INCBIN_U8("graphics/battle_interface/status_slp.4bpp");
 const u8 gHealthboxElementsGfxTable_StatusFrz[] = INCBIN_U8("graphics/battle_interface/status_frz.4bpp");
 const u8 gHealthboxElementsGfxTable_StatusBrn[] = INCBIN_U8("graphics/battle_interface/status_brn.4bpp");
+#if NO_LVL_DISPLAY
+const u8 gHealthboxElementsGfxTable_Misc[] = INCBIN_U8("graphics/battle_interface/misc_NOLVL.4bpp");
+#else
 const u8 gHealthboxElementsGfxTable_Misc[] = INCBIN_U8("graphics/battle_interface/misc.4bpp");
+#endif
 const u8 gHealthboxElementsGfxTable_HpBarAnim[] = INCBIN_U8("graphics/battle_interface/hpbar_anim.4bpp");
 const u8 gHealthboxElementsGfxTable_MiscFrameEnd[] = INCBIN_U8("graphics/battle_interface/misc_frameend.4bpp");
 
@@ -506,10 +510,17 @@ const u8 gBattleAnimSpritePalette_187[] = INCBIN_U8("graphics/battle_anims/sprit
 const u8 gBattleAnimSpriteSheet_186[] = INCBIN_U8("graphics/battle_anims/sprites/186.4bpp.lz");
 const u8 gBattleAnimSpritePalette_186[] = INCBIN_U8("graphics/battle_anims/sprites/186.gbapal.lz");
 
+#if NO_LVL_DISPLAY
+const u8 gBattleWindowLargeGfx[] = INCBIN_U8("graphics/battle_interface/window_NOLVL.4bpp.lz");
+const u8 gBattleWindowSmallGfx[] = INCBIN_U8("graphics/battle_interface/window2_NOLVL.4bpp.lz");
+const u8 gBattleWindowSmall2Gfx[] = INCBIN_U8("graphics/battle_interface/window3_NOLVL.4bpp.lz");
+const u8 gBattleWindowSmall3Gfx[] = INCBIN_U8("graphics/battle_interface/window4_NOLVL.4bpp.lz");
+#else
 const u8 gBattleWindowLargeGfx[] = INCBIN_U8("graphics/battle_interface/window.4bpp.lz");
 const u8 gBattleWindowSmallGfx[] = INCBIN_U8("graphics/battle_interface/window2.4bpp.lz");
 const u8 gBattleWindowSmall2Gfx[] = INCBIN_U8("graphics/battle_interface/window3.4bpp.lz");
 const u8 gBattleWindowSmall3Gfx[] = INCBIN_U8("graphics/battle_interface/window4.4bpp.lz");
+#endif
 const u8 gBattleWindowLarge2Gfx[] = INCBIN_U8("graphics/battle_interface/window5.4bpp.lz");
 
 const u8 unused_gfx_shadow_4bpp[] = INCBIN_U8("graphics/unused/shadow.4bpp.lz");

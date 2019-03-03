@@ -1015,7 +1015,7 @@ void sub_8043F44(u8 a)
 #define CHAR_LV_SEPARATOR CHAR_PERIOD
 #endif
 
-// print level
+// Prints the level (b) of the pokemon (a)
 /*static*/ void sub_8043FC0(u8 a, u8 b)
 {
     u8 str[30];
@@ -1044,8 +1044,11 @@ void sub_8043F44(u8 a)
     ptr = str + 6;
     if (b == 100)
     {
+#if NO_LVL_DISPLAY
         return;
-        //ptr = ConvertIntToDecimalStringN(ptr, 100, 0, 3);
+#else
+        ptr = ConvertIntToDecimalStringN(ptr, 100, 0, 3);
+#endif
     }
     else
     {

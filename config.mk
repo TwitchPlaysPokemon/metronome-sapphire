@@ -7,6 +7,7 @@ GAME_LANGUAGE ?= ENGLISH
 DEBUG         ?= 0
 COMPARE       ?= 1
 RANDOMIZE     ?= 1
+NO_LVL_DISPLAY?= 0
 
 # For gbafix
 MAKER_CODE  := 01
