@@ -1015,6 +1015,7 @@ void sub_8043F44(u8 a)
 #define CHAR_LV_SEPARATOR CHAR_PERIOD
 #endif
 
+// print level
 /*static*/ void sub_8043FC0(u8 a, u8 b)
 {
     u8 str[30];
@@ -1043,7 +1044,8 @@ void sub_8043F44(u8 a)
     ptr = str + 6;
     if (b == 100)
     {
-        ptr = ConvertIntToDecimalStringN(ptr, 100, 0, 3);
+        return;
+        //ptr = ConvertIntToDecimalStringN(ptr, 100, 0, 3);
     }
     else
     {
