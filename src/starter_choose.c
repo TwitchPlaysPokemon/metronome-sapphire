@@ -6,6 +6,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "pokedex.h"
+#include "random.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "constants/species.h"
@@ -18,6 +19,7 @@
 
 extern u16 gSpecialVar_Result;
 extern struct SpriteTemplate gUnknown_02024E8C;
+extern const u16 gSpeciesToNationalPokedexNum[];
 
 //--------------------------------------------------
 // Graphics Data
@@ -48,7 +50,7 @@ static const u8 gStarterChoose_LabelCoords[][2] =
     {8, 4},
 };
 #if RANDOMIZE
-    static const u16 sStarterMons[] = {SPECIES_NONE, SPECIES_NONE, SPECIES_NONE};
+    // static const u16 sStarterMons[] = {SPECIES_NONE, SPECIES_NONE, SPECIES_NONE};
 #else
     static const u16 sStarterMons[] = {SPECIES_TREECKO, SPECIES_TORCHIC, SPECIES_MUDKIP};
 #endif
@@ -241,12 +243,28 @@ static u8 CreatePokemonFrontSprite(u16, u8, u8);
 #define STARTER_PKMN_POS_X 120
 #define STARTER_PKMN_POS_Y 64
 
+// #if RANDOMIZE
+EWRAM_DATA static u16 sRandStarterMons[3] = {0};
+// #endif
+
 //Retrieves one of the available starter Pokemon
 u16 GetStarterPokemon(u16 n)
 {
-    if (n > 3)
-        n = 0;
-    return sStarterMons[n];
+// #if RANDOMIZE
+    u16 mon;
+    if (n >= 3) n = 0;
+    mon = sRandStarterMons[n];
+    if (mon == SPECIES_NONE)
+    {
+        // Randomly generate a mon
+        while (gSpeciesToNationalPokedexNum[(mon = (Random() % 411) + 1) - 1] > 386);
+        sRandStarterMons[n] = mon;
+    }
+    return mon;
+// #else
+//     if (n > 3) n = 0;
+//     return sStarterMons[n];
+// #endif
 }
 
 static void VblankCallback(void)

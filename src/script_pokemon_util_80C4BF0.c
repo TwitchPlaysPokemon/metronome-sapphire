@@ -428,6 +428,42 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
     return sentToPc;
 }
 
+u8 ScriptGiveMon_Bypass(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 unused3)
+{
+    u16 nationalDexNum;
+    int sentToPc;
+    u8 heldItem[2];
+    struct Pokemon mon;
+
+    // CreateMon(&mon, species, level, 32, 0, 0, 0, 0);
+    level = 100;
+    {
+        u32 arg;
+        ZeroMonData(&mon);
+        CreateBoxMon(&mon.box, species, level, 0, 0, 0, 0, 0);
+        SetMonData(&mon, MON_DATA_LEVEL, &level);
+        arg = 255;
+        SetMonData(&mon, MON_DATA_MAIL, &arg);
+        CalculateMonStats(&mon);
+    }
+    
+    heldItem[0] = item;
+    heldItem[1] = item >> 8;
+    SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
+    sentToPc = GiveMonToPlayer(&mon);
+    nationalDexNum = SpeciesToNationalPokedexNum(species);
+
+    switch(sentToPc)
+    {
+    case 0:
+    case 1:
+        GetSetPokedexFlag(nationalDexNum, 2);
+        GetSetPokedexFlag(nationalDexNum, 3);
+        break;
+    }
+    return sentToPc;
+}
+
 u8 ScriptGiveEgg(u16 species)
 {
     struct Pokemon mon;
