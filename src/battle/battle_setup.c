@@ -873,6 +873,7 @@ static void CB2_GiveStarter(void)
     u16 starterPoke;
 
     *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
+    *GetVarPointer(VAR_REAL_STARTER_SPECIES) = GetStarterPokemon(gSpecialVar_Result);
     starterPoke = GetStarterPokemon(gSpecialVar_Result);
     ScriptGiveMon_Bypass(starterPoke, 5, 0, 0, 0, 0);
     ResetTasks();
