@@ -69,10 +69,7 @@ void EnableNationalPokedex(void)
 
 bool32 IsNationalPokedexEnabled(void)
 {
-    if (gSaveBlock2.pokedex.nationalMagic == 0xDA && VarGet(VAR_NATIONAL_DEX) == 0x302 && FlagGet(FLAG_SYS_NATIONAL_DEX))
-        return TRUE;
-    else
-        return FALSE;
+    return TRUE;
 }
 
 void DisableMysteryGift(void)

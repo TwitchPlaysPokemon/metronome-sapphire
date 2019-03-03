@@ -1415,24 +1415,14 @@ void CB2_InitPokedex(void)
         }
         ClearPokedexView(gPokedexView);
         CreateTask(Task_PokedexShowMainScreen, 0);
-        gPokedexView->dexMode = gSaveBlock2.pokedex.unknown1;
-        if (!IsNationalPokedexEnabled())
-            gPokedexView->dexMode = DEX_MODE_HOENN;
+        gPokedexView->dexMode = DEX_MODE_NATIONAL;
         gPokedexView->dexOrder = gSaveBlock2.pokedex.order;
         gPokedexView->selectedPokemon = gUnknown_0202FFB8;
         gPokedexView->unk62C = gUnknown_0202FFBA;
         gPokedexView->selectedScreen = PAGE_SCREEN;
         gPokedexView->descriptionPageNum = 0;
-        if (!IsNationalPokedexEnabled())
-        {
-            gPokedexView->unk61A = GetHoennPokedexCount(0);
-            gPokedexView->unk61C = GetHoennPokedexCount(1);
-        }
-        else
-        {
-            gPokedexView->unk61A = GetNationalPokedexCount(0);
-            gPokedexView->unk61C = GetNationalPokedexCount(1);
-        }
+        gPokedexView->unk61A = GetNationalPokedexCount(0);
+        gPokedexView->unk61C = GetNationalPokedexCount(1);
         gPokedexView->unk62D = 8;
         gMain.state++;
         break;
@@ -1661,8 +1651,6 @@ static void sub_808CB8C(u8 taskId)
             gPokedexView->unk62C = gPokedexView->unk62A;
             gPokedexView->selectedPokemon = gPokedexView->unk610;
             gPokedexView->dexMode = gPokedexView->unk614;
-            if (!IsNationalPokedexEnabled())
-                gPokedexView->dexMode = DEX_MODE_HOENN;
             gPokedexView->dexOrder = gPokedexView->unk618;
             gTasks[taskId].func = Task_PokedexShowMainScreen;
         }
@@ -1673,9 +1661,6 @@ static void Task_ClosePokedex(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gSaveBlock2.pokedex.unknown1 = gPokedexView->dexMode;
-        if (!IsNationalPokedexEnabled())
-            gSaveBlock2.pokedex.unknown1 = 0;
         gSaveBlock2.pokedex.order = gPokedexView->dexOrder;
         DestroyTask(taskId);
         SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
@@ -1845,8 +1830,6 @@ static void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId)
         gPokedexView->unk62C = gPokedexView->unk62A;
         gPokedexView->selectedPokemon = gPokedexView->unk610;
         gPokedexView->dexMode = gPokedexView->unk614;
-        if (!IsNationalPokedexEnabled())
-            gPokedexView->dexMode = DEX_MODE_HOENN;
         gPokedexView->dexOrder = gPokedexView->unk618;
         gTasks[taskId].func = Task_PokedexShowMainScreen;
     }
@@ -1859,8 +1842,6 @@ static void Task_PokedexResultsScreenExitPokedex(u8 taskId)
         gPokedexView->unk62C = gPokedexView->unk62A;
         gPokedexView->selectedPokemon = gPokedexView->unk610;
         gPokedexView->dexMode = gPokedexView->unk614;
-        if (!IsNationalPokedexEnabled())
-            gPokedexView->dexMode = DEX_MODE_HOENN;
         gPokedexView->dexOrder = gPokedexView->unk618;
         gTasks[taskId].func = Task_ClosePokedex;
     }
