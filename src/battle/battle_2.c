@@ -3902,7 +3902,7 @@ static void BattlePrepIntroSlide(void)
     }
 }
 
-void sub_8011384(void)
+void sub_8011384(void) //BattleIntroDrawTrainersOrMonsSprites
 {
     u8 *ptr;
     s32 i;
