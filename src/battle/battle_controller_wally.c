@@ -65,9 +65,7 @@ extern void Emitcmd35(u8, u16);
 
 extern void nullsub_14(void);
 extern void PrepareBagForWallyTutorial(void);
-extern void sub_8045A5C();
 extern void sub_804777C();
-extern void sub_8043DFC();
 extern bool8 IsDoubleBattle(void);
 extern void c3_0802FDF4(u8);
 extern void PlayerHandlecmd1(void);
@@ -76,11 +74,9 @@ extern u8 GetBattlerPosition(u8);
 extern void sub_80313A0(struct Sprite *);
 extern u8 GetBattlerAtPosition(u8);
 extern u8 sub_8031720();
-extern void DoMoveAnim();
 extern void sub_80326EC();
 extern void sub_8031F24(void);
 extern void sub_80324BC();
-extern void BufferStringBattle();
 extern u8 GetBattlerSide(u8);
 extern void sub_80304A8(void);
 extern void sub_8047858();
@@ -121,7 +117,7 @@ void WallyHandlecmd10(void);
 void WallyHandlecmd11(void);
 void WallyHandlecmd12(void);
 void WallyHandleBallThrow(void);
-void WallyHandlePuase(void);
+void WallyHandlePause(void);
 void WallyHandleMoveAnimation(void);
 void WallyHandlePrintString(void);
 void WallyHandlePrintStringPlayerOnly(void);
@@ -184,7 +180,7 @@ static const BattleBufferCmd gWallyBufferCommands[] =
     WallyHandlecmd11,                  // WallyHandlePaletteFade,
     WallyHandlecmd12,                  // WallyHandleSuccessBallThrowAnim,
     WallyHandleBallThrow,              // WallyHandleBallThrowAnim,
-    WallyHandlePuase,                  // WallyHandlePause,
+    WallyHandlePause,                  // WallyHandlePause,
     WallyHandleMoveAnimation,          // WallyHandleMoveAnimation,
     WallyHandlePrintString,            // WallyHandlePrintString,
     WallyHandlePrintStringPlayerOnly,  // WallyHandlePrintSelectionString,
@@ -238,10 +234,10 @@ void unref_sub_8137220(void)
 void SetBankFuncToWallyBufferRunCommand(void)
 {
     gBattleBankFunc[gActiveBattler] = WallyBufferRunCommand;
-    ewram160A8 = 0;
-    ewram160A9 = 0;
-    ewram160AA = 0;
-    ewram160AB = 0;
+    eWallyTurnCounter = 0;
+    eWallyCmd20Counter = 0;
+    eWallyTurnTimer = 0;
+    eWallyCmd20Timer = 0;
 }
 
 void WallyBufferRunCommand(void)
@@ -257,65 +253,28 @@ void WallyBufferRunCommand(void)
 
 void sub_81372BC(void)
 {
-    u8 r4;
-
-    switch (ewram160A8)
+    switch (eWallyTurnCounter)
     {
     case 0:
-        ewram160AA = 64;
-        ewram160A8 = 4; //ewram160A8++;
+        eWallyTurnTimer = 64;
+        eWallyTurnCounter++;
         // fall through
     case 1:
-        r4 = --ewram160AA;
-        if (r4 == 0)
-        {
-            PlaySE(SE_SELECT);
-            Emitcmd33(1, 0, 0);
-            WallyBufferExecCompleted();
-            ewram160A8++;
-            ewram160A9 = r4;
-            ewram160AA = 64;
-        }
-        break;
-    case 2:
-        r4 = --ewram160AA;
-        if (r4 == 0)
-        {
-            PlaySE(SE_SELECT);
-            Emitcmd33(1, 0, 0);
-            WallyBufferExecCompleted();
-            ewram160A8++;
-            ewram160A9 = r4;
-            ewram160AA = 64;
-        }
-        break;
-    case 3:
-        r4 = --ewram160AA;
-        if (r4 == 0)
-        {
-            Emitcmd33(1, 9, 0);
-            WallyBufferExecCompleted();
-            ewram160A8++;
-            ewram160A9 = r4;
-            ewram160AA = 64;
-        }
-        break;
-    case 4:
-        if (--ewram160AA == 0)
+        if (--eWallyTurnTimer == 0)
         {
             PlaySE(SE_SELECT);
             nullsub_8(0);
             sub_802E3E4(1, 0);
-            ewram160AA = 64;
-            ewram160A8++;
+            eWallyTurnTimer = 64;
+            eWallyTurnCounter++;
         }
         break;
-    case 5:
-        if (--ewram160AA == 0)
+    case 2:
+        if (--eWallyTurnTimer == 0)
         {
             PlaySE(SE_SELECT);
             DestroyMenuCursor();
-            Emitcmd33(1, 1, 0);
+            Emitcmd33(1, ACTION_USE_ITEM, 0);
             WallyBufferExecCompleted();
         }
         break;
@@ -1162,7 +1121,7 @@ void WallyHandleBallThrow(void)
     gBattleBankFunc[gActiveBattler] = bx_wait_t5;
 }
 
-void WallyHandlePuase(void)
+void WallyHandlePause(void)
 {
     WallyBufferExecCompleted();
 }
@@ -1289,16 +1248,16 @@ void WallyHandlecmd19(void)
 
 void WallyHandlecmd20(void)
 {
-    switch (ewram160A9)
+    switch (eWallyCmd20Counter)
     {
     case 0:
         sub_80304A8();
-        ewram160A9++;
-        ewram160AB = 80;
+        eWallyCmd20Counter++;
+        eWallyCmd20Timer = 80;
         // fall through
     case 1:
-        ewram160AB--;
-        if (ewram160AB == 0)
+        eWallyCmd20Timer--;
+        if (eWallyCmd20Timer == 0)
         {
             DestroyMenuCursor();
             PlaySE(SE_SELECT);

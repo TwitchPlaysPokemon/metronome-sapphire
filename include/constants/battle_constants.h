@@ -174,20 +174,20 @@
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
-#define ACTION_USE_MOVE             0
-#define ACTION_USE_ITEM             1
-#define ACTION_SWITCH               2
-#define ACTION_RUN                  3
-#define ACTION_WATCHES_CAREFULLY    4
-#define ACTION_SAFARI_ZONE_BALL     5
-#define ACTION_POKEBLOCK_CASE       6
-#define ACTION_GO_NEAR              7
-#define ACTION_SAFARI_ZONE_RUN      8
-#define ACTION_9                    9
-#define ACTION_RUN_BATTLESCRIPT     10 // when executing an action
-#define ACTION_CANCEL_PARTNER       12 // when choosing an action
-#define ACTION_FINISHED             12 // when executing an action
-#define ACTION_NOTHING_FAINTED      13 // when choosing an action
+#define ACTION_USE_MOVE                0
+#define ACTION_USE_ITEM                1
+#define ACTION_SWITCH                  2
+#define ACTION_RUN                     3
+#define ACTION_WATCHES_CAREFULLY       4
+#define ACTION_SAFARI_ZONE_BALL        5
+#define ACTION_POKEBLOCK_CASE          6
+#define ACTION_GO_NEAR                 7
+#define ACTION_SAFARI_ZONE_RUN         8
+#define ACTION_WALLY_RECALL            9
+#define ACTION_RUN_BATTLESCRIPT       10 // when executing an action
+#define ACTION_CANCEL_PARTNER         12 // when choosing an action
+#define ACTION_FINISHED               12 // when executing an action
+#define ACTION_NOTHING_FAINTED        13 // when choosing an action
 #define ACTION_INIT_VALUE           0xFF
 
 #define TARGET_SELECTED_POKEMON 0

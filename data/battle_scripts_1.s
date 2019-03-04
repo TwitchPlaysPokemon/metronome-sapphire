@@ -1785,7 +1785,7 @@ BattleScript_EffectBatonPass: @ 81D7F7C
 	getswitchedmondata USER
 	switchindataupdate USER
 	hpthresholds USER
-	printstring 3
+	printstring BATTLE_TEXT_SwitchIn
 	switchinanim USER, 1
 	waitstate
 	switchineffects USER
@@ -2983,7 +2983,7 @@ BattleScript_FaintedMonTryChooseAnother: @ 81D8CC2
 	atknameinbuff1
 	resetintrimidatetracebits USER
 	hpthresholds2 USER
-	printstring 2
+	printstring BATTLE_TEXT_ComeBack
 	switchoutabilities USER
 	waitstate
 	returnatktoball
@@ -2992,7 +2992,7 @@ BattleScript_FaintedMonTryChooseAnother: @ 81D8CC2
 	getswitchedmondata USER
 	switchindataupdate USER
 	hpthresholds USER
-	printstring 3
+	printstring BATTLE_TEXT_SwitchIn
 	atk62 1
 	switchinanim USER, 0
 	waitstate
@@ -3004,7 +3004,7 @@ BattleScript_FaintedMonChooseAnother: @ 81D8D66
 	getswitchedmondata 3
 	switchindataupdate 3
 	hpthresholds 3
-	printstring 3
+	printstring BATTLE_TEXT_SwitchIn
 	atk62 3
 	switchinanim 3, 0
 	waitstate
@@ -3029,7 +3029,7 @@ BattleScript_1D8D99: @ 81D8D99
 	getswitchedmondata 3
 	switchindataupdate 3
 	hpthresholds 3
-	printstring 3
+	printstring BATTLE_TEXT_SwitchIn
 	atk62 3
 	switchinanim 3, 0
 	waitstate
@@ -3066,7 +3066,7 @@ BattleScript_LocalBattleLostEnd: @ 81D8E01
 	end2
 
 BattleScript_LinkBattleWonOrLost:: @ 81D8E02
-	printstring 5
+	printstring BATTLE_TEXT_BattleEnd
 	waitmessage 64
 	atk57
 	waitmessage 64
@@ -3118,7 +3118,7 @@ BattleScript_PrintFullBox:: @ 81D8E4A
 
 BattleScript_ActionSwitch:: @ 81D8E4E
 	hpthresholds2 USER
-	printstring 2
+	printstring BATTLE_TEXT_ComeBack
 	setbyte sDMG_MULTIPLIER, 2
 	jumpifbyte COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_DOUBLE, BattleScript_PursuitSwitchDmgSetMultihit
 	setmultihit 1
@@ -3145,7 +3145,7 @@ BattleScript_DoSwitchOut: @ 81D8E7A
 	getswitchedmondata USER
 	switchindataupdate USER
 	hpthresholds USER
-	printstring 3
+	printstring BATTLE_TEXT_SwitchIn
 	atk62 1
 	switchinanim USER, 0
 	waitstate

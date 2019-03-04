@@ -4120,9 +4120,9 @@ void sub_8011970(void)
 {
     if (gBattleExecBuffer == 0)
     {
-        if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_WALLY_TUTORIAL)))
             PrepareStringBattle(1, GetBattlerAtPosition(0));
-        gBattleMainFunc = sub_80119B4;
+        gBattleMainFunc = gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL ? BattleBeginFirstTurn : sub_80119B4;
     }
 }
 

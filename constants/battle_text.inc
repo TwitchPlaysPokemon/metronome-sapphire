@@ -1,3 +1,11 @@
+	enum_start
+	enum BATTLE_TEXT_WantsToFight
+	enum BATTLE_TEXT_SentOut
+	enum BATTLE_TEXT_ComeBack
+	enum BATTLE_TEXT_SwitchIn
+	enum BATTLE_TEXT_UsedMove
+	enum BATTLE_TEXT_BattleEnd
+
 	enum_start 12
 	enum BATTLE_TEXT_UnknownString
 	enum BATTLE_TEXT_GainExpPoints
