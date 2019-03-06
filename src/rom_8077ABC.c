@@ -815,7 +815,7 @@ void InitAnimSpritePos(struct Sprite *sprite, u8 a2)
 
 u8 GetBattlerSide(u8 slot)
 {
-    return gBanksBySide[slot] & 1;
+    return gBanksBySide[slot] & BIT_SIDE;
 }
 
 u8 GetBattlerPosition(u8 slot)
