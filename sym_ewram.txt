@@ -178,6 +178,9 @@ gUnknown_02024C2C = .; /* 2024C2C */
 gLastUsedMove = .; /* 2024C34 */
     . += 0x8;
 
+gLastUsedMetronomeMove = .;
+	. += 0x8;
+
 gLastLandedMoves = .; /* 2024C3C */
     . += 0x8;
 

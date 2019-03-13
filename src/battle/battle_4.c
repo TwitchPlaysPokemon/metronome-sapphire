@@ -117,6 +117,7 @@ extern u8 gEffectBank;
 extern u8 gAbsentBattlerFlags;
 extern u8 gMultiHitCounter;
 extern u16 gLastUsedMove[4];
+extern u16 gLastUsedMetronomeMove[4];
 extern u16 gLockedMoves[4];
 extern u16 gChosenMovesByBanks[4];
 extern u16 gSideAffecting[2];
@@ -12629,295 +12630,28 @@ static void atk9D_mimicattackcopy(void)
     }
 }
 
-#if DEBUG
-NAKED
 static void atk9E_metronome(void)
 {
-    asm("\
-	push	{r4, r5, r6, r7, lr}\n\
-	mov	r7, r8\n\
-	push	{r7}\n\
-	ldr	r6, ._3076      @ gBankAttacker\n\
-	ldrb	r2, [r6]\n\
-	lsl	r1, r2, #0x1\n\
-	ldr	r0, ._3076 + 4  @ \n\
-	add	r3, r1, r0\n\
-	ldr	r5, ._3076 + 8  @ \n\
-	mov	r4, #0x58\n\
-	add	r0, r2, #0\n\
-	mul	r0, r0, r4\n\
-	add	r1, r0, r5\n\
-	ldrh	r0, [r1, #0xe]\n\
-	cmp	r0, #0\n\
-	bne	._3071	@cond_branch\n\
-	ldrh	r2, [r1, #0x10]\n\
-	cmp	r2, #0\n\
-	beq	._3071	@cond_branch\n\
-	ldrh	r0, [r1, #0x12]\n\
-	cmp	r0, #0\n\
-	beq	._3071	@cond_branch\n\
-	ldrh	r0, [r3]\n\
-	cmp	r0, #0\n\
-	bne	._3072	@cond_branch\n\
-	strh	r2, [r3]\n\
-._3072:\n\
-	ldr	r1, ._3076 + 12 @ \n\
-	ldrh	r0, [r3]\n\
-	strh	r0, [r1]\n\
-	ldrb	r0, [r6]\n\
-	mul	r0, r0, r4\n\
-	add	r0, r0, r5\n\
-	ldrh	r5, [r0, #0x10]\n\
-	ldrh	r2, [r0, #0x12]\n\
-	add	r7, r1, #0\n\
-	cmp	r5, r2\n\
-	bcs	._3073	@cond_branch\n\
-	ldrh	r0, [r3]\n\
-	cmp	r0, r2\n\
-	beq	._3074	@cond_branch\n\
-	add	r0, r0, #0x1\n\
-	b	._3079\n\
-._3077:\n\
-	.align	2, 0\n\
-._3076:\n\
-	.word	gBankAttacker\n\
-	.word	+0x20160b4\n\
-	.word	gBattleMons\n\
-	.word	gCurrentMove\n\
-._3073:\n\
-	ldrh	r4, [r3]\n\
-	add	r1, r4, #0\n\
-	mov	r0, #0xb1\n\
-	lsl	r0, r0, #0x1\n\
-	cmp	r1, r0\n\
-	bne	._3078	@cond_branch\n\
-	mov	r0, #0x1\n\
-	b	._3079\n\
-._3078:\n\
-	cmp	r1, r2\n\
-	bne	._3080	@cond_branch\n\
-._3074:\n\
-	strh	r5, [r3]\n\
-	b	._3081\n\
-._3080:\n\
-	add	r0, r4, #1\n\
-._3079:\n\
-	strh	r0, [r3]\n\
-._3081:\n\
-	ldr	r4, ._3083      @ gHitMarker\n\
-	ldr	r2, [r4]\n\
-	ldr	r0, ._3083 + 4  @ 0xfffffbff\n\
-	and	r2, r2, r0\n\
-	str	r2, [r4]\n\
-	ldr	r6, ._3083 + 8  @ gBattlescriptCurrInstr\n\
-	ldr	r5, ._3083 + 12 @ gBattleScriptsForMoveEffects\n\
-	ldr	r3, ._3083 + 16 @ gBattleMoves\n\
-	ldrh	r1, [r7]\n\
-	lsl	r0, r1, #0x1\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r3\n\
-	ldrb	r0, [r0]\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r5\n\
-	ldr	r0, [r0]\n\
-	str	r0, [r6]\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x4\n\
-	orr	r2, r2, r0\n\
-	str	r2, [r4]\n\
-	ldrh	r0, [r7]\n\
-	b	._3082\n\
-._3084:\n\
-	.align	2, 0\n\
-._3083:\n\
-	.word	gHitMarker\n\
-	.word	0xfffffbff\n\
-	.word	gBattlescriptCurrInstr\n\
-	.word	gBattleScriptsForMoveEffects\n\
-	.word	gBattleMoves\n\
-._3071:\n\
-	ldr	r7, ._3090      @ gCurrentMove\n\
-	mov	r6, #0xb1\n\
-	lsl	r6, r6, #0x1\n\
-	ldr	r5, ._3090 + 4  @ sMovesForbiddenToCopy\n\
-	ldr	r0, ._3090 + 8  @ gBattlescriptCurrInstr\n\
-	mov	r8, r0\n\
-._3089:\n\
-	bl	Random\n\
-	ldr	r2, ._3090 + 12 @ 0x1ff\n\
-	add	r1, r2, #0\n\
-	and	r0, r0, r1\n\
-	add	r0, r0, #0x1\n\
-	strh	r0, [r7]\n\
-	cmp	r0, r6\n\
-	bhi	._3089	@cond_branch\n\
-	mov	r0, #0x3\n\
-._3086:\n\
-	sub	r0, r0, #0x1\n\
-	cmp	r0, #0\n\
-	bge	._3086	@cond_branch\n\
-	ldr	r4, ._3090      @ gCurrentMove\n\
-	ldrh	r2, [r4]\n\
-	ldr	r3, ._3090 + 16 @ 0xffff\n\
-	sub	r0, r5, #2\n\
-._3088:\n\
-	add	r0, r0, #0x2\n\
-	ldrh	r1, [r0]\n\
-	cmp	r1, r2\n\
-	beq	._3087	@cond_branch\n\
-	cmp	r1, r3\n\
-	bne	._3088	@cond_branch\n\
-._3087:\n\
-	ldr	r0, ._3090 + 16 @ 0xffff\n\
-	cmp	r1, r0\n\
-	bne	._3089	@cond_branch\n\
-	ldr	r2, ._3090 + 20 @ gHitMarker\n\
-	ldr	r0, [r2]\n\
-	ldr	r1, ._3090 + 24 @ 0xfffffbff\n\
-	and	r0, r0, r1\n\
-	str	r0, [r2]\n\
-	ldr	r3, ._3090 + 28 @ gBattleScriptsForMoveEffects\n\
-	ldr	r2, ._3090 + 32 @ gBattleMoves\n\
-	ldrh	r1, [r4]\n\
-	lsl	r0, r1, #0x1\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r2\n\
-	ldrb	r0, [r0]\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r3\n\
-	ldr	r0, [r0]\n\
-	mov	r1, r8\n\
-	str	r0, [r1]\n\
-	ldrh	r0, [r4]\n\
-._3082:\n\
-	mov	r1, #0x0\n\
-	bl	GetMoveTarget\n\
-	ldr	r1, ._3090 + 36 @ gBankTarget\n\
-	strb	r0, [r1]\n\
-	pop	{r3}\n\
-	mov	r8, r3\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._3091:\n\
-	.align	2, 0\n\
-._3090:\n\
-	.word	gCurrentMove\n\
-	.word	sMovesForbiddenToCopy\n\
-	.word	gBattlescriptCurrInstr\n\
-	.word	0x1ff\n\
-	.word	0xffff\n\
-	.word	gHitMarker\n\
-	.word	0xfffffbff\n\
-	.word	gBattleScriptsForMoveEffects\n\
-	.word	gBattleMoves\n\
-	.word	gBankTarget");
-}
-#else
-#ifdef NONMATCHING
-static void atk9E_metronome(void)
-{
-    // sMovesForbiddenToCopy
-    int i;
+    s32 i;
+
     do
     {
-        while ((gCurrentMove = (Random() & 0x1FF) + 1) > 0x162);
-        for (i = 0; sMovesForbiddenToCopy[i] != gCurrentMove && sMovesForbiddenToCopy[i] != 0xFFFF; i++);
-    } while (sMovesForbiddenToCopy[i] != 0xFFFF);
+        while ((gCurrentMove = (Random() & 0x1FF) + 1) >= NUM_MOVES);
+        for (i = 0; sMovesForbiddenToCopy[i] != METRONOME_FORBIDDEN_END; i++)
+        {
+            if (sMovesForbiddenToCopy[i] == gCurrentMove)
+                break;
+        };
+
+        if (sMovesForbiddenToCopy[i] == METRONOME_FORBIDDEN_END)
+            break;
+    } while (1);
 
     gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
     gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
     gBankTarget = GetMoveTarget(gCurrentMove, 0);
+    gLastUsedMetronomeMove[gBankAttacker] = gCurrentMove;
 }
-
-#else
-NAKED
-static void atk9E_metronome(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    ldr r7, _08027938 @ =gCurrentMove\n\
-    movs r6, 0xB1\n\
-    lsls r6, 1\n\
-    ldr r5, _0802793C @ =sMovesForbiddenToCopy\n\
-    ldr r0, _08027940 @ =gBattlescriptCurrInstr\n\
-    mov r8, r0\n\
-_080278CA:\n\
-    bl Random\n\
-    ldr r2, _08027944 @ =0x000001ff\n\
-    adds r1, r2, 0\n\
-    ands r0, r1\n\
-    adds r0, 0x1\n\
-    strh r0, [r7]\n\
-    cmp r0, r6\n\
-    bhi _080278CA\n\
-    movs r0, 0x3\n\
-_080278DE:\n\
-    subs r0, 0x1\n\
-    cmp r0, 0\n\
-    bge _080278DE\n\
-    ldr r4, _08027938 @ =gCurrentMove\n\
-    ldrh r2, [r4]\n\
-    ldr r3, _08027948 @ =0x0000ffff\n\
-    subs r0, r5, 0x2\n\
-_080278EC:\n\
-    adds r0, 0x2\n\
-    ldrh r1, [r0]\n\
-    cmp r1, r2\n\
-    beq _080278F8\n\
-    cmp r1, r3\n\
-    bne _080278EC\n\
-_080278F8:\n\
-    ldr r0, _08027948 @ =0x0000ffff\n\
-    cmp r1, r0\n\
-    bne _080278CA\n\
-    ldr r2, _0802794C @ =gHitMarker\n\
-    ldr r0, [r2]\n\
-    ldr r1, _08027950 @ =0xfffffbff\n\
-    ands r0, r1\n\
-    str r0, [r2]\n\
-    ldr r3, _08027954 @ =gBattleScriptsForMoveEffects\n\
-    ldr r2, _08027958 @ =gBattleMoves\n\
-    ldrh r1, [r4]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 2\n\
-    adds r0, r3\n\
-    ldr r0, [r0]\n\
-    mov r1, r8\n\
-    str r0, [r1]\n\
-    ldrh r0, [r4]\n\
-    movs r1, 0\n\
-    bl GetMoveTarget\n\
-    ldr r1, _0802795C @ =gBankTarget\n\
-    strb r0, [r1]\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08027938: .4byte gCurrentMove\n\
-_0802793C: .4byte sMovesForbiddenToCopy\n\
-_08027940: .4byte gBattlescriptCurrInstr\n\
-_08027944: .4byte 0x000001ff\n\
-_08027948: .4byte 0x0000ffff\n\
-_0802794C: .4byte gHitMarker\n\
-_08027950: .4byte 0xfffffbff\n\
-_08027954: .4byte gBattleScriptsForMoveEffects\n\
-_08027958: .4byte gBattleMoves\n\
-_0802795C: .4byte gBankTarget\n\
-        .syntax divided");
-}
-#endif // NONMATCHING
-#endif
 
 static void atk9F_dmgtolevel(void)
 {
@@ -13003,20 +12737,17 @@ static void atkA3_disablelastusedattack(void)
 
 static void atkA4_trysetencore(void)
 {
-    int i;
-    for (i = 0; i < 4; i++)
+    u16 encoreMove = gLastUsedMetronomeMove[gBankTarget];
+    if (encoreMove == MOVE_NONE)
+        encoreMove = gLastUsedMove[gBankTarget];
+    if (encoreMove == MOVE_STRUGGLE || encoreMove == MOVE_ENCORE || encoreMove == MOVE_MIRROR_MOVE)
     {
-        if (gBattleMons[gBankTarget].moves[i] == gLastUsedMove[gBankTarget])
-            break;
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
-    if (gLastUsedMove[gBankTarget] == MOVE_STRUGGLE || gLastUsedMove[gBankTarget] == MOVE_ENCORE || gLastUsedMove[gBankTarget] == MOVE_MIRROR_MOVE)
-        i = 4;
-    if (gDisableStructs[gBankTarget].encoredMove == 0 && i != 4 && gBattleMons[gBankTarget].pp[i] != 0)
+    else if (gDisableStructs[gBankTarget].encoredMove == 0)
     {
-        gDisableStructs[gBankTarget].encoredMove = gBattleMons[gBankTarget].moves[i];
-        gDisableStructs[gBankTarget].encoredMovePos = i;
-        gDisableStructs[gBankTarget].encoreTimer1 = (Random() & 3) + 3;
-        gDisableStructs[gBankTarget].encoreTimer2 = gDisableStructs[gBankTarget].encoreTimer1;
+        gDisableStructs[gBankTarget].encoredMove = encoreMove;
+        gDisableStructs[gBankTarget].encoreTimer2 = gDisableStructs[gBankTarget].encoreTimer1 = (Random() & 3) + 3;
         gBattlescriptCurrInstr += 5;
     }
     else

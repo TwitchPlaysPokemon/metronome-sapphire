@@ -553,8 +553,6 @@ u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check)
             unusableMoves |= gBitTable[i];
         if (IsImprisoned(bank, gBattleMons[bank].moves[i]) && check & MOVE_LIMITATION_IMPRISION)
             unusableMoves |= gBitTable[i];
-        if (gDisableStructs[bank].encoreTimer1 && gDisableStructs[bank].encoredMove != gBattleMons[bank].moves[i])
-            unusableMoves |= gBitTable[i];
         if (holdEffect == HOLD_EFFECT_CHOICE_BAND && *choicedMove != 0 && *choicedMove != 0xFFFF && *choicedMove != gBattleMons[bank].moves[i])
             unusableMoves |= gBitTable[i];
     }
@@ -1096,15 +1094,9 @@ u8 TurnBasedEffects(void)
             case 13:  // encore
                 if (gDisableStructs[gActiveBattler].encoreTimer1 != 0)
                 {
-                    if (gBattleMons[gActiveBattler].moves[gDisableStructs[gActiveBattler].encoredMovePos] != gDisableStructs[gActiveBattler].encoredMove)  // pokemon does not have the encored move anymore
+                    if (--gDisableStructs[gActiveBattler].encoreTimer1 == 0)
                     {
-                        gDisableStructs[gActiveBattler].encoredMove = 0;
-                        gDisableStructs[gActiveBattler].encoreTimer1 = 0;
-                    }
-                    else if (--gDisableStructs[gActiveBattler].encoreTimer1 == 0
-                     || gBattleMons[gActiveBattler].pp[gDisableStructs[gActiveBattler].encoredMovePos] == 0)
-                    {
-                        gDisableStructs[gActiveBattler].encoredMove = 0;
+                        gDisableStructs[gActiveBattler].encoredMove = MOVE_NONE;
                         gDisableStructs[gActiveBattler].encoreTimer1 = 0;
                         BattleScriptExecute(BattleScript_EncoredNoMore);
                         effect++;

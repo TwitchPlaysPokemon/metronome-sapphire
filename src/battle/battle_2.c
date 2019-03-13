@@ -6578,22 +6578,9 @@ void HandleAction_UseMove(void)
         gCurrentMove = gChosenMove = gLockedMoves[gBankAttacker];
     }
     // encore forces you to use the same move
-    else if (gDisableStructs[gBankAttacker].encoredMove != MOVE_NONE
-             && gDisableStructs[gBankAttacker].encoredMove == gBattleMons[gBankAttacker].moves[gDisableStructs[gBankAttacker].encoredMovePos])
+    else if (gDisableStructs[gBankAttacker].encoredMove != MOVE_NONE)
     {
         gCurrentMove = gChosenMove = gDisableStructs[gBankAttacker].encoredMove;
-        gCurrMovePos = gUnknown_02024BE5 = gDisableStructs[gBankAttacker].encoredMovePos;
-        ewram16010arr(gBankAttacker) = GetMoveTarget(gCurrentMove, 0);
-    }
-    // check if the encored move wasn't overwritten
-    else if (gDisableStructs[gBankAttacker].encoredMove != MOVE_NONE
-             && gDisableStructs[gBankAttacker].encoredMove != gBattleMons[gBankAttacker].moves[gDisableStructs[gBankAttacker].encoredMovePos])
-    {
-        gCurrMovePos = gUnknown_02024BE5 = gDisableStructs[gBankAttacker].encoredMovePos;
-        gCurrentMove = gChosenMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
-        gDisableStructs[gBankAttacker].encoredMove = MOVE_NONE;
-        gDisableStructs[gBankAttacker].encoredMovePos = 0;
-        gDisableStructs[gBankAttacker].encoreTimer1 = 0;
         ewram16010arr(gBankAttacker) = GetMoveTarget(gCurrentMove, 0);
     }
     else if (gBattleMons[gBankAttacker].moves[gCurrMovePos] != gChosenMovesByBanks[gBankAttacker])
