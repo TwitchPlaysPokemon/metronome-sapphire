@@ -2,7 +2,11 @@
 #define POKERUBY_EVENT_OBJECT_GFX_H
 
 const u32 gEventObjectPic_BrendanNormal[] = INCBIN_U32("graphics/event_objects/pics/people/brendan/normal.4bpp");
+#ifdef SAPPHIRE
+const u16 gEventObjectPalette8[] = INCBIN_U16("graphics/event_objects/palettes/blue_08.gbapal");
+#else
 const u16 gEventObjectPalette8[] = INCBIN_U16("graphics/event_objects/palettes/08.gbapal");
+#endif
 const u16 NullPalette_8310F68[16] = {};
 const u16 NullPalette_8310F88[16] = {};
 const u16 NullPalette_8310FA8[16] = {};
