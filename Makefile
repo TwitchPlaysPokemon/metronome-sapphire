@@ -26,6 +26,7 @@ SCANINC   := tools/scaninc/scaninc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 GBAFIX    := tools/gbafix/gbafix$(EXE)
 MAPJSON   := tools/mapjson/mapjson$(EXE)
+PGEGEN    := python3 tools/pgegen/pgegen.py
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG) --defsym RANDOMIZE=$(RANDOMIZE) --defsym NO_LVL_DISPLAY=$(NO_LVL_DISPLAY)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -36,6 +37,7 @@ CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -und
 
 ROM := metronome$(BUILD_NAME).gba
 MAP := $(ROM:%.gba=%.map)
+PGEINI := $(ROM:%.gba=%.pge.ini)
 
 BUILD_DIR := build/$(BUILD_NAME)
 
@@ -102,7 +104,7 @@ MAKEFLAGS += --no-print-directory
 # Create build subdirectories
 $(shell mkdir -p $(SUBDIRS))
 
-all: $(ROM)
+all: $(ROM) $(PGEINI)
 # ifeq ($(COMPARE),1)
 # 	@$(SHA1SUM) $(BUILD_NAME).sha1
 # endif
@@ -143,6 +145,9 @@ tidy:
 $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
+
+$(PGEINI): %.pge.ini: %.elf
+	$(PGEGEN) $< $@ --code $(GAME_CODE) --name "$(TITLE)"
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
