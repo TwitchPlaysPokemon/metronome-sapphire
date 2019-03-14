@@ -38,7 +38,8 @@
 // why does GF hate 2d arrays
 #define MULTI_DIM_ARR(x, dim, y) ((x) * dim + (y))
 
-#define RANDOMIZE_SPECIES(species) while (gSpeciesToNationalPokedexNum[(species = (Random() % (NUM_SPECIES - 1)) + 1) - 1] > NATIONAL_DEX_COUNT) ;
+//#define RANDOMIZE_SPECIES(species) while (gSpeciesToNationalPokedexNum[(species = (Random() % (NUM_SPECIES - 1)) + 1) - 1] > NATIONAL_DEX_COUNT) ;
+#define RANDOMIZE_SPECIES(species) while (gSpeciesToNationalPokedexNum[(species = ((SPECIES_MELTAN - 1) % (NUM_SPECIES - 1)) + 1) - 1] > NATIONAL_DEX_COUNT) ;
 
 // dim access enums
 enum

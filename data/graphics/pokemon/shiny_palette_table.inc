@@ -254,8 +254,8 @@ gMonShinyPaletteTable:: @ 81EB374
 	obj_pal gMonShinyPalette_Lugia, PAL_ID_SHINY + SPECIES_LUGIA
 	obj_pal gMonShinyPalette_HoOh, PAL_ID_SHINY + SPECIES_HO_OH
 	obj_pal gMonShinyPalette_Celebi, PAL_ID_SHINY + SPECIES_CELEBI
-	obj_pal gMonShinyPalette_QuestionMark, PAL_ID_SHINY + SPECIES_OLD_UNOWN_B
-	obj_pal gMonShinyPalette_QuestionMark, PAL_ID_SHINY + SPECIES_OLD_UNOWN_C
+	obj_pal gMonShinyPalette_QuestionMark, PAL_ID_SHINY + SPECIES_MELTAN
+	obj_pal gMonShinyPalette_QuestionMark, PAL_ID_SHINY + SPECIES_MELMETAL
 	obj_pal gMonShinyPalette_QuestionMark, PAL_ID_SHINY + SPECIES_OLD_UNOWN_D
 	obj_pal gMonShinyPalette_QuestionMark, PAL_ID_SHINY + SPECIES_OLD_UNOWN_E
 	obj_pal gMonShinyPalette_QuestionMark, PAL_ID_SHINY + SPECIES_OLD_UNOWN_F
