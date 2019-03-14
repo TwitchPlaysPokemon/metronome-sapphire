@@ -38,7 +38,7 @@ const u16 gEventObjectPalette11[] = INCBIN_U16("graphics/event_objects/palettes/
 const u32 gEventObjectPic_MayNormal[] = INCBIN_U32("graphics/event_objects/pics/people/may/normal.4bpp");
 #ifdef SAPPHIRE
 const u16 gEventObjectPalette17[] = INCBIN_U16("graphics/event_objects/palettes/blue_17.gbapal");
-const u16 gEventObjectPalette18[] = INCBIN_U16("graphics/event_objects/palettes/blue_18.gbapal");
+const u16 gEventObjectPalette18[] = INCBIN_U16("graphics/event_objects/palettes/18.gbapal");
 #else
 const u16 gEventObjectPalette17[] = INCBIN_U16("graphics/event_objects/palettes/17.gbapal");
 const u16 gEventObjectPalette18[] = INCBIN_U16("graphics/event_objects/palettes/18.gbapal");
