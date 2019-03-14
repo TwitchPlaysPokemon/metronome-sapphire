@@ -100,6 +100,7 @@ extern u8 gMultiHitCounter;
 extern u8 gActionForBanks[];
 extern u16 gUnknown_02024C2C[];
 extern u16 gLastUsedMove[];
+extern u16 gLastMetronomeMove[];
 extern u16 gLastLandedMoves[];
 extern u16 gLastHitByType[];
 extern u16 gUnknown_02024C4C[];
@@ -3624,6 +3625,7 @@ void sub_8010874(void)
         gDisableStructs[i].isFirstTurn= 2;
         gUnknown_02024C70[i] = 0;
         gLastUsedMove[i] = 0;
+        gLastMetronomeMove[i] = 0;
         gLastLandedMoves[i] = 0;
         gLastHitByType[i] = 0;
         gUnknown_02024C4C[i] = 0;
