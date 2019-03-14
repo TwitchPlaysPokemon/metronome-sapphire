@@ -2,9 +2,7 @@
 #define GUARD_POKEDEX_H
 
 #include "sprite.h"
-
-#define HOENN_DEX_COUNT 202
-#define NATIONAL_DEX_COUNT 386
+#include "constants/species.h"
 
 void ResetPokedex(void);
 void sub_808C0A0(void);
