@@ -74,8 +74,13 @@ const u8 gTrainerBackPic_May[] = INCBIN_U8("graphics/trainers/may_back.4bpp.lz")
 const u8 gTrainerBackPic_Wally[] = INCBIN_U8("graphics/trainers/wally_back.4bpp.lz");
 const u8 gTrainerPalette_Lass[] = INCBIN_U8("graphics/trainers/lass.gbapal.lz");
 const u8 gTrainerPalette_Youngster[] = INCBIN_U8("graphics/trainers/youngster.gbapal.lz");
+#ifdef SAPPHIRE
+const u8 gTrainerPalette_Brendan[] = INCBIN_U8("graphics/trainers/brendan_blue.gbapal.lz");
+const u8 gTrainerPalette_May[] = INCBIN_U8("graphics/trainers/may_blue.gbapal.lz");
+#else
 const u8 gTrainerPalette_Brendan[] = INCBIN_U8("graphics/trainers/brendan.gbapal.lz");
 const u8 gTrainerPalette_May[] = INCBIN_U8("graphics/trainers/may.gbapal.lz");
+#endif
 const u8 gTrainerPalette_Hiker[] = INCBIN_U8("graphics/trainers/hiker.gbapal.lz");
 const u8 gTrainerPalette_Beauty[] = INCBIN_U8("graphics/trainers/beauty.gbapal.lz");
 const u8 gTrainerPalette_Fisherman[] = INCBIN_U8("graphics/trainers/fisherman.gbapal.lz");
