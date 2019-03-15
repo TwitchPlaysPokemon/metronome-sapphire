@@ -22,7 +22,11 @@ const u16 NullPalette_83110C8[16] = {};
 const u16 NullPalette_83110E8[16] = {};
 const u16 NullPalette_8311108[16] = {};
 const u16 NullPalette_8311128[16] = {};
+#ifdef SAPPHIRE
+const u16 gEventObjectPalette9[] = INCBIN_U16("graphics/event_objects/palettes/blue_09.gbapal");
+#else
 const u16 gEventObjectPalette9[] = INCBIN_U16("graphics/event_objects/palettes/09.gbapal");
+#endif
 const u16 gEventObjectPalette10[] = INCBIN_U16("graphics/event_objects/palettes/10.gbapal");
 const u32 gEventObjectPic_BrendanFieldMove[] = INCBIN_U32("graphics/event_objects/pics/people/brendan/field_move.4bpp");
 const u32 gEventObjectPic_BrendanSurfing[] = INCBIN_U32("graphics/event_objects/pics/people/brendan/surfing.4bpp");
@@ -38,7 +42,7 @@ const u16 gEventObjectPalette11[] = INCBIN_U16("graphics/event_objects/palettes/
 const u32 gEventObjectPic_MayNormal[] = INCBIN_U32("graphics/event_objects/pics/people/may/normal.4bpp");
 #ifdef SAPPHIRE
 const u16 gEventObjectPalette17[] = INCBIN_U16("graphics/event_objects/palettes/blue_17.gbapal");
-const u16 gEventObjectPalette18[] = INCBIN_U16("graphics/event_objects/palettes/18.gbapal");
+const u16 gEventObjectPalette18[] = INCBIN_U16("graphics/event_objects/palettes/blue_18.gbapal");
 #else
 const u16 gEventObjectPalette17[] = INCBIN_U16("graphics/event_objects/palettes/17.gbapal");
 const u16 gEventObjectPalette18[] = INCBIN_U16("graphics/event_objects/palettes/18.gbapal");
