@@ -104,10 +104,12 @@ MAKEFLAGS += --no-print-directory
 # Create build subdirectories
 $(shell mkdir -p $(SUBDIRS))
 
-all: $(ROM) $(PGEINI)
+all: $(ROM)
 # ifeq ($(COMPARE),1)
 # 	@$(SHA1SUM) $(BUILD_NAME).sha1
 # endif
+
+ini: $(PGEINI)
 
 clean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
