@@ -1124,21 +1124,21 @@ static void atk00_attackcanceler(void)
 
     gHitMarker &= ~(HITMARKER_x800000);
 
-    if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS))
-    {
-        i = IsMonDisobedient(); // why use the 'i' variable...?
-        switch (i)
-        {
-        case 0:
-            break;
-        case 2:
-            gHitMarker |= HITMARKER_OBEYS;
-            return;
-        default:
-            gMoveResultFlags |= MOVE_RESULT_MISSED;
-            return;
-        }
-    }
+//    if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS))
+//    {
+//        i = IsMonDisobedient(); // why use the 'i' variable...?
+//        switch (i)
+//        {
+//        case 0:
+//            break;
+//        case 2:
+//            gHitMarker |= HITMARKER_OBEYS;
+//            return;
+//        default:
+//            gMoveResultFlags |= MOVE_RESULT_MISSED;
+//            return;
+//        }
+//    }
 
     gHitMarker |= HITMARKER_OBEYS;
 

@@ -24,6 +24,6 @@ void sub_80157C4(u8 bank);
 bool8 HandleWishPerishSongOnTurnEnd(void);
 void BattleScriptExecute(const u8* BS_ptr);
 void BattleScriptPushCursorAndCallback(u8* BS_ptr);
-u8 IsMonDisobedient(void);
+//u8 IsMonDisobedient(void);
 
 #endif // GUARD_BATTLE_UTIL_H

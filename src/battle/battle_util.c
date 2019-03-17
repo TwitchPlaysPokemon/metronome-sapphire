@@ -3431,7 +3431,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
     return targetBank;
 }
 
-u8 IsMonDisobedient(void)
-{
-    return 0;
-}
+//u8 IsMonDisobedient(void)
+//{
+//    return 0;
+//}
