@@ -52,7 +52,7 @@ def pgegen(args):
     ptrs = []
     while True:
         grp = elf.get_sym(f'gMapGroup{len(ptrs)}')
-        if grp is None:
+        if grp.st_name is None:
             break
         config_set(f'OriginalBankPointer{len(ptrs)}', f'{grp.st_value & 0xFFFFFF:X}')
         ptrs.append(grp.st_value)
@@ -229,6 +229,87 @@ def pgegen(args):
     config_set('TradeData', f'{gIngameTrades.st_value & 0xFFFFFF:X}')
     config_set('NumberOfTrades', f'{gIngameTrades.st_size // 60}')
 
+    # RAM locations
+    gPlayerParty = elf.get_sym('gPlayerParty')
+    config_set('EwramPartyLocation', f'{gPlayerParty.st_value & 0xFFFFFF:X}')
+    config_set('PartyBytes', f'{gPlayerParty.st_size:X}')
+
+    gPokemonStoragePtr = elf.get_sym('gPokemonStoragePtr')
+    gSaveBlock1Ptr = elf.get_sym('gSaveBlock1Ptr')
+    gSaveBlock2Ptr = elf.get_sym('gSaveBlock2Ptr')
+
+    gPokemonStorage = elf.get_sym('gPokemonStorage')
+
+    is_rs = None in (gPokemonStoragePtr.st_name, gSaveBlock1Ptr.st_name, gSaveBlock2Ptr.st_name)
+
+    if is_rs:
+        # RS
+        config_set('PCBlockAddress', f'{gPokemonStorage.st_value:X}')
+        config_set('SaveBlock1Address', f'{elf.get_sym("gSaveBlock1").st_value:X}')
+        config_set('SaveBlock2Address', f'{elf.get_sym("gSaveBlock2").st_value:X}')
+    else:
+        # Emerald
+        config_set('PCBlockAddress', f'*{gPokemonStoragePtr.st_value:X}')
+        config_set('SaveBlock1Address', f'*{gSaveBlock1Ptr.st_value:X}')
+        config_set('SaveBlock2Address', f'*{gSaveBlock2Ptr.st_value:X}')
+    config_set('PCBytes', f'{gPokemonStorage.st_size:X}')
+
+    # Assume these offsets are unchanged from vanilla
+    if is_rs:
+        config_set('DaycareOffset', '2F9C')
+        config_set('MoneyOffset', '490')
+        # Skip encryption key offset
+        config_set('ItemPCOffset', '498')
+        config_set('ItemPCCount', '32')
+        config_set('ItemPocketOffset', '560')
+        config_set('ItemPocketCount', '14')
+        config_set('ItemKeyOffset', '5B0')
+        config_set('ItemKeyCount', '14')
+        config_set('ItemBallOffset', '600')
+        config_set('ItemBallCount', '10')
+        config_set('ItemTMOffset', '640')
+        config_set('ItemTMCount', '40')
+        config_set('ItemBerriesOffset', '740')
+        config_set('ItemBerriesCount', '2E')
+        config_set('FlagsOffset', '1220')
+        config_set('BadgeFlag', '807')  # 100:7
+        config_set('IwramMusicAddr', sym_get('sCurrentMapMusic'))
+        config_set('EvolutionMusicIds', '178 179')
+        # Skip rival name
+    else:
+        # Assume Emerald for now
+        config_set('DaycareOffset', '3030')
+        config_set('MoneyOffset', '490')
+        config_set('EncryptionKeyOffset', 'AC')
+        config_set('ItemPCOffset', '498')
+        config_set('ItemPCCount', '32')
+        config_set('ItemPocketOffset', '560')
+        config_set('ItemPocketCount', '1E')
+        config_set('ItemKeyOffset', '5D8')
+        config_set('ItemKeyCount', '1E')
+        config_set('ItemBallOffset', '650')
+        config_set('ItemBallCount', '10')
+        config_set('ItemTMOffset', '690')
+        config_set('ItemTMCount', '40')
+        config_set('ItemBerriesOffset', '790')
+        config_set('ItemBerriesCount', '2E')
+        config_set('FlagsOffset', '1270')
+        config_set('BadgeFlag', '867')  # 10E:7
+        config_set('IwramMusicAddr', sym_get('sCurrentMapMusic'))
+        config_set('EvolutionMusicIds', '178 179')
+        # Skip rival name
+    config_set('CurrentAreaAddr', f'{elf.get_sym("gMapHeader").st_value:X}+14')
+    config_set('gBattleTypeFlags', f'{elf.get_sym("gBattleTypeFlags").st_value:X}')
+    config_set('gTrainerBattleOpponent_A', f'{(elf.get_sym("gTrainerBattleOpponent_A") or elf.get_sym("gTrainerBattleOpponent")).st_value:X}')
+    config_set('gEnemyParty', f'{elf.get_sym("gEnemyParty").st_value:X}')
+    config_set('gBattlersCount', f'{elf.get_sym("gBattlersCount").st_value:X}')
+    config_set('gBattlerPartyIndexes', f'{elf.get_sym("gBattlerPartyIndexes").st_value:X}')
+    config_set('gBattlerPositions', f'{(elf.get_sym("gBattlerPositions") or elf.get_sym("gBanksBySide")).st_value:X}')
+    gBattleMons = elf.get_sym("gBattleMons")
+    config_set('gBattleMons', f'{gBattleMons.st_value:X}')
+    config_set('gBattleMonsBytes', f'{get_size_rawasm(gBattleMons):X}')
+    config_set('InBattleAddr', f'{elf.get_sym("gMain").st_value:X}+439')
+
     print('done')
 
     print('writing config... ', end='', flush=True)
@@ -243,6 +324,8 @@ def main():
     parser.add_argument('output', type=argparse.FileType('w'))
     parser.add_argument('--code', default='AXVE')
     parser.add_argument('--name', default='Pokemon Ruby (English)')
+    parser.add_argument('-iquote')
+    parser.add_argument('-I')
     args = parser.parse_args()
     pgegen(args)
 

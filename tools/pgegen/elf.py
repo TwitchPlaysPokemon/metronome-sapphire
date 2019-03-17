@@ -51,22 +51,15 @@ class SectionHeader:
 
 @functools.total_ordering
 class Symbol:
-    def __init__(self, eh):
+    def __init__(self):
         self.st_name = None
         self.st_sh = None
-        self.st_name_off = int.from_bytes(eh.read(4 * eh.intwidth), eh.endianness, signed=False)
-        if eh.intwidth == 1:
-            self.st_value = int.from_bytes(eh.read(4), eh.endianness, signed=False)
-            self.st_size = int.from_bytes(eh.read(4), eh.endianness, signed=False)
-            self.st_info = int.from_bytes(eh.read(1), eh.endianness, signed=False)
-            self.st_other = int.from_bytes(eh.read(1), eh.endianness, signed=False)
-            self.st_shndx = int.from_bytes(eh.read(2), eh.endianness, signed=False)
-        else:
-            self.st_info = int.from_bytes(eh.read(1), eh.endianness, signed=False)
-            self.st_other = int.from_bytes(eh.read(1), eh.endianness, signed=False)
-            self.st_shndx = int.from_bytes(eh.read(2), eh.endianness, signed=False)
-            self.st_value = int.from_bytes(eh.read(8), eh.endianness, signed=False)
-            self.st_size = int.from_bytes(eh.read(8), eh.endianness, signed=False)
+        self.st_name_off = 0
+        self.st_value = 0
+        self.st_size = 0
+        self.st_info = 0
+        self.st_other = 0
+        self.st_shndx = -1
 
     def __repr__(self):
         if self.st_name is None:
@@ -89,6 +82,27 @@ class Symbol:
         if isinstance(other, int):
             return self.st_value < other
         return NotImplemented
+
+    @classmethod
+    def from_eh(cls, eh):
+        self = cls()
+        self.st_name_off = int.from_bytes(eh.read(4 * eh.intwidth), eh.endianness, signed=False)
+        if eh.intwidth == 1:
+            self.st_value = int.from_bytes(eh.read(4), eh.endianness, signed=False)
+            self.st_size = int.from_bytes(eh.read(4), eh.endianness, signed=False)
+            self.st_info = int.from_bytes(eh.read(1), eh.endianness, signed=False)
+            self.st_other = int.from_bytes(eh.read(1), eh.endianness, signed=False)
+            self.st_shndx = int.from_bytes(eh.read(2), eh.endianness, signed=False)
+        else:
+            self.st_info = int.from_bytes(eh.read(1), eh.endianness, signed=False)
+            self.st_other = int.from_bytes(eh.read(1), eh.endianness, signed=False)
+            self.st_shndx = int.from_bytes(eh.read(2), eh.endianness, signed=False)
+            self.st_value = int.from_bytes(eh.read(8), eh.endianness, signed=False)
+            self.st_size = int.from_bytes(eh.read(8), eh.endianness, signed=False)
+        return self
+
+    def __bool__(self):
+        return self.st_name is not None
 
 
 class Elf:
@@ -150,7 +164,7 @@ class Elf:
             elif strtab.sh_type == 2:  # symbol table
                 self._fp.seek(strtab.sh_offset)
                 while self._fp.tell() < strtab.sh_offset + strtab.sh_size:
-                    self.symbols.append(Symbol(self))
+                    self.symbols.append(Symbol.from_eh(self))
         print('done')
 
         print('Assigning section names... ', end='', flush=True)
@@ -182,13 +196,15 @@ class Elf:
         for sym in self.symbols:
             if sym == name:
                 return sym
-        return None
+        # print(f'WARNING: symbol {name} not found, returning dummy object')
+        return Symbol()
 
     def get_offset(self, name):
         sym = self.get_sym(name)
         if sym is not None:
             return sym.st_value
-        return None
+        # print(f'WARNING: symbol {name} not found, returning invalid offset')
+        return -1
 
     @classmethod
     def from_filename(cls, filename):
