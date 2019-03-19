@@ -26,6 +26,7 @@ SCANINC   := tools/scaninc/scaninc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 GBAFIX    := tools/gbafix/gbafix$(EXE)
 MAPJSON   := tools/mapjson/mapjson$(EXE)
+ITEMSJSON := tools/itemsjson/itemsjson$(EXE)
 PGEGEN    := python3 tools/pgegen/pgegen.py
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG) --defsym RANDOMIZE=$(RANDOMIZE) --defsym NO_LVL_DISPLAY=$(NO_LVL_DISPLAY)
@@ -127,6 +128,7 @@ clean: tidy
 	$(MAKE) clean -C tools/ramscrgen
 	$(MAKE) clean -C tools/gbafix
 	$(MAKE) clean -C tools/mapjson
+	$(MAKE) clean -C tools/itemsjson
 
 tools:
 	@$(MAKE) -C tools/gbagfx
@@ -139,6 +141,7 @@ tools:
 	@$(MAKE) -C tools/mid2agb
 	@$(MAKE) -C tools/gbafix
 	@$(MAKE) -C tools/mapjson
+	@$(MAKE) -C tools/itemsjson
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=metronome%{.gba,.elf,.map})
@@ -214,3 +217,11 @@ sound/%.bin: sound/%.aif
 
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID2AGB) $(<F)
+
+ITEM_HEADERS := src/data/items.h src/data/item_descriptions.h
+
+src/data/item_descriptions.h: %: data/items.json
+	$(ITEMSJSON) $(shell echo $(GAME_LANGUAGE) | tr '[:upper:]' '[:lower:]') $<
+src/data/items.h: ;
+
+$(BUILD_DIR)/src/item.o: $(ITEM_HEADERS)

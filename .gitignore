@@ -45,3 +45,5 @@ build/
 *.diff
 *.ini
 *.pyc
+src/data/items.h
+src/data/item_descriptions.h
