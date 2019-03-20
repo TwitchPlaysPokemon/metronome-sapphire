@@ -116,7 +116,7 @@ static void Task_NewGameSpeech33(u8 taskId);
 static void CB_ContinueNewGameSpeechPart2();
 static void nullsub_34(struct Sprite *sprite);
 static void ShrinkPlayerSprite(struct Sprite *sprite);
-static u8 CreateAzurillSprite(u8 x, u8 y);
+static u8 CreateAzurillSprite(u8 x, u8 y, u16 species);
 static void AddBirchSpeechObjects(u8 taskId);
 static void Task_SpriteFadeOut(u8 taskId);
 static void StartSpriteFadeOut(u8 taskId, u8 interval);
@@ -748,6 +748,7 @@ void PrintBadgeCount(void)
 #define tAzurillSpriteId data[9]
 #define tBrendanSpriteId data[10]
 #define tMaySpriteId     data[11]
+#define tRandSpecies     data[12]
 
 static void Task_NewGameSpeech1(u8 taskId)
 {
@@ -868,7 +869,7 @@ static void Task_NewGameSpeech7(u8 taskId)
         gTasks[taskId].tFrameCounter++;
         //Play Azurill cry at frame 32
         if (gTasks[taskId].tFrameCounter == 32)
-            PlayCry1(SPECIES_AZURILL, 0);
+            PlayCry1(gTasks[taskId].tRandSpecies, 0);
     }
 }
 
@@ -1429,12 +1430,8 @@ void ShrinkPlayerSprite(struct Sprite *sprite)
     sprite->data[0] = y;
 }
 
-u8 CreateAzurillSprite(u8 x, u8 y)
+u8 CreateAzurillSprite(u8 x, u8 y, u16 species)
 {
-    u16 species;
-
-    RANDOMIZE_SPECIES(species);
-
     DecompressPicFromTable_2(
         &gMonFrontPicTable[species],
         gMonFrontPicCoords[species].coords,
@@ -1450,6 +1447,7 @@ u8 CreateAzurillSprite(u8 x, u8 y)
 void AddBirchSpeechObjects(u8 taskId)
 {
     u8 spriteId;
+    u16 species;
 
     spriteId = CreateBirchSprite(136, 60, 1);
     gSprites[spriteId].callback = nullsub_34;
@@ -1457,7 +1455,10 @@ void AddBirchSpeechObjects(u8 taskId)
     gSprites[spriteId].invisible = 1;
     gTasks[taskId].tBirchSpriteId = spriteId;
 
-    spriteId = CreateAzurillSprite(0x68, 0x48);
+    RANDOMIZE_SPECIES(species);
+    gTasks[taskId].tRandSpecies = species;
+
+    spriteId = CreateAzurillSprite(0x68, 0x48, species);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].oam.priority = 0;
     gSprites[spriteId].invisible = 1;
