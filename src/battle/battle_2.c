@@ -4964,7 +4964,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
     {
         CpuFill32(0, gEnemyParty, sizeof(gEnemyParty));
         ResetSpriteData();
-        if (gLeveledUpInBattle == 0 || gBattleOutcome != BATTLE_WON)
+        if (RANDOMIZE || gLeveledUpInBattle == 0 || gBattleOutcome != BATTLE_WON)
         {
             gBattleMainFunc = ReturnFromBattleToOverworld;
             return;
