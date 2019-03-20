@@ -62,5 +62,5 @@ endif
 
 # Randomized
 ifneq ($(RANDOMIZE), 1)
-  build_name := $(BUILD_NAME)_norand
+  BUILD_NAME := $(BUILD_NAME)_norand
 endif
