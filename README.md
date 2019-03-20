@@ -1,5 +1,7 @@
 # Pokémon Metronome Sapphire
 
+Based on [this](https://www.reddit.com/r/twitchplayspokemon/comments/6q06qu/idea_for_a_future_run/) subreddit post.
+
 Currently planned features:
 
 * All Pokémon only know Metronome during battle/contests.
@@ -8,7 +10,7 @@ Currently planned features:
 * HM moves only require the HM itself and the relevant badge.
 * Encounters are fully random, meaning that each wild Pokémon the player runs into can be of any species in the game.
 
-If you have ideas on how to expand upon this concept to make the game more interesting, open an Issue
+If you have ideas on how to expand upon this concept to make the game more interesting, open an Issue.
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
