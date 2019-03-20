@@ -60,3 +60,7 @@ ifeq ($(DEBUG), 1)
   BUILD_NAME := $(BUILD_NAME)_debug
 endif
 
+# Randomized
+ifneq ($(RANDOMIZE), 1)
+  build_name := $(BUILD_NAME)_norand
+endif
