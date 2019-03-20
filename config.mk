@@ -16,12 +16,12 @@ MAKER_CODE  := 01
 ifeq ($(GAME_VERSION), RUBY)
   BUILD_NAME := ruby
   TITLE      := METRO RUBY
-  GAME_CODE  := PMR
+  GAME_CODE  := AXV
 else
 ifeq ($(GAME_VERSION), SAPPHIRE)
   BUILD_NAME := sapphire
   TITLE      := METRO SAPPH
-  GAME_CODE  := PMS
+  GAME_CODE  := AXP
 else
   $(error unknown version $(GAME_VERSION))
 endif
