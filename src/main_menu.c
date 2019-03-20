@@ -869,7 +869,11 @@ static void Task_NewGameSpeech7(u8 taskId)
         gTasks[taskId].tFrameCounter++;
         //Play Azurill cry at frame 32
         if (gTasks[taskId].tFrameCounter == 32)
+#ifdef RANDOMIZE
             PlayCry1(gTasks[taskId].tRandSpecies, 0);
+#else
+            PlayCry1(SPECIES_AZURILL, 0);
+#endif
     }
 }
 
@@ -1455,8 +1459,12 @@ void AddBirchSpeechObjects(u8 taskId)
     gSprites[spriteId].invisible = 1;
     gTasks[taskId].tBirchSpriteId = spriteId;
 
+#ifdef RANDOMIZE
     RANDOMIZE_SPECIES(species);
     gTasks[taskId].tRandSpecies = species;
+#else
+    species = SPECIES_AZURILL;
+#endif
 
     spriteId = CreateAzurillSprite(0x68, 0x48, species);
     gSprites[spriteId].callback = nullsub_34;
