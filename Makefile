@@ -26,6 +26,8 @@ SCANINC   := tools/scaninc/scaninc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 GBAFIX    := tools/gbafix/gbafix$(EXE)
 MAPJSON   := tools/mapjson/mapjson$(EXE)
+ITEMSJSON := tools/itemsjson/itemsjson$(EXE)
+PGEGEN    := python3 tools/pgegen/pgegen.py
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG) --defsym RANDOMIZE=$(RANDOMIZE) --defsym NO_LVL_DISPLAY=$(NO_LVL_DISPLAY)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -36,6 +38,7 @@ CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -und
 
 ROM := metronome$(BUILD_NAME).gba
 MAP := $(ROM:%.gba=%.map)
+PGEINI := $(ROM:%.gba=%.pge.ini)
 
 BUILD_DIR := build/$(BUILD_NAME)
 
@@ -107,6 +110,8 @@ all: $(ROM)
 # 	@$(SHA1SUM) $(BUILD_NAME).sha1
 # endif
 
+ini: $(PGEINI)
+
 clean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
@@ -123,6 +128,7 @@ clean: tidy
 	$(MAKE) clean -C tools/ramscrgen
 	$(MAKE) clean -C tools/gbafix
 	$(MAKE) clean -C tools/mapjson
+	$(MAKE) clean -C tools/itemsjson
 
 tools:
 	@$(MAKE) -C tools/gbagfx
@@ -135,6 +141,7 @@ tools:
 	@$(MAKE) -C tools/mid2agb
 	@$(MAKE) -C tools/gbafix
 	@$(MAKE) -C tools/mapjson
+	@$(MAKE) -C tools/itemsjson
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=metronome%{.gba,.elf,.map})
@@ -143,6 +150,9 @@ tidy:
 $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
+
+$(PGEINI): %.pge.ini: %.elf
+	$(PGEGEN) $< $@ --code $(GAME_CODE) --name "$(TITLE)"
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
@@ -175,7 +185,7 @@ sapphire_rev2: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2
 ruby_de:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN
 sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
 ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
-
+norand:        ; @$(MAKE) GAME_VERSION=SAPPHIRE RANDOMIZE=0
 
 #### Graphics Rules ####
 
@@ -207,3 +217,11 @@ sound/%.bin: sound/%.aif
 
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID2AGB) $(<F)
+
+ITEM_HEADERS := src/data/items.h src/data/item_descriptions.h
+
+src/data/item_descriptions.h: %: data/items.json
+	$(ITEMSJSON) $(shell echo $(GAME_LANGUAGE) | tr '[:upper:]' '[:lower:]') $<
+src/data/items.h: ;
+
+$(BUILD_DIR)/src/item.o: $(ITEM_HEADERS)

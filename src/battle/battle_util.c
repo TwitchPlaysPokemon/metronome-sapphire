@@ -27,7 +27,7 @@ extern u8 gUnknown_02023A14_50;
 extern const u8* gBattlescriptCurrInstr;
 extern u8 gActiveBattler;
 extern u8 gBattleBufferB[4][0x200];
-extern u8* gUnknown_02024C1C[4]; //battlescript location when you try to choose a move you're not allowed to
+extern u8* gSelectionBattleScripts[4]; //battlescript location when you try to choose a move you're not allowed to
 extern u16 gLastUsedMove[4];
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
@@ -481,25 +481,25 @@ u8 TrySetCantSelectMoveBattleScript(void) //msg can't select a move
     {
         gBattleStruct->scriptingActive = gActiveBattler;
         gCurrentMove = move;
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionDisabledMove;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionDisabledMove;
         limitations++;
     }
     if (move == gLastUsedMove[gActiveBattler] && move != MOVE_STRUGGLE && gBattleMons[gActiveBattler].status2 & STATUS2_TORMENT)
     {
         CancelMultiTurnMoves(gActiveBattler);
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionTormented;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionTormented;
         limitations++;
     }
     if (gDisableStructs[gActiveBattler].tauntTimer1 && gBattleMoves[move].power == 0)
     {
         gCurrentMove = move;
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionTaunted;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionTaunted;
         limitations++;
     }
     if (IsImprisoned(gActiveBattler, move))
     {
         gCurrentMove = move;
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionImprisoned;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionImprisoned;
         limitations++;
     }
     if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY)
@@ -511,12 +511,12 @@ u8 TrySetCantSelectMoveBattleScript(void) //msg can't select a move
     {
         gCurrentMove = *choicedMove;
         gLastUsedItem = gBattleMons[gActiveBattler].item;
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionChoiceBanded;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionChoiceBanded;
         limitations++;
     }
     if (gBattleMons[gActiveBattler].pp[gBattleBufferB[gActiveBattler][2]] == 0)
     {
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_MoveSelectionNoPP;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_MoveSelectionNoPP;
         limitations++;
     }
     return limitations;
@@ -566,7 +566,7 @@ bool8 AreAllMovesUnusable(void)
     if (unusable == 0xF) //all moves are unusable
     {
         gProtectStructs[gActiveBattler].onlyStruggle = 1;
-        gUnknown_02024C1C[gActiveBattler] = BattleScript_NoMovesLeft;
+        gSelectionBattleScripts[gActiveBattler] = BattleScript_NoMovesLeft;
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             gBattleBufferB[gActiveBattler][3] = GetBattlerAtPosition((GetBattlerPosition(gActiveBattler) ^ 1) | (Random() & 2));
         else
@@ -3431,111 +3431,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
     return targetBank;
 }
 
-u8 IsMonDisobedient(void)
-{
-    u8 obedienceLevel;
-    s32 rnd;
-    s32 calc;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK
-     || GetBattlerSide(gBankAttacker) == 1
-     || !IsOtherTrainer(gBattleMons[gBankAttacker].otId, gBattleMons[gBankAttacker].otName))
-	return 0;
-
-    if (DEBUG && (gUnknown_02023A14_50 & 0x40))
-    {
-	obedienceLevel = 10;
-    }
-    else
-    {
-	if (FlagGet(FLAG_BADGE08_GET))
-	    return 0;
-	obedienceLevel = 10;
-	if (FlagGet(FLAG_BADGE02_GET))
-	    obedienceLevel = 30;
-	if (FlagGet(FLAG_BADGE04_GET))
-	    obedienceLevel = 50;
-	if (FlagGet(FLAG_BADGE06_GET))
-	    obedienceLevel = 70;
-    }
-
-    if (gBattleMons[gBankAttacker].level <= obedienceLevel)
-        return 0;
-    rnd = (Random() & 255);
-    calc = (gBattleMons[gBankAttacker].level + obedienceLevel) * rnd >> 8;
-    if (calc < obedienceLevel)
-        return 0;
-
-    // is not obedient
-    if (gCurrentMove == MOVE_RAGE)
-        gBattleMons[gBankAttacker].status2 &= ~(STATUS2_RAGE);
-    if (gBattleMons[gBankAttacker].status1 & STATUS_SLEEP && (gCurrentMove == MOVE_SNORE || gCurrentMove == MOVE_SLEEP_TALK))
-    {
-        gBattlescriptCurrInstr = gUnknown_081D995F;
-        return 1;
-    }
-
-    rnd = (Random() & 255);
-    calc = (gBattleMons[gBankAttacker].level + obedienceLevel) * rnd >> 8;
-    if (calc < obedienceLevel)
-    {
-        calc = CheckMoveLimitations(gBankAttacker, gBitTable[gCurrMovePos], 0xFF);
-        if (calc == 0xF) // all moves cannot be used
-        {
-            gBattleCommunication[MULTISTRING_CHOOSER] = Random() & 3;
-            gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
-            return 1;
-        }
-        else // use a random move
-        {
-            do
-            {
-                gCurrMovePos = gUnknown_02024BE5 = Random() & 3;
-            } while (gBitTable[gCurrMovePos] & calc);
-            gRandomMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
-            gBattleCommunication[3] = 0;
-            gDynamicBasePower = 0;
-            gBattleStruct->dynamicMoveType = 0;
-            gBattlescriptCurrInstr = BattleScript_IgnoresAndUsesRandomMove;
-            gBankTarget = GetMoveTarget(gRandomMove, 0);
-            gHitMarker |= HITMARKER_x200000;
-            return 2;
-        }
-    }
-    else
-    {
-        obedienceLevel = gBattleMons[gBankAttacker].level - obedienceLevel;
-
-        calc = (Random() & 255);
-        if (calc < obedienceLevel && !(gBattleMons[gBankAttacker].status1 & STATUS_ANY) && gBattleMons[gBankAttacker].ability != ABILITY_VITAL_SPIRIT && gBattleMons[gBankAttacker].ability != ABILITY_INSOMNIA)
-        {
-            // try putting asleep
-            int i;
-            for (i = 0; i < gBattlersCount; i++)
-            {
-                if (gBattleMons[i].status2 & STATUS2_UPROAR)
-                    break;
-            }
-            if (i == gBattlersCount)
-            {
-                gBattlescriptCurrInstr = BattleScript_IgnoresAndFallsAsleep;
-                return 1;
-            }
-        }
-        calc -= obedienceLevel;
-        if (calc < obedienceLevel)
-        {
-            gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBankAttacker], &gBattleMons[gBankAttacker], MOVE_POUND, 0, 40, 0, gBankAttacker, gBankAttacker);
-            gBankTarget = gBankAttacker;
-            gBattlescriptCurrInstr = gUnknown_081D99A0;
-            gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
-            return 2;
-        }
-        else
-        {
-            gBattleCommunication[MULTISTRING_CHOOSER] = Random() & 3;
-            gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
-            return 1;
-        }
-    }
-}
+//u8 IsMonDisobedient(void)
+//{
+//    return 0;
+//}

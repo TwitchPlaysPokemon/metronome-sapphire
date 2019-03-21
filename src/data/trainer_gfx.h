@@ -1,7 +1,11 @@
 const u8 gTrainerFrontPic_Lass[] = INCBIN_U8("graphics/trainers/lass.4bpp.lz");
 const u8 gTrainerFrontPic_Youngster[] = INCBIN_U8("graphics/trainers/youngster.4bpp.lz");
 const u8 gTrainerFrontPic_Brendan[] = INCBIN_U8("graphics/trainers/brendan.4bpp.lz");
+#ifdef SAPPHIRE
+const u8 gTrainerFrontPic_May[] = INCBIN_U8("graphics/trainers/may_blue.4bpp.lz");
+#else
 const u8 gTrainerFrontPic_May[] = INCBIN_U8("graphics/trainers/may.4bpp.lz");
+#endif
 const u8 gTrainerFrontPic_Hiker[] = INCBIN_U8("graphics/trainers/hiker.4bpp.lz");
 const u8 gTrainerFrontPic_Beauty[] = INCBIN_U8("graphics/trainers/beauty.4bpp.lz");
 const u8 gTrainerFrontPic_Fisherman[] = INCBIN_U8("graphics/trainers/fisherman.4bpp.lz");
@@ -74,8 +78,13 @@ const u8 gTrainerBackPic_May[] = INCBIN_U8("graphics/trainers/may_back.4bpp.lz")
 const u8 gTrainerBackPic_Wally[] = INCBIN_U8("graphics/trainers/wally_back.4bpp.lz");
 const u8 gTrainerPalette_Lass[] = INCBIN_U8("graphics/trainers/lass.gbapal.lz");
 const u8 gTrainerPalette_Youngster[] = INCBIN_U8("graphics/trainers/youngster.gbapal.lz");
+#ifdef SAPPHIRE
+const u8 gTrainerPalette_Brendan[] = INCBIN_U8("graphics/trainers/brendan_blue.gbapal.lz");
+const u8 gTrainerPalette_May[] = INCBIN_U8("graphics/trainers/may_blue.gbapal.lz");
+#else
 const u8 gTrainerPalette_Brendan[] = INCBIN_U8("graphics/trainers/brendan.gbapal.lz");
 const u8 gTrainerPalette_May[] = INCBIN_U8("graphics/trainers/may.gbapal.lz");
+#endif
 const u8 gTrainerPalette_Hiker[] = INCBIN_U8("graphics/trainers/hiker.gbapal.lz");
 const u8 gTrainerPalette_Beauty[] = INCBIN_U8("graphics/trainers/beauty.gbapal.lz");
 const u8 gTrainerPalette_Fisherman[] = INCBIN_U8("graphics/trainers/fisherman.gbapal.lz");

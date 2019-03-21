@@ -58,9 +58,17 @@ const u8 gUnknown_08413E78[] = INCBIN_U8("graphics/intro/intro2_bgnight.4bpp.lz"
 const u16 gUnknown_08414064[] = INCBIN_U16("graphics/intro/intro2_bgnight.gbapal");
 const u8 gUnknown_08414084[] = INCBIN_U8("graphics/intro/intro2_bgnight_map.bin.lz");
 const u8 gIntro2NightTiles[] = INCBIN_U8("graphics/intro/intro2_night.4bpp.lz");
+#ifdef SAPPHIRE
+const u16 gIntro2BrendanPalette[] = INCBIN_U16("graphics/intro/intro2_brendan_blue.gbapal");
+#else
 const u16 gIntro2BrendanPalette[] = INCBIN_U16("graphics/intro/intro2_brendan.gbapal");
+#endif
 const u8 gIntro2BrendanTiles[] = INCBIN_U8("graphics/intro/intro2_brendan.4bpp.lz");
+#ifdef SAPPHIRE
+const u16 gIntro2MayPalette[] = INCBIN_U16("graphics/intro/intro2_may_blue.gbapal");
+#else
 const u16 gIntro2MayPalette[] = INCBIN_U16("graphics/intro/intro2_may.gbapal");
+#endif
 const u16 gUnknown_08414F90[0xF0] = {0};
 const u8 gIntro2MayTiles[] = INCBIN_U8("graphics/intro/intro2_may.4bpp.lz");
 const u8 gIntro2BicycleTiles[] = INCBIN_U8("graphics/intro/intro2_bicycle.4bpp.lz");
