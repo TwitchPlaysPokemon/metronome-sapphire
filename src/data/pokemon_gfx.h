@@ -1504,6 +1504,19 @@ const u8 gMonBackPic_Celebi[] = INCBIN_U8("graphics/pokemon/celebi/back.4bpp.lz"
 const u8 gMonShinyPalette_Celebi[] = INCBIN_U8("graphics/pokemon/celebi/shiny.gbapal.lz");
 const u8 gMonIcon_Celebi[] = INCBIN_U8("graphics/pokemon/celebi/icon.4bpp");
 const u8 gMonFootprint_Celebi[] = INCBIN_U8("graphics/pokemon/celebi/footprint.1bpp");
+
+const u8 gMonFrontPic_Meltan[] = INCBIN_U8("graphics/pokemon/meltan/front.4bpp.lz");
+const u8 gMonPalette_Meltan[] = INCBIN_U8("graphics/pokemon/meltan/normal.gbapal.lz");
+const u8 gMonBackPic_Meltan[] = INCBIN_U8("graphics/pokemon/meltan/back.4bpp.lz");
+const u8 gMonShinyPalette_Meltan[] = INCBIN_U8("graphics/pokemon/meltan/shiny.gbapal.lz");
+const u8 gMonIcon_Meltan[] = INCBIN_U8("graphics/pokemon/question_mark/icon.4bpp");
+
+const u8 gMonFrontPic_Melmetal[] = INCBIN_U8("graphics/pokemon/melmetal/front.4bpp.lz");
+const u8 gMonPalette_Melmetal[] = INCBIN_U8("graphics/pokemon/melmetal/normal.gbapal.lz");
+const u8 gMonBackPic_Melmetal[] = INCBIN_U8("graphics/pokemon/melmetal/back.4bpp.lz");
+const u8 gMonShinyPalette_Melmetal[] = INCBIN_U8("graphics/pokemon/melmetal/shiny.gbapal.lz");
+const u8 gMonIcon_Melmetal[] = INCBIN_U8("graphics/pokemon/question_mark/icon.4bpp");
+
 const u8 gMonFrontPic_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/front.4bpp.lz");
 const u8 gMonPalette_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/normal.gbapal.lz");
 const u8 gMonBackPic_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/back.4bpp.lz");

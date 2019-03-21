@@ -1563,6 +1563,19 @@ extern const u8 gMonBackPic_Celebi[];
 extern const u8 gMonShinyPalette_Celebi[];
 extern const u8 gMonIcon_Celebi[];
 extern const u8 gMonFootprint_Celebi[];
+
+extern const u8 gMonFrontPic_Meltan[];
+extern const u8 gMonPalette_Meltan[];
+extern const u8 gMonBackPic_Meltan[];
+extern const u8 gMonShinyPalette_Meltan[];
+extern const u8 gMonIcon_Meltan[];
+
+extern const u8 gMonFrontPic_Melmetal[];
+extern const u8 gMonPalette_Melmetal[];
+extern const u8 gMonBackPic_Melmetal[];
+extern const u8 gMonShinyPalette_Melmetal[];
+extern const u8 gMonIcon_Melmetal[];
+
 extern const u8 gMonFrontPic_QuestionMark[];
 extern const u8 gMonPalette_QuestionMark[];
 extern const u8 gMonBackPic_QuestionMark[];

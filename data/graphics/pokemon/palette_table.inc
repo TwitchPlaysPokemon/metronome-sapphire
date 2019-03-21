@@ -252,8 +252,8 @@ gMonPaletteTable:: @ 81EA5B4
 	obj_pal gMonPalette_Lugia, SPECIES_LUGIA
 	obj_pal gMonPalette_HoOh, SPECIES_HO_OH
 	obj_pal gMonPalette_Celebi, SPECIES_CELEBI
-	obj_pal gMonPalette_QuestionMark, SPECIES_MELTAN
-	obj_pal gMonPalette_QuestionMark, SPECIES_MELMETAL
+	obj_pal gMonPalette_Meltan, SPECIES_MELTAN
+	obj_pal gMonPalette_Melmetal, SPECIES_MELMETAL
 	obj_pal gMonPalette_QuestionMark, SPECIES_OLD_UNOWN_D
 	obj_pal gMonPalette_QuestionMark, SPECIES_OLD_UNOWN_E
 	obj_pal gMonPalette_QuestionMark, SPECIES_OLD_UNOWN_F
