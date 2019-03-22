@@ -6058,9 +6058,23 @@ const u32 gTMHMLearnsets[][2] =
                                         | TMHM(HM01_CUT)
                                         | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_B] = TMHM_LEARNSET(0),
+    [SPECIES_MELTAN]      = TMHM_LEARNSET(TMHM(TM44_REST)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM06_TOXIC)
+                                        | TMHM(TM24_THUNDERBOLT)),
 
-    [SPECIES_OLD_UNOWN_C] = TMHM_LEARNSET(0),
+    [SPECIES_MELMETAL]    = TMHM_LEARNSET(TMHM(TM44_REST)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM06_TOXIC)
+                                        | TMHM(TM24_THUNDERBOLT)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM31_BRICK_BREAK)
+                                        | TMHM(TM24_THUNDERBOLT)
+                                        | TMHM(TM25_THUNDER)
+                                        | TMHM(TM26_EARTHQUAKE)
+                                        | TMHM(TM22_SOLARBEAM)
+                                        | TMHM(TM15_HYPER_BEAM)
+                                        | TMHM(TM13_ICE_BEAM)),
 
     [SPECIES_OLD_UNOWN_D] = TMHM_LEARNSET(0),
 
