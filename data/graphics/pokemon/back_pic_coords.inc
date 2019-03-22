@@ -252,8 +252,8 @@ gMonBackPicCoords:: @ 81E9114
 	.byte 136,  1, 0, 0
 	.byte 136,  1, 0, 0
 	.byte 102,  8, 0, 0
-	.byte 136,  8, 0, 0
-	.byte 136,  8, 0, 0
+	.byte  85, 12, 0, 0 //Meltan
+	.byte 117, 13, 0, 0 //Melmetal
 	.byte 136,  8, 0, 0
 	.byte 136,  8, 0, 0
 	.byte 136,  8, 0, 0

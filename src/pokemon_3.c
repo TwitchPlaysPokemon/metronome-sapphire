@@ -466,7 +466,7 @@ u16 SpeciesToCryId(u16 species)
         return species;
 
     if (species <= SPECIES_MELMETAL - 1)
-        return gSpeciesIdToCryId[SPECIES_CHIMECHO - 1] + (species - (SPECIES_MELTAN - 1));
+        return gSpeciesIdToCryId[SPECIES_CHIMECHO - 1 - ((SPECIES_OLD_UNOWN_Z + 1) - 1)] + 1 + (species - (SPECIES_MELTAN - 1));
 
     if (species <= SPECIES_OLD_UNOWN_Z - 1)
         return SPECIES_UNOWN - 1;
