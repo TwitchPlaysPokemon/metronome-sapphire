@@ -17,11 +17,13 @@ ifeq ($(GAME_VERSION), RUBY)
   BUILD_NAME := ruby
   TITLE      := METRO RUBY
   GAME_CODE  := AXV
+  GAME_NAME  := Metronome Ruby
 else
 ifeq ($(GAME_VERSION), SAPPHIRE)
   BUILD_NAME := sapphire
   TITLE      := METRO SAPPH
   GAME_CODE  := AXP
+  GAME_NAME  := Metronome Sapphire
 else
   $(error unknown version $(GAME_VERSION))
 endif

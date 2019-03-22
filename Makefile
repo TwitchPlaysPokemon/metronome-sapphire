@@ -152,7 +152,7 @@ $(ROM): %.gba: %.elf
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(PGEINI): %.pge.ini: %.elf
-	$(PGEGEN) $< $@ --code $(GAME_CODE) --name "$(TITLE)"
+	$(PGEGEN) $< $@ --code $(GAME_CODE) --name "$(GAME_NAME)"
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
