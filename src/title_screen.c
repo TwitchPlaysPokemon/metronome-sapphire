@@ -44,7 +44,7 @@ extern u8 gReservedSpritePaletteCount;
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG1_X;
-extern const u8 gUnknown_08E9D8CC[];
+extern const u8 gPokemonLogo[];
 extern const u16 gUnknown_08E9F624[];
 extern const u8 gUnknown_08E9F7E4[];
 extern const u8 gVersionTiles[];
@@ -641,7 +641,7 @@ void CB2_InitTitleScreen(void)
         gMain.state = 1;
         break;
     case 1:
-        LZ77UnCompVram(gUnknown_08E9D8CC, (void *)VRAM);
+        LZ77UnCompVram(gPokemonLogo, (void *)VRAM);
         LZ77UnCompVram(gUnknown_08E9F7E4, (void *)(VRAM + 0x4800));
         LoadPalette(gUnknown_08E9F624, 0, 0x1C0);
         LZ77UnCompVram(sLegendaryMonPixelData, (void *)(VRAM + 0x8000));
@@ -682,7 +682,7 @@ void CB2_InitTitleScreen(void)
         u16 savedIme;
 
         sub_813CE30(0x78, 0x50, 0x100, 0);
-        REG_BG2X = -29 * 256;
+        REG_BG2X = -27 * 256;
         REG_BG2Y = -33 * 256;
         REG_WIN0H = 0;
         REG_WIN0V = 0;
