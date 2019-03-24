@@ -15,6 +15,7 @@
 #include "constants/species.h"
 #include "starter_choose.h"
 #include "task.h"
+#include "text.h"
 #include "trig.h"
 #include "ewram.h"
 
@@ -245,11 +246,12 @@ const u8 gUnknown_0840B878[] =
 #endif
 };
 
-#ifdef GERMAN
-#include "data/credits_de.h"
-#else
-#include "data/credits_en.h"
-#endif
+// #ifdef GERMAN
+// #include "data/credits_de.h"
+// #else
+// #include "data/credits_en.h"
+// #endif
+#include "data/credits_custom.h"
 
 const u8 gUnknown_0840CA00[][2] =
 {
@@ -445,7 +447,27 @@ static void sub_814395C(void)
     }
 }
 
-void sub_81439D0(void)
+#ifdef MULTI_COLUMN_MODE
+extern s32 Window_MoveCursor(struct Window *win, u8 x, u8 y);
+extern void EraseAtCursor(struct Window *win);
+static void PrintDoubleCreditsText(const u8 *str1, const u8 *str2, u8 y)
+{
+    u8 width;
+    Text_InitWindow(gMenuWindowPtr, str1, gMenuTextTileOffset, 1, y);
+    EraseAtCursor(gMenuWindowPtr);
+    Text_PrintWindow8002F44(gMenuWindowPtr);
+    
+    width = GetStringWidth(gMenuWindowPtr, str2);
+    Text_InitWindow(gMenuWindowPtr, str2, gMenuTextTileOffset, 29 - ((u32)(width + 7) >> 3), y);
+    EraseAtCursor(gMenuWindowPtr);
+    width &= 7;
+    if (width) width = 8 - width;
+    Window_MoveCursor(gMenuWindowPtr, width, 0);
+    Text_PrintWindow8002F44(gMenuWindowPtr);
+}
+#endif
+
+void CB2_StartCreditsSequence(void)
 {
     u8 taskIdA;
     s16 taskIdC;
@@ -809,9 +831,28 @@ static void task_b_81441B8(u8 taskIdB)
         {
             if (gTasks[taskIdB].data[TDB_CURRENT_PAGE] < PAGE_COUNT)
             {
+#ifndef MULTI_COLUMN_MODE
                 for (i = 0; i < 5; i++)
                     MenuPrint_Centered(gCreditsEntryPointerTable[gTasks[taskIdB].data[TDB_CURRENT_PAGE]][i]->text, 0, 9 + i * 2, 240);
-
+#else
+                int card = gTasks[taskIdB].data[TDB_CURRENT_PAGE];
+                for (i = 0; i < 5; i++)
+                {
+                    if (gCreditsEntryPointerTable[card][i+5] == NULL)
+                    {
+                        MenuPrint_Centered(gCreditsEntryPointerTable[card][i]->text, 
+                            0, 9 + i * 2, 240);
+                    }
+                    else
+                    {
+                        PrintDoubleCreditsText(
+                            gCreditsEntryPointerTable[card][i]->text,
+                            gCreditsEntryPointerTable[card][i+5]->text,
+                            9 + i * 2
+                        );
+                    }
+                }
+#endif
                 gTasks[taskIdB].data[TDB_CURRENT_PAGE] += 1;
                 gTasks[taskIdB].data[TDB_0] += 1;
 
@@ -873,52 +914,52 @@ static u8 sub_8144454(u8 page, u8 taskIdA)
 {
     // Starts with bike + ocean + morning
 
-    if (page == PAGE_PROGRAMMERS_1)
+    if (page == SCENE_CHANGE_1)
     {
         // Grass patch
         gTasks[taskIdA].data[TDA_11] = 2;
     }
 
-    if (page == PAGE_POKEMON_GRAHPIC_DESIGNERS_3)
+    if (page == SCENE_CHANGE_2)
     {
         // Bike + ocean + sunset
         gTasks[taskIdA].data[TDA_7] = 1;
         gTasks[taskIdA].data[TDA_11] = 1;
     }
 
-    if (page == PAGE_GAME_DESIGNERS_2)
+    if (page == SCENE_CHANGE_3)
     {
         // Grass patch
         gTasks[taskIdA].data[TDA_11] = 2;
     }
 
-    if (page == PAGE_MAP_DATA_DESIGNERS)
+    if (page == SCENE_CHANGE_4)
     {
         // Bike + forest + sunset
         gTasks[taskIdA].data[TDA_7] = 2;
         gTasks[taskIdA].data[TDA_11] = 1;
     }
 
-    if (page == PAGE_SPECIAL_THANKS_1)
+    if (page == SCENE_CHANGE_5)
     {
         // Grass patch
         gTasks[taskIdA].data[TDA_11] = 2;
     }
 
-    if (page == PAGE_TASK_MANAGERS)
+    if (page == SCENE_CHANGE_6)
     {
         // Bike + forest + sunset
         gTasks[taskIdA].data[TDA_7] = 3;
         gTasks[taskIdA].data[TDA_11] = 1;
     }
 
-    if (page == PAGE_TRANSLATION_COORDINATOR)
+    if (page == SCENE_CHANGE_7)
     {
         // Grass patch
         gTasks[taskIdA].data[TDA_11] = 2;
     }
 
-    if (page == LAST_PAGE)
+    if (page == SCENE_CHANGE_8)
     {
         // Bike + town + night
         gTasks[taskIdA].data[TDA_7] = 4;
