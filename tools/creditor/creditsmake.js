@@ -39,7 +39,7 @@ for (let card of credits) {
 		} else if (typeof line === 'object') {
 			if (!line.id || !line.ruby || !line.sapphire) {
 				console.error(`Object lines must have an 'id', a 'ruby', and a 'sapphire' key! (Card ${_i})`);
-				return  -1;
+				return -1;
 			}
 		}
 	}
@@ -50,43 +50,44 @@ let strings = [`static const u8 gCreditsText_EmptyString[] = _("");`];
 let entries = [`static const struct CreditsEntry gCreditsEntry_EmptyString[] = {0, gCreditsText_EmptyString};`];
 let array = [];
 
-function makeText(str, id=undefined) {
+function makeText(str, id = undefined) {
 	let defstr, defentry;
-	let title = false;	
+	let title = false;
 	if (str.startsWith('#')) {
 		title = true;
 		str = str.slice(1);
 	}
+	str = str.replace(/_/g, " "); //Credits can't have underscores
 	let strid = strids.get(id || str);
 	if (!strid) {
 		strid = id || str;
 		strid = strid.replace(/POKéMON/ig, 'Pkmn');
 		strid = strid.replace(/[^a-zA-Z0-9]/gi, '');
 		strids.set(str, strid);
-		defstr = `static const u8 gCreditsText_${strid}[] = _("${title?'{PALETTE 9}':''}${str}");`;
+		defstr = `static const u8 gCreditsText_${strid}[] = _("${title ? '{PALETTE 9}' : ''}${str}");`;
 		defentry = `static const struct CreditsEntry gCreditsEntry_${strid}[] = {0, gCreditsText_${strid}};`;
 	}
 	return [`gCreditsEntry_${strid}`, defstr, defentry];
 }
 
 for (const incard of credits) {
-	let card = new Array(multiColumnMode?10:5);
+	let card = new Array(multiColumnMode ? 10 : 5);
 	switch (incard.length) {
 		case 0:
 			card[1] = `#Unused Card ${array.length}`;
 			break;
 		case 3:
 			card[3] = incard[2];
-			// fallthrough
-		case 2: 
+		// fallthrough
+		case 2:
 			card[2] = incard[1];
-			// fallthrough
+		// fallthrough
 		case 1:
 			card[1] = incard[0];
 			break;
 		case 5:
 			card[4] = incard[4];
-			// fallthrough
+		// fallthrough
 		case 4:
 			card[0] = incard[0];
 			card[1] = incard[1];
@@ -97,7 +98,7 @@ for (const incard of credits) {
 	if (multiColumnMode) {
 		for (let i = 0; i < 5; i++) {
 			if (Array.isArray(card[i])) {
-				card[i+5] = card[i][1];
+				card[i + 5] = card[i][1];
 				card[i] = card[i][0];
 			}
 		}
@@ -105,13 +106,13 @@ for (const incard of credits) {
 	for (let i = 0; i < card.length; i++) {
 		if (!card[i]) {
 			if (card[i] === "") card[i] = "_";
-			else card[i] = i<5?"_":"NULL";
+			else card[i] = i < 5 ? "_" : "NULL";
 		} else if (typeof card[i] === 'object') {
 			let c, s, e;
 			[c, s, e] = makeText(card[i].sapphire, card[i].id);
 			if (s) strings.push(`#ifdef SAPPHIRE`, s);
 			if (e) entries.push(e);
-			
+
 			[c, s, e] = makeText(card[i].ruby, card[i].id);
 			if (s) strings.push(`#else`, s, `#endif`);
 			card[i] = c;
@@ -137,7 +138,7 @@ try {
 	out.write(entries.join('\n'));
 	out.write(`\n
 #define _ gCreditsEntry_EmptyString
-static const struct CreditsEntry *const gCreditsEntryPointerTable[][${multiColumnMode?10:5}] =
+static const struct CreditsEntry *const gCreditsEntryPointerTable[][${multiColumnMode ? 10 : 5}] =
 {\n`);
 	for (let card of array) {
 		out.write(`\t{\n`);

@@ -1,33 +1,11 @@
 #define MULTI_COLUMN_MODE
 static const u8 gCreditsText_EmptyString[] = _("");
 #ifdef SAPPHIRE
-static const u8 gCreditsText_HackVersion[] = _("{PALETTE 9}METRONOME SAPPHIRE VERSION");
-#else
-static const u8 gCreditsText_HackVersion[] = _("{PALETTE 9}METRONOME RUBY VERSION");
-#endif
-static const u8 gCreditsText_HackCredits[] = _("{PALETTE 9}Hack Credits");
-static const u8 gCreditsText_Title[] = _("{PALETTE 9}Title");
-static const u8 gCreditsText_ABCDEFG[] = _("ABCDEFG");
-static const u8 gCreditsText_LeftAligned[] = _("Left Aligned");
-static const u8 gCreditsText_CenterAligned[] = _("Center Aligned");
-static const u8 gCreditsText_0123456[] = _("0123456");
-static const u8 gCreditsText_RightAligned[] = _("Right Aligned");
-static const u8 gCreditsText_UnusedCard2[] = _("{PALETTE 9}Unused Card 2");
-static const u8 gCreditsText_UnusedCard3[] = _("{PALETTE 9}Unused Card 3");
-static const u8 gCreditsText_UnusedCard4[] = _("{PALETTE 9}Unused Card 4");
-static const u8 gCreditsText_UnusedCard5[] = _("{PALETTE 9}Unused Card 5");
-static const u8 gCreditsText_UnusedCard6[] = _("{PALETTE 9}Unused Card 6");
-static const u8 gCreditsText_UnusedCard7[] = _("{PALETTE 9}Unused Card 7");
-static const u8 gCreditsText_UnusedCard8[] = _("{PALETTE 9}Unused Card 8");
-static const u8 gCreditsText_UnusedCard9[] = _("{PALETTE 9}Unused Card 9");
-static const u8 gCreditsText_UnusedCard10[] = _("{PALETTE 9}Unused Card 10");
-static const u8 gCreditsText_UnusedCard11[] = _("{PALETTE 9}Unused Card 11");
-#ifdef SAPPHIRE
 static const u8 gCreditsText_Version[] = _("{PALETTE 9}POKéMON SAPPHIRE VERSION");
 #else
 static const u8 gCreditsText_Version[] = _("{PALETTE 9}POKéMON RUBY VERSION");
 #endif
-static const u8 gCreditsText_VanillaCredits[] = _("{PALETTE 9}Vanilla Credits");
+static const u8 gCreditsText_Credits[] = _("{PALETTE 9}Credits");
 static const u8 gCreditsText_Director[] = _("{PALETTE 9}Director");
 static const u8 gCreditsText_JunichiMasuda[] = _("Junichi Masuda");
 static const u8 gCreditsText_ArtDirector[] = _("{PALETTE 9}Art Director");
@@ -162,27 +140,51 @@ static const u8 gCreditsText_KojiUyama[] = _("Koji Uyama");
 static const u8 gCreditsText_AnthonyHowitt[] = _("Anthony Howitt");
 static const u8 gCreditsText_GailTilden[] = _("Gail Tilden");
 static const u8 gCreditsText_KazuhiroFujihara[] = _("Kazuhiro Fujihara");
+#ifdef SAPPHIRE
+static const u8 gCreditsText_HackVersion[] = _("{PALETTE 9}POKéMON METRONOME SAPPHIRE");
+#else
+static const u8 gCreditsText_HackVersion[] = _("{PALETTE 9}POKéMON METRONOME RUBY");
+#endif
+static const u8 gCreditsText_OriginalConcept[] = _("{PALETTE 9}Original Concept");
+static const u8 gCreditsText_edlde62[] = _("edlde62");
+static const u8 gCreditsText_Developers[] = _("{PALETTE 9}Developers");
+static const u8 gCreditsText_Tustin2121[] = _("Tustin2121");
+static const u8 gCreditsText_PikalaxALT[] = _("PikalaxALT");
+static const u8 gCreditsText_M4usedRollout[] = _("M4 used Rollout");
+static const u8 gCreditsText_BlueCharacterArt[] = _("{PALETTE 9}Blue Character Art");
+static const u8 gCreditsText_Legtendga[] = _("Legtendga");
+static const u8 gCreditsText_Testers[] = _("{PALETTE 9}Testers");
+static const u8 gCreditsText_Egobuff[] = _("Egobuff");
+static const u8 gCreditsText_Sev[] = _("Sev");
+static const u8 gCreditsText_evolem[] = _("evolem");
+static const u8 gCreditsText_Charmy[] = _("Charmy");
+static const u8 gCreditsText_Diana[] = _("Diana");
+static const u8 gCreditsText_Consultants[] = _("{PALETTE 9}Consultants");
+static const u8 gCreditsText_Chaoslord2[] = _("Chaos lord2");
+static const u8 gCreditsText_ax6[] = _("ax6");
+static const u8 gCreditsText_ProjectRevoTPP[] = _("ProjectRevoTPP");
+static const u8 gCreditsText_ReverseEngineering[] = _("{PALETTE 9}Reverse Engineering");
+static const u8 gCreditsText_pret[] = _("pret");
+static const u8 gCreditsText_ExtraSpriteResource[] = _("{PALETTE 9}Extra Sprite Resource");
+static const u8 gCreditsText_TheGenVIIPkmnGBA[] = _("The Gen VII+ Pokémon GBA");
+static const u8 gCreditsText_SpriteRepository64x64[] = _("Sprite Repository (64x64)");
+static const u8 gCreditsText_MeltanBattleSprites[] = _("{PALETTE 9}Meltan Battle Sprites");
+static const u8 gCreditsText_leParagon[] = _("leParagon");
+static const u8 gCreditsText_MelmetalBattleSprites[] = _("{PALETTE 9}Melmetal Battle Sprites");
+static const u8 gCreditsText_Cynda[] = _("Cynda");
+static const u8 gCreditsText_MeltanIcon[] = _("{PALETTE 9}Meltan Icon");
+static const u8 gCreditsText_MegaxRocker[] = _("Megax Rocker");
+static const u8 gCreditsText_MelmetalIcon[] = _("{PALETTE 9}Melmetal Icon");
+static const u8 gCreditsText_MultiDiegoDani[] = _("MultiDiegoDani");
+static const u8 gCreditsText_MetronomeLogoFont[] = _("{PALETTE 9}Metronome Logo Font");
+static const u8 gCreditsText_PkmnSolid[] = _("Pokémon Solid");
+static const u8 gCreditsText_CreatorUnknown[] = _("(Creator Unknown)");
+static const u8 gCreditsText_TwitchPlaysPokemon[] = _("TwitchPlaysPokemon");
+static const u8 gCreditsText_TheTPPCommunity[] = _("The TPP Community");
+static const u8 gCreditsText_AprilFools[] = _("{PALETTE 9}April Fools!");
 static const struct CreditsEntry gCreditsEntry_EmptyString[] = {0, gCreditsText_EmptyString};
-static const struct CreditsEntry gCreditsEntry_HackVersion[] = {0, gCreditsText_HackVersion};
-static const struct CreditsEntry gCreditsEntry_HackCredits[] = {0, gCreditsText_HackCredits};
-static const struct CreditsEntry gCreditsEntry_Title[] = {0, gCreditsText_Title};
-static const struct CreditsEntry gCreditsEntry_ABCDEFG[] = {0, gCreditsText_ABCDEFG};
-static const struct CreditsEntry gCreditsEntry_LeftAligned[] = {0, gCreditsText_LeftAligned};
-static const struct CreditsEntry gCreditsEntry_CenterAligned[] = {0, gCreditsText_CenterAligned};
-static const struct CreditsEntry gCreditsEntry_0123456[] = {0, gCreditsText_0123456};
-static const struct CreditsEntry gCreditsEntry_RightAligned[] = {0, gCreditsText_RightAligned};
-static const struct CreditsEntry gCreditsEntry_UnusedCard2[] = {0, gCreditsText_UnusedCard2};
-static const struct CreditsEntry gCreditsEntry_UnusedCard3[] = {0, gCreditsText_UnusedCard3};
-static const struct CreditsEntry gCreditsEntry_UnusedCard4[] = {0, gCreditsText_UnusedCard4};
-static const struct CreditsEntry gCreditsEntry_UnusedCard5[] = {0, gCreditsText_UnusedCard5};
-static const struct CreditsEntry gCreditsEntry_UnusedCard6[] = {0, gCreditsText_UnusedCard6};
-static const struct CreditsEntry gCreditsEntry_UnusedCard7[] = {0, gCreditsText_UnusedCard7};
-static const struct CreditsEntry gCreditsEntry_UnusedCard8[] = {0, gCreditsText_UnusedCard8};
-static const struct CreditsEntry gCreditsEntry_UnusedCard9[] = {0, gCreditsText_UnusedCard9};
-static const struct CreditsEntry gCreditsEntry_UnusedCard10[] = {0, gCreditsText_UnusedCard10};
-static const struct CreditsEntry gCreditsEntry_UnusedCard11[] = {0, gCreditsText_UnusedCard11};
 static const struct CreditsEntry gCreditsEntry_Version[] = {0, gCreditsText_Version};
-static const struct CreditsEntry gCreditsEntry_VanillaCredits[] = {0, gCreditsText_VanillaCredits};
+static const struct CreditsEntry gCreditsEntry_Credits[] = {0, gCreditsText_Credits};
 static const struct CreditsEntry gCreditsEntry_Director[] = {0, gCreditsText_Director};
 static const struct CreditsEntry gCreditsEntry_JunichiMasuda[] = {0, gCreditsText_JunichiMasuda};
 static const struct CreditsEntry gCreditsEntry_ArtDirector[] = {0, gCreditsText_ArtDirector};
@@ -317,158 +319,52 @@ static const struct CreditsEntry gCreditsEntry_KojiUyama[] = {0, gCreditsText_Ko
 static const struct CreditsEntry gCreditsEntry_AnthonyHowitt[] = {0, gCreditsText_AnthonyHowitt};
 static const struct CreditsEntry gCreditsEntry_GailTilden[] = {0, gCreditsText_GailTilden};
 static const struct CreditsEntry gCreditsEntry_KazuhiroFujihara[] = {0, gCreditsText_KazuhiroFujihara};
+static const struct CreditsEntry gCreditsEntry_HackVersion[] = {0, gCreditsText_HackVersion};
+static const struct CreditsEntry gCreditsEntry_OriginalConcept[] = {0, gCreditsText_OriginalConcept};
+static const struct CreditsEntry gCreditsEntry_edlde62[] = {0, gCreditsText_edlde62};
+static const struct CreditsEntry gCreditsEntry_Developers[] = {0, gCreditsText_Developers};
+static const struct CreditsEntry gCreditsEntry_Tustin2121[] = {0, gCreditsText_Tustin2121};
+static const struct CreditsEntry gCreditsEntry_PikalaxALT[] = {0, gCreditsText_PikalaxALT};
+static const struct CreditsEntry gCreditsEntry_M4usedRollout[] = {0, gCreditsText_M4usedRollout};
+static const struct CreditsEntry gCreditsEntry_BlueCharacterArt[] = {0, gCreditsText_BlueCharacterArt};
+static const struct CreditsEntry gCreditsEntry_Legtendga[] = {0, gCreditsText_Legtendga};
+static const struct CreditsEntry gCreditsEntry_Testers[] = {0, gCreditsText_Testers};
+static const struct CreditsEntry gCreditsEntry_Egobuff[] = {0, gCreditsText_Egobuff};
+static const struct CreditsEntry gCreditsEntry_Sev[] = {0, gCreditsText_Sev};
+static const struct CreditsEntry gCreditsEntry_evolem[] = {0, gCreditsText_evolem};
+static const struct CreditsEntry gCreditsEntry_Charmy[] = {0, gCreditsText_Charmy};
+static const struct CreditsEntry gCreditsEntry_Diana[] = {0, gCreditsText_Diana};
+static const struct CreditsEntry gCreditsEntry_Consultants[] = {0, gCreditsText_Consultants};
+static const struct CreditsEntry gCreditsEntry_Chaoslord2[] = {0, gCreditsText_Chaoslord2};
+static const struct CreditsEntry gCreditsEntry_ax6[] = {0, gCreditsText_ax6};
+static const struct CreditsEntry gCreditsEntry_ProjectRevoTPP[] = {0, gCreditsText_ProjectRevoTPP};
+static const struct CreditsEntry gCreditsEntry_ReverseEngineering[] = {0, gCreditsText_ReverseEngineering};
+static const struct CreditsEntry gCreditsEntry_pret[] = {0, gCreditsText_pret};
+static const struct CreditsEntry gCreditsEntry_ExtraSpriteResource[] = {0, gCreditsText_ExtraSpriteResource};
+static const struct CreditsEntry gCreditsEntry_TheGenVIIPkmnGBA[] = {0, gCreditsText_TheGenVIIPkmnGBA};
+static const struct CreditsEntry gCreditsEntry_SpriteRepository64x64[] = {0, gCreditsText_SpriteRepository64x64};
+static const struct CreditsEntry gCreditsEntry_MeltanBattleSprites[] = {0, gCreditsText_MeltanBattleSprites};
+static const struct CreditsEntry gCreditsEntry_leParagon[] = {0, gCreditsText_leParagon};
+static const struct CreditsEntry gCreditsEntry_MelmetalBattleSprites[] = {0, gCreditsText_MelmetalBattleSprites};
+static const struct CreditsEntry gCreditsEntry_Cynda[] = {0, gCreditsText_Cynda};
+static const struct CreditsEntry gCreditsEntry_MeltanIcon[] = {0, gCreditsText_MeltanIcon};
+static const struct CreditsEntry gCreditsEntry_MegaxRocker[] = {0, gCreditsText_MegaxRocker};
+static const struct CreditsEntry gCreditsEntry_MelmetalIcon[] = {0, gCreditsText_MelmetalIcon};
+static const struct CreditsEntry gCreditsEntry_MultiDiegoDani[] = {0, gCreditsText_MultiDiegoDani};
+static const struct CreditsEntry gCreditsEntry_MetronomeLogoFont[] = {0, gCreditsText_MetronomeLogoFont};
+static const struct CreditsEntry gCreditsEntry_PkmnSolid[] = {0, gCreditsText_PkmnSolid};
+static const struct CreditsEntry gCreditsEntry_CreatorUnknown[] = {0, gCreditsText_CreatorUnknown};
+static const struct CreditsEntry gCreditsEntry_TwitchPlaysPokemon[] = {0, gCreditsText_TwitchPlaysPokemon};
+static const struct CreditsEntry gCreditsEntry_TheTPPCommunity[] = {0, gCreditsText_TheTPPCommunity};
+static const struct CreditsEntry gCreditsEntry_AprilFools[] = {0, gCreditsText_AprilFools};
 
 #define _ gCreditsEntry_EmptyString
 static const struct CreditsEntry *const gCreditsEntryPointerTable[][10] =
 {
 	{
 		_,
-		gCreditsEntry_HackVersion,
-		gCreditsEntry_HackCredits,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		gCreditsEntry_Title,
-		gCreditsEntry_ABCDEFG,
-		_,
-		gCreditsEntry_LeftAligned,
-		gCreditsEntry_CenterAligned,
-		NULL,
-		gCreditsEntry_0123456,
-		gCreditsEntry_RightAligned,
-		_,
-		NULL,
-	},
-	{
-		_,
-		gCreditsEntry_UnusedCard2,
-		_,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		_,
-		gCreditsEntry_UnusedCard3,
-		_,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		_,
-		gCreditsEntry_UnusedCard4,
-		_,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		_,
-		gCreditsEntry_UnusedCard5,
-		_,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		_,
-		gCreditsEntry_UnusedCard6,
-		_,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		_,
-		gCreditsEntry_UnusedCard7,
-		_,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		_,
-		gCreditsEntry_UnusedCard8,
-		_,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		_,
-		gCreditsEntry_UnusedCard9,
-		_,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		_,
-		gCreditsEntry_UnusedCard10,
-		_,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		_,
-		gCreditsEntry_UnusedCard11,
-		_,
-		_,
-		_,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-	},
-	{
-		_,
 		gCreditsEntry_Version,
-		gCreditsEntry_VanillaCredits,
+		gCreditsEntry_Credits,
 		_,
 		_,
 		NULL,
@@ -944,6 +840,150 @@ static const struct CreditsEntry *const gCreditsEntryPointerTable[][10] =
 		gCreditsEntry_AnthonyHowitt,
 		gCreditsEntry_GailTilden,
 		gCreditsEntry_KazuhiroFujihara,
+	},
+	{
+		_,
+		gCreditsEntry_HackVersion,
+		gCreditsEntry_Credits,
+		_,
+		_,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+	},
+	{
+		_,
+		gCreditsEntry_OriginalConcept,
+		gCreditsEntry_edlde62,
+		_,
+		_,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+	},
+	{
+		gCreditsEntry_Developers,
+		gCreditsEntry_Tustin2121,
+		gCreditsEntry_PikalaxALT,
+		gCreditsEntry_M4usedRollout,
+		_,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+	},
+	{
+		_,
+		gCreditsEntry_BlueCharacterArt,
+		gCreditsEntry_Legtendga,
+		_,
+		_,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+	},
+	{
+		gCreditsEntry_Testers,
+		gCreditsEntry_Egobuff,
+		gCreditsEntry_Sev,
+		gCreditsEntry_evolem,
+		_,
+		NULL,
+		gCreditsEntry_Charmy,
+		gCreditsEntry_Diana,
+		NULL,
+		NULL,
+	},
+	{
+		gCreditsEntry_Consultants,
+		gCreditsEntry_Chaoslord2,
+		gCreditsEntry_ax6,
+		gCreditsEntry_ProjectRevoTPP,
+		_,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+	},
+	{
+		_,
+		gCreditsEntry_ReverseEngineering,
+		gCreditsEntry_pret,
+		_,
+		_,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+	},
+	{
+		_,
+		gCreditsEntry_ExtraSpriteResource,
+		gCreditsEntry_TheGenVIIPkmnGBA,
+		gCreditsEntry_SpriteRepository64x64,
+		_,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+	},
+	{
+		gCreditsEntry_MeltanBattleSprites,
+		gCreditsEntry_leParagon,
+		gCreditsEntry_MelmetalBattleSprites,
+		gCreditsEntry_leParagon,
+		_,
+		NULL,
+		NULL,
+		NULL,
+		gCreditsEntry_Cynda,
+		NULL,
+	},
+	{
+		gCreditsEntry_MeltanIcon,
+		gCreditsEntry_MegaxRocker,
+		gCreditsEntry_MelmetalIcon,
+		gCreditsEntry_MultiDiegoDani,
+		_,
+		NULL,
+		NULL,
+		NULL,
+		gCreditsEntry_MegaxRocker,
+		NULL,
+	},
+	{
+		_,
+		gCreditsEntry_MetronomeLogoFont,
+		gCreditsEntry_PkmnSolid,
+		gCreditsEntry_CreatorUnknown,
+		_,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+	},
+	{
+		gCreditsEntry_SpecialThanks,
+		gCreditsEntry_TwitchPlaysPokemon,
+		gCreditsEntry_TheTPPCommunity,
+		_,
+		gCreditsEntry_AprilFools,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
 	},
 };
 #undef _
