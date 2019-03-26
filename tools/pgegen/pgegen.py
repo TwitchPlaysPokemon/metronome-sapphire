@@ -231,7 +231,7 @@ def pgegen(args):
 
     # RAM locations
     gPlayerParty = elf.get_sym('gPlayerParty')
-    config_set('EwramPartyLocation', f'{gPlayerParty.st_value & 0xFFFFFF:X}')
+    config_set('gPlayerParty', f'{gPlayerParty.st_value:X}')
     config_set('PartyBytes', f'{gPlayerParty.st_size:X}')
 
     gPokemonStoragePtr = elf.get_sym('gPokemonStoragePtr')
@@ -308,7 +308,10 @@ def pgegen(args):
     gBattleMons = elf.get_sym("gBattleMons")
     config_set('gBattleMons', f'{gBattleMons.st_value:X}')
     config_set('gBattleMonsBytes', f'{get_size_rawasm(gBattleMons):X}')
-    config_set('InBattleAddr', f'{elf.get_sym("gMain").st_value:X}+439')
+    if is_rs:
+        config_set('InBattleAddr', f'{elf.get_sym("gMain").st_value:X}+43D')
+    else:
+        config_set('InBattleAddr', f'{elf.get_sym("gMain").st_value:X}+439')
 
     print('done')
 
