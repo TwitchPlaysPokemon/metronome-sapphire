@@ -948,7 +948,7 @@ void BattleMainCB2(void)
         gScanlineEffect.state = 3;
         gMain.callback1 = gPreBattleCallback1;
         ZeroEnemyPartyMons();
-        m4aSongNumStop(0x5A);
+        m4aSongNumStop(SE_HINSI);
         if (gBattleTypeFlags & 2)
             SetMainCallback2(sub_805465C);
         else
@@ -5033,7 +5033,7 @@ static void ReturnFromBattleToOverworld(void)
             SetRoamerInactive();
     }
 
-    m4aSongNumStop(0x5A);
+    m4aSongNumStop(SE_HINSI);
     SetMainCallback2(gMain.savedCallback);
 }
 

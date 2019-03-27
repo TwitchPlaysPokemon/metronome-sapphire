@@ -2023,7 +2023,7 @@ BattleScript_EffectTeleport: @ 81D8233
 	waitanimation
 	printstring BATTLE_TEXT_FledBattle
 	waitmessage 64
-	setbyte gBattleOutcome, 5
+	setbyte gBattleOutcome, BATTLE_PLAYER_TELEPORTED
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectBeatUp: @ 81D826E
@@ -3371,7 +3371,7 @@ BattleScript_SuccessForceOut:: @ 81D90FC
 	returntoball TARGET
 	waitstate
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_TrainerBattleForceOut
-	setbyte gBattleOutcome, 5
+	setbyte gBattleOutcome, BATTLE_PLAYER_TELEPORTED
 	finishaction
 
 BattleScript_TrainerBattleForceOut: @ 81D9116

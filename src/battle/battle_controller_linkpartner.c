@@ -458,7 +458,7 @@ void sub_811E258(void)
 {
     if (gReceivedRemoteLinkPlayers == 0)
     {
-        m4aSongNumStop(0x5A);
+        m4aSongNumStop(SE_HINSI);
         gMain.inBattle = FALSE;
         gMain.callback1 = gPreBattleCallback1;
         SetMainCallback2(c2_8011A1C);
@@ -476,7 +476,7 @@ void sub_811E29C(void)
         }
         else
         {
-            m4aSongNumStop(0x5A);
+            m4aSongNumStop(SE_HINSI);
             gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(gMain.savedCallback);

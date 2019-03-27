@@ -1447,6 +1447,7 @@ void sub_802DB6C(u8 taskId)
     }
 }
 #else
+asm(".set SE_EXP, 33");
 NAKED
 void sub_802DB6C(u8 taskId)
 {
@@ -1498,7 +1499,7 @@ _0802DB9C:\n\
     negs r0, r0\n\
     cmp r4, r0\n\
     bne _0802DC98\n\
-    movs r0, 0x21\n\
+    movs r0, SE_EXP\n\
     bl m4aSongNumStop\n\
     movs r0, 0x64\n\
     mov r1, r9\n\

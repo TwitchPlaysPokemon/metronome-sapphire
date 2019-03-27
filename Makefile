@@ -27,7 +27,7 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 GBAFIX    := tools/gbafix/gbafix$(EXE)
 MAPJSON   := tools/mapjson/mapjson$(EXE)
 ITEMSJSON := tools/itemsjson/itemsjson$(EXE)
-PGEGEN    := python3 tools/pgegen/pgegen.py
+PGEGEN    := python3 tools/pgegen/pgegen.py$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG) --defsym RANDOMIZE=$(RANDOMIZE) --defsym NO_LVL_DISPLAY=$(NO_LVL_DISPLAY)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
