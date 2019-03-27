@@ -10,7 +10,7 @@
 
 /* battle */
 
-	. = ALIGN(4);
+    . = ALIGN(4);
 gUnknown_020238C8 = .; /* 20238C8 */
     . += 0x4;
 
@@ -41,8 +41,7 @@ gUnknown_02023A14_50 = .;
     . += 0x2;
 
 gUnknown_Debug_2023A76 = .;
-gUnknown_Debug_2023A76_ = .;
-	. += 0x8C;
+    . += 0x8C;
 
 gUnknown_Debug_2023B02 = .;
     . += 0x60;
@@ -161,7 +160,7 @@ gLastUsedMove = .; /* 2024C34 */
     . += 0x8;
 
 gLastUsedMetronomeMove = .;
-	. += 0x8;
+    . += 0x8;
 
 gLastLandedMoves = .; /* 2024C3C */
     . += 0x8;

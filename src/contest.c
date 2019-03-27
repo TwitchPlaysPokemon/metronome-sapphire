@@ -48,7 +48,7 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gBanksBySide[];
 extern u8 gBankSpriteIds[];
-extern struct Window gUnknown_03004210;
+extern struct Window gBattleMainTextWindow;
 extern u32 gContestRngValue;
 
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -344,7 +344,7 @@ void LoadContestBgAfterMoveAnim(void)
 void SetUpContestWindow(void)
 {
     Text_LoadWindowTemplate(&gWindowTemplate_81E6FD8);
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6FD8);
+    Text_InitWindowWithTemplate(&gBattleMainTextWindow, &gWindowTemplate_81E6FD8);
     Text_InitWindowWithTemplate(&gMenuWindow, &gWindowTemplate_81E6FF4);
 }
 
@@ -676,7 +676,7 @@ void sub_80ABCDC(u8 taskId)
     gBattle_BG0_Y = 0xA0;
     gBattle_BG2_Y = 0xA0;
     Text_FillWindowRectDefPalette(
-      &gUnknown_03004210,
+      &gBattleMainTextWindow,
       0,
       gUnknown_083CA340[0][0],
       gUnknown_083CA340[0][1],
@@ -705,13 +705,13 @@ void sub_80ABCDC(u8 taskId)
         r5 = StringCopy(r5, gMoveNames[move]);
 
         Text_InitWindow8002E4C(
-          &gUnknown_03004210,
+          &gBattleMainTextWindow,
           sp8,
           776 + i * 20,
           gUnknown_083CA340[i][0] * 8 + 4,
           gUnknown_083CA340[i][1] * 8,
           1);
-        Text_PrintWindow8002F44(&gUnknown_03004210);
+        Text_PrintWindow8002F44(&gBattleMainTextWindow);
     }
 
     MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 72);
@@ -749,7 +749,7 @@ void sub_80ABEA0(u8 taskId)
             PlaySE(SE_SELECT);
             sub_80AFFE0(FALSE);
             Text_FillWindowRectDefPalette(
-              &gUnknown_03004210,
+              &gBattleMainTextWindow,
               0,
               gUnknown_083CA340[0][0],
               gUnknown_083CA340[0][1],
@@ -820,21 +820,21 @@ void debug_sub_80B9EBC(u8 taskId)
     {
     case 0:
 	Text_FillWindowRectDefPalette(
-	  &gUnknown_03004210,
+	  &gBattleMainTextWindow,
 	  0,
 	  gUnknown_083CA340[0][0],
 	  gUnknown_083CA340[0][1],
 	  gUnknown_083CA340[0][2],
 	  gUnknown_083CA340[0][3]);
 	Text_InitWindowAndPrintText(
-	  &gUnknown_03004210,
+	  &gBattleMainTextWindow,
 	  gMoveNames[gTasks[taskId].data[1]],
 	  776,
 	  gUnknown_083CA340[0][0],
 	  gUnknown_083CA340[0][1]);
 	ConvertIntToDecimalStringN(text, gTasks[taskId].data[1], 2, 3);
 	Text_InitWindowAndPrintText(
-	  &gUnknown_03004210,
+	  &gBattleMainTextWindow,
 	  text,
 	  796,
 	  gUnknown_083CA340[1][0],
@@ -2295,7 +2295,7 @@ void sub_80AE514(void)
     for (i = 0; i < 4; i++)
     {
         Text_FillWindowRectDefPalette(
-          &gUnknown_03004210,
+          &gBattleMainTextWindow,
           0,
           gUnknown_083CA308[gUnknown_02038696[i]][0],
           gUnknown_083CA308[gUnknown_02038696[i]][1],
@@ -2335,7 +2335,7 @@ void sub_80AE5D4(u8 p, u8 b)
     {
         StringCopy(str, gLinkPlayers[p].name);
         Text_InitWindow8004D04(
-          &gUnknown_03004210,
+          &gBattleMainTextWindow,
           gDisplayedStringBattle,
           592 + gUnknown_02038696[p] * 22,
           251 + gUnknown_083CA310[gUnknown_02038696[p]][0] * 8,
@@ -2346,7 +2346,7 @@ void sub_80AE5D4(u8 p, u8 b)
     {
         StringCopy(str, gContestMons[p].trainerName);
         Text_InitWindowAndPrintText(
-          &gUnknown_03004210,
+          &gBattleMainTextWindow,
           gDisplayedStringBattle,
           592 + gUnknown_02038696[p] * 22,
           gUnknown_083CA310[gUnknown_02038696[p]][0],
@@ -2372,7 +2372,7 @@ void sub_80AE6E4(u8 a, u8 b)
     *str = EOS;
 
     Text_InitWindow8004D04(
-      &gUnknown_03004210,
+      &gBattleMainTextWindow,
       gDisplayedStringBattle,
       512 + gUnknown_02038696[a] * 20,
       253 + gUnknown_083CA308[gUnknown_02038696[a]][0] * 8,
@@ -2556,7 +2556,7 @@ void sub_80AEBEC(u16 a)
     s32 i;
     u8 numHearts;
 
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 0, 11, 31, 16, 34);
+    Text_FillWindowRectDefPalette(&gBattleMainTextWindow, 0, 11, 31, 16, 34);
 
     category = gContestMoves[a].contestCategory;
     if      (category == CONTEST_CATEGORY_COOL)
@@ -2605,13 +2605,13 @@ void sub_80AEBEC(u16 a)
             *(u16 *)(VRAM + 0xC82A + i * 2) = 0x5036;
     }
 
-    Text_InitWindowAndPrintText(&gUnknown_03004210, gContestEffectStrings[gContestMoves[a].effect], 868, 11, 35);
-    Text_InitWindowAndPrintText(&gUnknown_03004210, gUnknown_083CC5A2, 866, 16, 31);
+    Text_InitWindowAndPrintText(&gBattleMainTextWindow, gContestEffectStrings[gContestMoves[a].effect], 868, 11, 35);
+    Text_InitWindowAndPrintText(&gBattleMainTextWindow, gUnknown_083CC5A2, 866, 16, 31);
 }
 
 void sub_80AED58(void)
 {
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 0, 11, 35, 28, 40);
+    Text_FillWindowRectDefPalette(&gBattleMainTextWindow, 0, 11, 35, 28, 40);
 }
 
 // unused
@@ -2787,7 +2787,7 @@ void sub_80AF120(void)
 
 void sub_80AF138(void)
 {
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 0, 1, 15, 17, 18);
+    Text_FillWindowRectDefPalette(&gBattleMainTextWindow, 0, 1, 15, 17, 18);
 }
 
 u16 GetChosenMove(u8 a)
@@ -2838,7 +2838,7 @@ void sub_80AF1E4(u8 a, u8 b)
         sub_80AE598(gDisplayedStringBattle, gMoveNames[sContestantStatus[a].currMove], r3);
     sub_80AF2A0(a);
     Text_InitWindowAndPrintText(
-      &gUnknown_03004210,
+      &gBattleMainTextWindow,
       gDisplayedStringBattle,
       696 + a * 20,
       gUnknown_083CA318[a][0],
@@ -2856,7 +2856,7 @@ void unref_sub_80AF280(u8 a)
 void sub_80AF2A0(u8 a)
 {
     Text_FillWindowRectDefPalette(
-      &gUnknown_03004210,
+      &gBattleMainTextWindow,
       0,
       gUnknown_083CA318[a][0],
       gUnknown_083CA318[a][1],
@@ -4316,7 +4316,7 @@ void unref_sub_80B0CF4(void)
         for (i = 0; i < 4; i++)
         {
             Text_FillWindowRectDefPalette(
-              &gUnknown_03004210,
+              &gBattleMainTextWindow,
               0,
               gUnknown_083CA308[i][0],
               gUnknown_083CA308[i][1],
@@ -4345,7 +4345,7 @@ void sub_80B0D7C(void)
         for (i = 0; i < 4; i++)
         {
             Text_FillWindowRectDefPalette(
-              &gUnknown_03004210,
+              &gBattleMainTextWindow,
               0,
               gUnknown_083CA308[i][0],
               gUnknown_083CA308[i][1],
@@ -4363,7 +4363,7 @@ void sub_80B0D7C(void)
             }
             ConvertIntToDecimalStringN(sp8 + r5, r2, 0, 4);
             Text_InitWindowAndPrintText(
-              &gUnknown_03004210,
+              &gBattleMainTextWindow,
               sp8,
               592 + gUnknown_02038696[i] * 22,
               gUnknown_083CA310[gUnknown_02038696[i]][0],
@@ -4381,7 +4381,7 @@ void sub_80B0D7C(void)
             }
             ConvertIntToDecimalStringN(sp8 + r5, r2, 0, 4);
             Text_InitWindowAndPrintText(
-              &gUnknown_03004210,
+              &gBattleMainTextWindow,
               sp8,
               512 + gUnknown_02038696[i] * 20,
               gUnknown_083CA308[gUnknown_02038696[i]][0],
@@ -4800,7 +4800,7 @@ void unref_sub_80B19D0(void)
 {
     u8 str[20];
     StringCopy(str, gUnknown_083CC2EC);
-    Text_InitWindowAndPrintText(&gUnknown_03004210, str, 680, 0, 0);
+    Text_InitWindowAndPrintText(&gBattleMainTextWindow, str, 680, 0, 0);
 }
 
 s8 Contest_GetMoveExcitement(u16 move)

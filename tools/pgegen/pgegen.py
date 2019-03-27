@@ -327,8 +327,6 @@ def main():
     parser.add_argument('output', type=argparse.FileType('w'))
     parser.add_argument('--code', default='AXVE')
     parser.add_argument('--name', default='Pokemon Ruby (English)')
-    parser.add_argument('-iquote')
-    parser.add_argument('-I')
     args = parser.parse_args()
     pgegen(args)
 

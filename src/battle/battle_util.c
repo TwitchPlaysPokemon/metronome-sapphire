@@ -3348,7 +3348,7 @@ void unref_sub_801B40C(void)
     }
 }
 
-void sub_801B594(void)
+void HandleAction_RunBattleScript(void)
 {
     if (gBattleExecBuffer == 0)
         gBattleScriptingCommandsTable[*gBattlescriptCurrInstr]();

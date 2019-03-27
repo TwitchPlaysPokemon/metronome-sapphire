@@ -36,7 +36,7 @@ struct MovePpInfo
 #define SUB_803037C_TILE_DATA_OFFSET 444
 #endif
 
-extern struct Window gUnknown_03004210;
+extern struct Window gBattleMainTextWindow;
 
 extern void (*gBattleBankFunc[])(void);
 
@@ -142,7 +142,7 @@ extern u8 gAbsentBattlerFlags;
 extern u8 gUnknown_03004344;
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
-extern struct Window gUnknown_03004210;
+extern struct Window gBattleMainTextWindow;
 extern const u8 BattleText_SwitchWhich[];
 extern u8 gUnknown_03004348;
 extern struct BattlePokemon gBattleMons[];
@@ -363,7 +363,7 @@ void bx_0802E404(void)
         PlayerBufferExecCompleted();
 }
 
-void sub_802C098(void)
+void BattleMenuAction(void)
 {
     u16 itemId = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
@@ -377,17 +377,17 @@ void sub_802C098(void)
         // Useless switch statement.
         switch (gActionSelectionCursor[gActiveBattler])
         {
-        case 0:
-            Emitcmd33(1, 0, 0);
+        case 0: // FIGHT
+            Emitcmd33(1, ACTION_USE_MOVE, 0);
             break;
-        case 1:
-            Emitcmd33(1, 1, 0);
+        case 1: // BAG
+            Emitcmd33(1, ACTION_USE_ITEM, 0);
             break;
-        case 2:
-            Emitcmd33(1, 2, 0);
+        case 2: // POKéMON
+            Emitcmd33(1, ACTION_SWITCH, 0);
             break;
-        case 3:
-            Emitcmd33(1, 3, 0);
+        case 3: // RUN
+            Emitcmd33(1, ACTION_RUN, 0);
             break;
         }
         PlayerBufferExecCompleted();
@@ -399,7 +399,7 @@ void sub_802C098(void)
             PlaySE(SE_SELECT);
             nullsub_8(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 1;
-            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
+            UpdateBattleMenuCursorPosition(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_RIGHT)
@@ -409,7 +409,7 @@ void sub_802C098(void)
             PlaySE(SE_SELECT);
             nullsub_8(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 1;
-            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
+            UpdateBattleMenuCursorPosition(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_UP)
@@ -419,7 +419,7 @@ void sub_802C098(void)
             PlaySE(SE_SELECT);
             nullsub_8(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 2;
-            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
+            UpdateBattleMenuCursorPosition(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_DOWN)
@@ -429,7 +429,7 @@ void sub_802C098(void)
             PlaySE(SE_SELECT);
             nullsub_8(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 2;
-            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
+            UpdateBattleMenuCursorPosition(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -448,7 +448,7 @@ void sub_802C098(void)
                     return;
             }
             PlaySE(SE_SELECT);
-            Emitcmd33(1, 12, 0);
+            Emitcmd33(1, ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted();
             DestroyMenuCursor();
         }
@@ -740,9 +740,9 @@ void sub_802C68C(void)
             else
                 gUnknown_03004344 = gMoveSelectionCursor[gActiveBattler] + 1;
             sub_802E3B4(gUnknown_03004344, 27);
-            Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-            Text_InitWindow(&gUnknown_03004210, BattleText_SwitchWhich, 0x290, 0x17, 0x37);
-            Text_PrintWindow8002F44(&gUnknown_03004210);
+            Text_FillWindowRect(&gBattleMainTextWindow, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+            Text_InitWindow(&gBattleMainTextWindow, BattleText_SwitchWhich, 0x290, 0x17, 0x37);
+            Text_PrintWindow8002F44(&gBattleMainTextWindow);
             gBattleBankFunc[gActiveBattler] = sub_802CA60;
         }
     }
@@ -752,34 +752,34 @@ void sub_802C68C(void)
         const u8 *moveName;
         s32 i;
 
-        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x3A);
+        Text_FillWindowRect(&gBattleMainTextWindow, 0x1016, 1, 0x37, 16, 0x3A);
         moveName = gMoveNames[GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1)];
-        Text_InitWindowAndPrintText(&gUnknown_03004210, moveName, 0x100, 2, 0x37);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, moveName, 0x100, 2, 0x37);
         ConvertIntToDecimalStringN(
             gDisplayedStringBattle,
             GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1),
             2, 3);
-        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x110, 10, 0x37);
-        Text_InitWindowAndPrintText(&gUnknown_03004210, gString_TurnJP, 0x116, 1, 0x39);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 0x110, 10, 0x37);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, gString_TurnJP, 0x116, 1, 0x39);
         ConvertIntToDecimalStringN(gDisplayedStringBattle, gAnimMoveTurn, 2, 3);
-        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x11C, 4, 0x39);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 0x11C, 4, 0x39);
         for (i = 0; i < 64; i++)
         {
             if (gSprites[i].inUse)
                 count++;
         }
         ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x122, 8, 0x39);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 0x122, 8, 0x39);
         count = GetTaskCount();
         ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x126, 11, 0x39);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 0x126, 11, 0x39);
         for (i = 0, count = 0; i < 32; i++)
         {
             if (gOamMatrixAllocBitmap & (1 << i))
                 count++;
         }
         ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x12A, 14, 0x39);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 0x12A, 14, 0x39);
         gBattleBankFunc[gActiveBattler] = debug_sub_8030C24;
     }
 #endif
@@ -886,9 +886,9 @@ void sub_802CA60(void)
         gBattleBankFunc[gActiveBattler] = sub_802C68C;
         gMoveSelectionCursor[gActiveBattler] = gUnknown_03004344;
         sub_802E3B4(gMoveSelectionCursor[gActiveBattler], 0);
-        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-        Text_InitWindow(&gUnknown_03004210, BattleText_PP, 0x290, 0x17, 0x37);
-        Text_PrintWindow8002F44(&gUnknown_03004210);
+        Text_FillWindowRect(&gBattleMainTextWindow, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+        Text_InitWindow(&gBattleMainTextWindow, BattleText_PP, 0x290, 0x17, 0x37);
+        Text_PrintWindow8002F44(&gBattleMainTextWindow);
         sub_802E220();
         sub_802E2D4();
     }
@@ -899,9 +899,9 @@ void sub_802CA60(void)
         sub_802E3B4(gMoveSelectionCursor[gActiveBattler], 0);
         sub_802E12C(gMoveSelectionCursor[gActiveBattler], BattleText_Format);
         gBattleBankFunc[gActiveBattler] = sub_802C68C;
-        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-        Text_InitWindow(&gUnknown_03004210, BattleText_PP, 0x290, 0x17, 0x37);
-        Text_PrintWindow8002F44(&gUnknown_03004210);
+        Text_FillWindowRect(&gBattleMainTextWindow, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+        Text_InitWindow(&gBattleMainTextWindow, BattleText_PP, 0x290, 0x17, 0x37);
+        Text_PrintWindow8002F44(&gBattleMainTextWindow);
         sub_802E220();
         sub_802E2D4();
     }
@@ -1046,10 +1046,10 @@ void debug_sub_8030C24(void)
                 move = 1;
             SetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1, &move);
             gBattleMons[gActiveBattler].moves[0] = move;
-            Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x38);
-            Text_InitWindowAndPrintText(&gUnknown_03004210, gMoveNames[move], 0x100, 2, 0x37);
+            Text_FillWindowRect(&gBattleMainTextWindow, 0x1016, 1, 0x37, 16, 0x38);
+            Text_InitWindowAndPrintText(&gBattleMainTextWindow, gMoveNames[move], 0x100, 2, 0x37);
             ConvertIntToDecimalStringN(gDisplayedStringBattle, move, 2, 3);
-            Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 272, 10, 0x37);
+            Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 272, 10, 0x37);
         }
         break;
     case L_BUTTON:
@@ -1071,10 +1071,10 @@ void debug_sub_8030C24(void)
                 move = 354;
             SetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1, &move);
             gBattleMons[gActiveBattler].moves[0] = move;
-            Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x38);
-            Text_InitWindowAndPrintText(&gUnknown_03004210, gMoveNames[move], 0x100, 2, 0x37);
+            Text_FillWindowRect(&gBattleMainTextWindow, 0x1016, 1, 0x37, 16, 0x38);
+            Text_InitWindowAndPrintText(&gBattleMainTextWindow, gMoveNames[move], 0x100, 2, 0x37);
             ConvertIntToDecimalStringN(gDisplayedStringBattle, move, 2, 3);
-            Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 272, 10, 0x37);
+            Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 272, 10, 0x37);
         }
         break;
     case DPAD_UP:
@@ -1084,7 +1084,7 @@ void debug_sub_8030C24(void)
         else
             gAnimMoveTurn++;
         ConvertIntToDecimalStringN(gDisplayedStringBattle, gAnimMoveTurn, 2, 3);
-        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 284, 4, 0x39);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 284, 4, 0x39);
         break;
     }
 
@@ -1099,12 +1099,12 @@ void debug_sub_8030C24(void)
             move = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + i);
             StringAppend(gDisplayedStringBattle, gMoveNames[move]);
             Text_InitWindow(
-                &gUnknown_03004210,
+                &gBattleMainTextWindow,
                 gDisplayedStringBattle,
                 0x100 + i * 16,
                 (i & 1) ? 10 : 2,
                 (i < 2) ? 0x37 : 0x39);
-            Text_PrintWindow8002F44(&gUnknown_03004210);
+            Text_PrintWindow8002F44(&gBattleMainTextWindow);
         }
         gBattleBankFunc[gActiveBattler] = sub_802C68C;
     }
@@ -1129,11 +1129,11 @@ void debug_sub_803107C(void)
             count++;
         }
         ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 290, 8, 0x39);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 290, 8, 0x39);
 
         count = GetTaskCount();
         ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 294, 11, 0x39);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 294, 11, 0x39);
 
         for (i = 0, count = 0; i < 32; i++)
         {
@@ -1141,7 +1141,7 @@ void debug_sub_803107C(void)
             count++;
         }
         ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 298, 14, 0x39);
+        Text_InitWindowAndPrintText(&gBattleMainTextWindow, gDisplayedStringBattle, 298, 14, 0x39);
 
         gBattleBankFunc[gActiveBattler] = debug_sub_8030C24;
     }
@@ -1318,7 +1318,7 @@ void bx_t1_healthbar_update(void)
 
 void sub_802D90C(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gBattleMainTextWindow.state == 0)
         PlayerBufferExecCompleted();
 }
 
@@ -1669,7 +1669,7 @@ void sub_802DEAC(void)
 // Duplicate of sub_802D90C
 void sub_802DF18(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gBattleMainTextWindow.state == 0)
         PlayerBufferExecCompleted();
 }
 
@@ -1751,12 +1751,12 @@ void sub_802E12C(s32 a, const u8 *b)
     StringCopy(gDisplayedStringBattle, b);
     StringAppend(gDisplayedStringBattle, gMoveNames[r4->moves[a]]);
     Text_InitWindow(
-      &gUnknown_03004210,
+      &gBattleMainTextWindow,
       gDisplayedStringBattle,
       0x300 + a * 20,
       (a & 1) ? 11 : 1,
       (a < 2) ? 0x37 : 0x39);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
 }
 
 void sub_802E1B0(void)
@@ -1765,7 +1765,7 @@ void sub_802E1B0(void)
     s32 i;
 
     gUnknown_03004348 = 0;
-    Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 0x14, 0x3A);
+    Text_FillWindowRect(&gBattleMainTextWindow, 0x1016, 1, 0x37, 0x14, 0x3A);
     for (i = 0; i < 4; i++)
     {
         nullsub_7(i);
@@ -1794,8 +1794,8 @@ void sub_802E220(void)
         str = ConvertIntToDecimalStringN(str, r4->pp[gMoveSelectionCursor[gActiveBattler]], 1, 2);
         *str++ = CHAR_SLASH;
         ConvertIntToDecimalStringN(str, r4->unkC[gMoveSelectionCursor[gActiveBattler]], 1, 2);
-        Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 0x2A2, 0x19, 0x37);
-        Text_PrintWindow8002F44(&gUnknown_03004210);
+        Text_InitWindow(&gBattleMainTextWindow, gDisplayedStringBattle, 0x2A2, 0x19, 0x37);
+        Text_PrintWindow8002F44(&gBattleMainTextWindow);
     }
 }
 
@@ -1806,8 +1806,8 @@ void sub_802E2D4(void)
 {
     if (gBattleBufferA[gActiveBattler][2] == 1)
     {
-        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
-        Text_InitWindow(&gUnknown_03004210, BattleText_ForgetMove, 0x290, 0x13, 0x37);
+        Text_FillWindowRect(&gBattleMainTextWindow, 0x1016, 0x17, 0x37, 0x1C, 0x3A);
+        Text_InitWindow(&gBattleMainTextWindow, BattleText_ForgetMove, 0x290, 0x13, 0x37);
     }
     else
     {
@@ -1816,10 +1816,10 @@ void sub_802E2D4(void)
 
         str = StringCopy(str, BattleText_Format);
         StringCopy(str, gTypeNames[gBattleMoves[r4->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
-        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 0x17, 0x39, 0x1C, 0x3A);
-        Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 0x2C0, 0x17, 0x39);
+        Text_FillWindowRect(&gBattleMainTextWindow, 0x1016, 0x17, 0x39, 0x1C, 0x3A);
+        Text_InitWindow(&gBattleMainTextWindow, gDisplayedStringBattle, 0x2C0, 0x17, 0x39);
     }
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
 }
 
 const u8 gUnknown_081FAE89[][2] =
@@ -1852,7 +1852,7 @@ void nullsub_7(u8 a)
 {
 }
 
-void sub_802E3E4(u8 a, int unused)
+void UpdateBattleMenuCursorPosition(u8 a, int unused)
 {
     sub_814A958(0x2A);
     MenuCursor_SetPos814A880(gUnknown_081FAE91[a][0], gUnknown_081FAE91[a][1]);
@@ -1890,7 +1890,7 @@ void b_link_standby_message(void)
     {
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = 0;
-        Text_InitWindow8002EB0(&gUnknown_03004210, BattleText_LinkStandby, 0x90, 2, 15);
+        Text_InitWindow8002EB0(&gBattleMainTextWindow, BattleText_LinkStandby, 0x90, 2, 15);
     }
 }
 
@@ -2755,7 +2755,7 @@ void PlayerHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
-    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 0x90, 2, 15);
+    Text_InitWindow8002EB0(&gBattleMainTextWindow, gDisplayedStringBattle, 0x90, 2, 15);
     gBattleBankFunc[gActiveBattler] = sub_802DF18;
 }
 
@@ -2773,23 +2773,23 @@ void PlayerHandlecmd18(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 160;
-    Text_FillWindowRect(&gUnknown_03004210, 10, 2, 15, 27, 18);
-    Text_FillWindowRect(&gUnknown_03004210, 10, 2, 35, 16, 38);
+    Text_FillWindowRect(&gBattleMainTextWindow, 10, 2, 15, 27, 18);
+    Text_FillWindowRect(&gBattleMainTextWindow, 10, 2, 35, 16, 38);
 
-    gBattleBankFunc[gActiveBattler] = sub_802C098;
+    gBattleBankFunc[gActiveBattler] = BattleMenuAction;
 
-    Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptions, 400, 18, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, BattleText_MenuOptions, 400, 18, 35);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
     MenuCursor_Create814A5C0(0, 0xFFFF, 12, 11679, 0);
 
     for (r4 = 0; r4 < 4; r4++)
         nullsub_8(r4);
 
-    sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
+    UpdateBattleMenuCursorPosition(gActionSelectionCursor[gActiveBattler], 0);
 
     StrCpyDecodeToDisplayedStringBattle(BattleText_OtherMenu);
-    Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_803037C_TILE_DATA_OFFSET, 2, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, gDisplayedStringBattle, SUB_803037C_TILE_DATA_OFFSET, 2, 35);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
 }
 
 void PlayerHandlecmd19()
@@ -2812,8 +2812,8 @@ void sub_80304A8(void)
     sub_802E3B4(gMoveSelectionCursor[gActiveBattler], 0);
     if (gBattleBufferA[gActiveBattler][2] != 1)
     {
-        Text_InitWindow(&gUnknown_03004210, BattleText_PP, 656, 23, 55);
-        Text_PrintWindow8002F44(&gUnknown_03004210);
+        Text_InitWindow(&gBattleMainTextWindow, BattleText_PP, 656, 23, 55);
+        Text_PrintWindow8002F44(&gBattleMainTextWindow);
     }
     sub_802E220();
     sub_802E2D4();

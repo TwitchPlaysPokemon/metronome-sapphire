@@ -116,7 +116,7 @@ extern u8 gActionSelectionCursor[];
 extern u8 gMoveSelectionCursor[];
 extern u8 gUnknown_02038470[];
 extern struct Window gUnknown_030041D0;
-extern struct Window gUnknown_03004210;
+extern struct Window gBattleMainTextWindow;
 extern struct Window gUnknown_03004250;
 extern u32 gUnknown_03004284;
 extern MainCallback gPreBattleCallback1;
@@ -140,7 +140,7 @@ extern u8 gMoveResultFlags;
 extern u8 BattleScript_FocusPunchSetUp[];
 extern u16 gDynamicBasePower;
 extern u8 gCurrentTurnActionNumber;
-extern void (* const gUnknown_081FA640[])(void);
+extern void (* const gBattleActionPointers[])(void);
 extern void (* const gUnknown_081FA678[])(void);
 extern u8* gBattlescriptCurrInstr;
 extern u8 BattleScript_LinkBattleWonOrLost[];
@@ -247,7 +247,7 @@ void InitBattle(void)
     gBattleTerrain = BattleSetup_GetTerrain();
 #endif
 
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+    Text_InitWindowWithTemplate(&gBattleMainTextWindow, &gWindowTemplate_81E6C58);
     Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowTemplate_81E71D0);
     Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowTemplate_81E71EC);
     sub_800D6D4();
@@ -962,7 +962,7 @@ void BattleMainCB2(void)
     }
 #endif
 
-    Text_UpdateWindowInBattle(&gUnknown_03004210);
+    Text_UpdateWindowInBattle(&gBattleMainTextWindow);
     UpdatePaletteFade();
     RunTasks();
 }
@@ -1285,7 +1285,7 @@ void c2_8011A1C(void)
     gBattle_BG3_X = 0;
     gBattle_BG3_Y = 0;
 
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+    Text_InitWindowWithTemplate(&gBattleMainTextWindow, &gWindowTemplate_81E6C58);
     Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowTemplate_81E71D0);
     Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowTemplate_81E71EC);
     sub_800D6D4();
@@ -2510,7 +2510,7 @@ void debug_sub_8012688(void)
 	FreeAllSpritePalettes();
 	gReservedSpritePaletteCount = 4;
 	gCurrentMove = 1;
-	Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+	Text_InitWindowWithTemplate(&gBattleMainTextWindow, &gWindowTemplate_81E6C58);
 	DecompressPicFromTable_2(
 	  &gMonFrontPicTable[gCurrentMove],
 	  gMonFrontPicCoords[gCurrentMove].coords,
@@ -2537,7 +2537,7 @@ void debug_sub_8012878(void)
 {
 	AnimateSprites();
 	BuildOamBuffer();
-	Text_UpdateWindowInBattle(&gUnknown_03004210);
+	Text_UpdateWindowInBattle(&gBattleMainTextWindow);
 	UpdatePaletteFade();
 	RunTasks();
 	if (gMain.heldKeys == (SELECT_BUTTON | R_BUTTON))
@@ -2547,25 +2547,25 @@ void debug_sub_8012878(void)
 void debug_sub_80128B4(void)
 {
     debug_sub_8010A7C(0, 9);
-    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 144, 2, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, gBattleTextBuff1, 144, 2, 35);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
     ConvertIntToDecimalStringN(gBattleTextBuff1, gCurrentMove, 2, 3);
     gBattleTextBuff1[3] = CHAR_SPACE;
     gBattleTextBuff1[4] = EOS;
     StringAppend(gBattleTextBuff1, gSpeciesNames[gCurrentMove]);
-    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 144, 2, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, gBattleTextBuff1, 144, 2, 35);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
 }
 
 void debug_sub_8012938(u8 taskId)
 {
     debug_sub_8010A7C(0, 7);
-    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 162, 2, 37);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, gBattleTextBuff1, 162, 2, 37);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
     StringCopy(gBattleTextBuff1, Str_821F7B8);
     ConvertIntToDecimalStringN(gBattleTextBuff1 + 4, gUnknown_Debug_2023B62[gCurrentMove - 1], 2, 3);
-    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 162, 2, 37);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, gBattleTextBuff1, 162, 2, 37);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
     gSprites[gTasks[taskId].data[1]].pos2.y = -gUnknown_Debug_2023B62[gCurrentMove - 1];
 }
 
@@ -2625,8 +2625,8 @@ void debug_sub_8012B70(u8 taskId, u8 b)
     {
         sub_802BBD4(24, 28, 29, 33, 0);
         gTasks[taskId].data[0] = 2;
-        Text_InitWindow(&gUnknown_03004210, Str_821F7DA, 656, 26, 29);
-        Text_PrintWindow8002F44(&gUnknown_03004210);
+        Text_InitWindow(&gBattleMainTextWindow, Str_821F7DA, 656, 26, 29);
+        Text_PrintWindow8002F44(&gBattleMainTextWindow);
         gTasks[taskId].data[3] = 0;
         debug_sub_8012B2C(0);
     }
@@ -2635,25 +2635,25 @@ void debug_sub_8012B70(u8 taskId, u8 b)
 void debug_sub_8012C08(u8 taskId, u8 b)
 {
     debug_sub_8010A7C(0, 9);
-    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 144, 2, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, gBattleTextBuff1, 144, 2, 35);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
     debug_sub_8010A7C(0, 7);
-    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 162, 2, 37);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, gBattleTextBuff1, 162, 2, 37);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
     sub_802BBD4(24, 28, 29, 33, 0);
     if (b != 0)
     {
         gTasks[taskId].data[0] = 4;
-        Text_InitWindow(&gUnknown_03004210, gUnknown_Debug_821F7F3, 144, 2, 35);
+        Text_InitWindow(&gBattleMainTextWindow, gUnknown_Debug_821F7F3, 144, 2, 35);
     }
     else
     {
         gTasks[taskId].data[0] = 3;
-        Text_InitWindow(&gUnknown_03004210, Str_821F7EA, 144, 2, 35);
+        Text_InitWindow(&gBattleMainTextWindow, Str_821F7EA, 144, 2, 35);
     }
-    Text_PrintWindow8002F44(&gUnknown_03004210);
-    Text_InitWindow(&gUnknown_03004210, BattleText_YesNo, 656, 26, 29);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
+    Text_InitWindow(&gBattleMainTextWindow, BattleText_YesNo, 656, 26, 29);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
     gTasks[taskId].data[3] = 1;
     debug_sub_8012B2C(1);
 }
@@ -2665,10 +2665,10 @@ void debug_sub_8012D10(u8 taskId)
     case 0:
         debug_sub_80128B4();
         debug_sub_8012938(taskId);
-        Text_InitWindow(&gUnknown_03004210, Str_821F7BD, 400, 19, 35);
-        Text_PrintWindow8002F44(&gUnknown_03004210);
+        Text_InitWindow(&gBattleMainTextWindow, Str_821F7BD, 400, 19, 35);
+        Text_PrintWindow8002F44(&gBattleMainTextWindow);
         gTasks[taskId].data[0]++;
-        sub_802E3E4(gTasks[taskId].data[2], 0);
+        UpdateBattleMenuCursorPosition(gTasks[taskId].data[2], 0);
         break;
     case 1:
         if (gMain.newKeys & DPAD_UP)
@@ -2676,28 +2676,28 @@ void debug_sub_8012D10(u8 taskId)
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] &= ~2;
-            sub_802E3E4(gTasks[taskId].data[2], 0);
+            UpdateBattleMenuCursorPosition(gTasks[taskId].data[2], 0);
         }
         else if (gMain.newKeys & DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] |= 2;
-            sub_802E3E4(gTasks[taskId].data[2], 0);
+            UpdateBattleMenuCursorPosition(gTasks[taskId].data[2], 0);
         }
         else if (gMain.newKeys & DPAD_LEFT)
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] &= ~1;
-            sub_802E3E4(gTasks[taskId].data[2], 0);
+            UpdateBattleMenuCursorPosition(gTasks[taskId].data[2], 0);
         }
         else if (gMain.newKeys & DPAD_RIGHT)
         {
             PlaySE(SE_SELECT);
             nullsub_8(gTasks[taskId].data[2]);
             gTasks[taskId].data[2] |= 1;
-            sub_802E3E4(gTasks[taskId].data[2], 0);
+            UpdateBattleMenuCursorPosition(gTasks[taskId].data[2], 0);
         }
         else if (gMain.newAndRepeatedKeys & A_BUTTON)
         {
@@ -3236,7 +3236,7 @@ void debug_sub_80138CC(void)
         switch (gSharedMem[0x160FD])
         {
         case 0:
-            if (gBattleBankFunc[gActiveBattler] == sub_802C098)
+            if (gBattleBankFunc[gActiveBattler] == BattleMenuAction)
                 gSharedMem[0x160FD]++;
             break;
         case 1:
@@ -4800,7 +4800,7 @@ static void RunTurnActionsFunctions(void)
         gCurrentActionFuncId = 12;
 
     gBattleStruct->unk16057 = gCurrentTurnActionNumber;
-    gUnknown_081FA640[gCurrentActionFuncId]();
+    gBattleActionPointers[gCurrentActionFuncId]();
 
     if (gCurrentTurnActionNumber >= gBattlersCount) // everyone did their actions, turn finished
     {
@@ -5511,7 +5511,7 @@ void HandleAction_SafriZoneRun(void)
     gBattleOutcome = BATTLE_RAN;
 }
 
-void HandleAction_Action9(void)
+void HandleAction_WallyRecall(void)
 {
     gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;

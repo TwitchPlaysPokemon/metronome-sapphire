@@ -478,7 +478,7 @@ extern u16 gMoveToLearn;
 extern u16 gUnknown_08E9A300[];
 extern struct Coords8 const gUnknown_08376738[12][6];
 extern u8 gUnknown_02039460[];
-extern struct Window gUnknown_03004210;
+extern struct Window gBattleMainTextWindow;
 
 extern const u8 gPartyMenuMisc_Gfx[];
 extern const u8 gPartyMenuMisc_Tilemap[];
@@ -676,8 +676,8 @@ bool8 InitPartyMenu(void)
         gMain.state++;
         break;
     case 8:
-        Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C90);
-        MultistepInitWindowTileData(&gUnknown_03004210, 1);
+        Text_InitWindowWithTemplate(&gBattleMainTextWindow, &gWindowTemplate_81E6C90);
+        MultistepInitWindowTileData(&gBattleMainTextWindow, 1);
         gMain.state++;
         break;
     case 9:
@@ -2708,7 +2708,7 @@ void sub_806D5B8(u8 monIndex)
     u8 right = gUnknown_08376948[IsDoubleBattle()][monIndex].right;
     u8 bottom = gUnknown_08376948[IsDoubleBattle()][monIndex].bottom;
 
-    Text_EraseWindowRect(&gUnknown_03004210, left, top, right, bottom);
+    Text_EraseWindowRect(&gBattleMainTextWindow, left, top, right, bottom);
 
     var1 = 0;
     CpuFastSet(&var1, OBJ_VRAM1 + monIndex * 0x400, 0x1000100);
@@ -2722,7 +2722,7 @@ void sub_806D668(u8 monIndex)
     u8 right = gUnknown_08376978[IsDoubleBattle()][monIndex].right;
     u8 bottom = gUnknown_08376978[IsDoubleBattle()][monIndex].bottom;
 
-    Text_EraseWindowRect(&gUnknown_03004210, left, top, right, bottom);
+    Text_EraseWindowRect(&gBattleMainTextWindow, left, top, right, bottom);
 
     var1 = 0;
     CpuFastSet(&var1, OBJ_VRAM1 + 0x300 + monIndex * 0x400, 0x1000040);
