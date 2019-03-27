@@ -17,3 +17,5 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 Based on the Pret disassembly of [**Pokémon Ruby**][pokeruby]
 
 [pokeruby]: https://github.com/pret/pokeruby
+
+Meltan and Melmetal sprites from [Gen VII+ Pokémon GBA Sprite Repository (64x64)](https://www.pokecommunity.com/showthread.php?t=368703)

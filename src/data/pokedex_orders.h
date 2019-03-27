@@ -1,8 +1,6 @@
 #if ENGLISH
 static const u16 gPokedexOrder_Alphabetical[] =
 {
-    NATIONAL_DEX_OLD_UNOWN_B,
-    NATIONAL_DEX_OLD_UNOWN_C,
     NATIONAL_DEX_OLD_UNOWN_D,
     NATIONAL_DEX_OLD_UNOWN_E,
     NATIONAL_DEX_OLD_UNOWN_F,
@@ -223,6 +221,8 @@ static const u16 gPokedexOrder_Alphabetical[] =
     NATIONAL_DEX_MEDICHAM,
     NATIONAL_DEX_MEDITITE,
     NATIONAL_DEX_MEGANIUM,
+    NATIONAL_DEX_MELTAN,
+    NATIONAL_DEX_MELMETAL,
     NATIONAL_DEX_MEOWTH,
     NATIONAL_DEX_METAGROSS,
     NATIONAL_DEX_METANG,
@@ -415,8 +415,6 @@ static const u16 gPokedexOrder_Alphabetical[] =
 };
 #elif GERMAN
 static const u16 gPokedexOrder_Alphabetical[] = {
-    NATIONAL_DEX_OLD_UNOWN_B,
-    NATIONAL_DEX_OLD_UNOWN_C,
     NATIONAL_DEX_OLD_UNOWN_D,
     NATIONAL_DEX_OLD_UNOWN_E,
     NATIONAL_DEX_OLD_UNOWN_F,
@@ -634,6 +632,8 @@ static const u16 gPokedexOrder_Alphabetical[] = {
     NATIONAL_DEX_MEDICHAM, // Meditalis
     NATIONAL_DEX_MEDITITE, // Meditie
     NATIONAL_DEX_MEGANIUM, // Meganie
+    NATIONAL_DEX_MELTAN, // Meltan
+    NATIONAL_DEX_MELMETAL, // Melmetal
     NATIONAL_DEX_MANKEY, // Menki
     NATIONAL_DEX_METAGROSS, // Metagross
     NATIONAL_DEX_METANG, // Metang

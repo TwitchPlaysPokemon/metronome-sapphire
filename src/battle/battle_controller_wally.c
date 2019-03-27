@@ -54,7 +54,7 @@ extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gAnimMoveTurn;
-extern struct Window gUnknown_03004210;
+extern struct Window gBattleMainTextWindow;
 extern u8 gUnknown_0300434C[];
 extern const u8 BattleText_WallyMenu[];
 extern const u8 BattleText_MenuOptions[];
@@ -264,7 +264,7 @@ void sub_81372BC(void)
         {
             PlaySE(SE_SELECT);
             nullsub_8(0);
-            sub_802E3E4(1, 0);
+            UpdateBattleMenuCursorPosition(1, 0);
             eWallyTurnTimer = 64;
             eWallyTurnCounter++;
         }
@@ -289,7 +289,7 @@ void sub_813741C(void)
 
 void sub_8137454(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gBattleMainTextWindow.state == 0)
         WallyBufferExecCompleted();
 }
 
@@ -1204,7 +1204,7 @@ void WallyHandlePrintString(void)
     if (*ptr == 2)
         DestroyMenuCursor();
     BufferStringBattle(*ptr);
-    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 0x90, 2, 15);
+    Text_InitWindow8002EB0(&gBattleMainTextWindow, gDisplayedStringBattle, 0x90, 2, 15);
     gBattleBankFunc[gActiveBattler] = sub_8137454;
 }
 
@@ -1222,23 +1222,23 @@ void WallyHandlecmd18(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 160;
-    gUnknown_03004210.paletteNum = 0;
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 15, 27, 18);
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
+    gBattleMainTextWindow.paletteNum = 0;
+    Text_FillWindowRectDefPalette(&gBattleMainTextWindow, 10, 2, 15, 27, 18);
+    Text_FillWindowRectDefPalette(&gBattleMainTextWindow, 10, 2, 35, 16, 36);
     gBattleBankFunc[gActiveBattler] = sub_81372BC;
-    Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptions, 400, 18, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, BattleText_MenuOptions, 400, 18, 35);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
     MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 0);
     for (i = 0; i < 4; i++)
         nullsub_8(i);
-    sub_802E3E4(0, 0);
+    UpdateBattleMenuCursorPosition(0, 0);
     StrCpyDecodeToDisplayedStringBattle(BattleText_WallyMenu);
 #ifdef ENGLISH
-    Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 440, 2, 35);
+    Text_InitWindow(&gBattleMainTextWindow, gDisplayedStringBattle, 440, 2, 35);
 #else
-    Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, 444, 2, 35);
+    Text_InitWindow(&gBattleMainTextWindow, gDisplayedStringBattle, 444, 2, 35);
 #endif
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
 }
 
 void WallyHandlecmd19(void)

@@ -15,7 +15,7 @@
 #include "util.h"
 #include "ewram.h"
 
-extern struct Window gUnknown_03004210;
+extern struct Window gBattleMainTextWindow;
 extern u8 gDisplayedStringBattle[];
 extern u8 gActionSelectionCursor[];
 
@@ -238,7 +238,7 @@ void bx_battle_menu_t6_2(void)
             PlaySE(SE_SELECT);
             nullsub_8(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 1;
-            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
+            UpdateBattleMenuCursorPosition(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_RIGHT)
@@ -248,7 +248,7 @@ void bx_battle_menu_t6_2(void)
             PlaySE(SE_SELECT);
             nullsub_8(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 1;
-            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
+            UpdateBattleMenuCursorPosition(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_UP)
@@ -258,7 +258,7 @@ void bx_battle_menu_t6_2(void)
             PlaySE(SE_SELECT);
             nullsub_8(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 2;
-            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
+            UpdateBattleMenuCursorPosition(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_DOWN)
@@ -268,7 +268,7 @@ void bx_battle_menu_t6_2(void)
             PlaySE(SE_SELECT);
             nullsub_8(gActionSelectionCursor[gActiveBattler]);
             gActionSelectionCursor[gActiveBattler] ^= 2;
-            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
+            UpdateBattleMenuCursorPosition(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
 #if DEBUG
@@ -292,7 +292,7 @@ void sub_812B65C(void)
 
 void sub_812B694(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gBattleMainTextWindow.state == 0)
         SafariBufferExecCompleted();
 }
 
@@ -463,7 +463,7 @@ void SafariHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
-    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+    Text_InitWindow8002EB0(&gBattleMainTextWindow, gDisplayedStringBattle, 144, 2, 15);
     gBattleBankFunc[gActiveBattler] = sub_812B694;
 }
 
@@ -481,23 +481,23 @@ void SafariHandlecmd18(void)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 160;
-    gUnknown_03004210.paletteNum = 0;
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 15, 27, 18);
-    Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
+    gBattleMainTextWindow.paletteNum = 0;
+    Text_FillWindowRectDefPalette(&gBattleMainTextWindow, 10, 2, 15, 27, 18);
+    Text_FillWindowRectDefPalette(&gBattleMainTextWindow, 10, 2, 35, 16, 36);
     gBattleBankFunc[gActiveBattler] = bx_battle_menu_t6_2;
 
-    Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptionsSafari, 400, 18, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, BattleText_MenuOptionsSafari, 400, 18, 35);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
     MenuCursor_Create814A5C0(0, 0xFFFF, 12, 11679, 0);
 
     for (i = 0; i < 4; i++)
         nullsub_8(i);
 
-    sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
+    UpdateBattleMenuCursorPosition(gActionSelectionCursor[gActiveBattler], 0);
     StrCpyDecodeToDisplayedStringBattle(BattleText_PlayerMenu);
 
-    Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_812BB10_TILE_DATA_OFFSET, 2, 35);
-    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gBattleMainTextWindow, gDisplayedStringBattle, SUB_812BB10_TILE_DATA_OFFSET, 2, 35);
+    Text_PrintWindow8002F44(&gBattleMainTextWindow);
 }
 
 void SafariHandlecmd19(void)

@@ -52,7 +52,7 @@ extern u32 gTransformedPersonalities[];
 extern u8 gAnimMoveTurn;
 extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
-extern struct Window gUnknown_03004210;
+extern struct Window gBattleMainTextWindow;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBankTarget;
 extern u8 gAbsentBattlerFlags;
@@ -439,7 +439,7 @@ void sub_8033160(void)
 
 void sub_80331D0(void)
 {
-    if (gUnknown_03004210.state == 0)
+    if (gBattleMainTextWindow.state == 0)
         OpponentBufferExecCompleted();
 }
 
@@ -1416,7 +1416,7 @@ void OpponentHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
-    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+    Text_InitWindow8002EB0(&gBattleMainTextWindow, gDisplayedStringBattle, 144, 2, 15);
     gBattleBankFunc[gActiveBattler] = sub_80331D0;
 }
 

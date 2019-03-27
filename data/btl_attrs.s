@@ -221,7 +221,7 @@ gSpriteAffineAnimTable_81F971C:: @ 81F971C
 	.include "data/text/ability_names.inc"
 
 	.align 2
-gUnknown_081FA640:: @ 81FA640
+gBattleActionPointers:: @ 81FA640
 	.4byte HandleAction_UseMove
 	.4byte HandleAction_UseItem
 	.4byte HandleAction_Switch
@@ -231,8 +231,8 @@ gUnknown_081FA640:: @ 81FA640
 	.4byte HandleAction_ThrowPokeblock
 	.4byte HandleAction_GoNear
 	.4byte HandleAction_SafriZoneRun
-	.4byte HandleAction_Action9
-	.4byte sub_801B594
+	.4byte HandleAction_WallyRecall
+	.4byte HandleAction_RunBattleScript
 	.4byte HandleAction_Action11
 	.4byte HandleAction_ActionFinished
 	.4byte HandleAction_NothingIsFainted
@@ -295,14 +295,14 @@ gUnknown_081FA71F:: @ 81FA71F
 
 	.align 1
 gSoundMovesTable:: @ 81FA724
-	.2byte   0x2D
-	.2byte   0x2E
-	.2byte   0x2F
-	.2byte   0x30
-	.2byte   0x67
-	.2byte   0xAD
-	.2byte   0xFD
-	.2byte  0x13F
-	.2byte  0x140
-	.2byte  0x130
+	.2byte MOVE_GROWL
+	.2byte MOVE_ROAR
+	.2byte MOVE_SING
+	.2byte MOVE_SUPERSONIC
+	.2byte MOVE_SCREECH
+	.2byte MOVE_SNORE
+	.2byte MOVE_UPROAR
+	.2byte MOVE_METAL_SOUND
+	.2byte MOVE_GRASS_WHISTLE
+	.2byte MOVE_HYPER_VOICE
 	.2byte 0xFFFF

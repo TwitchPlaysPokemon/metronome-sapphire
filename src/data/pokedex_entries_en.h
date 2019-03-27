@@ -5389,6 +5389,19 @@ static const u8 DexDescription_Deoxys_2[] = _(
   "chest appears to be its brain.");
 #endif
 
+static const u8 DexDescription_Meltan_1[] = _(
+  "It melts particles of iron and other\n"
+  "metals found in the subsoil, so it\n"
+  "can absorb them into its body of");
+static const u8 DexDescription_Meltan_2[] = _("molten steel.");
+
+static const u8 DexDescription_Melmetal_1[] = _(
+    "Revered long ago for its capacity to\n"
+    "create iron from nothing, for some\n"
+    "reason it has come back to life after"); 
+static const u8 DexDescription_Melmetal_2[] = _("3,000 years.");
+
+
 const struct PokedexEntry gPokedexEntries[] =
 {
     {  //Dummy
@@ -9647,5 +9660,27 @@ const struct PokedexEntry gPokedexEntries[] =
         .pokemonOffset = 0,
         .trainerScale = 290,
         .trainerOffset = 2,
+    },
+    {  //Meltan
+        .categoryName = _("HEX NUT"),
+        .height = 2,
+        .weight = 8,
+        .descriptionPage1 = DexDescription_Meltan_1,
+        .descriptionPage2 = DexDescription_Meltan_2,
+        .pokemonScale = 549,
+        .pokemonOffset = 22,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+    {  //Melmetal
+        .categoryName = _("HEX NUT"),
+        .height = 25,
+        .weight = 800,
+        .descriptionPage1 = DexDescription_Melmetal_1,
+        .descriptionPage2 = DexDescription_Melmetal_2,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 359,
+        .trainerOffset = 6,
     },
 };

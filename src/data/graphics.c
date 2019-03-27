@@ -1192,6 +1192,8 @@ const u16 gMonIconPalettes[][16] =
     INCBIN_U16("graphics/pokemon_icon_palettes/0.gbapal"),
     INCBIN_U16("graphics/pokemon_icon_palettes/1.gbapal"),
     INCBIN_U16("graphics/pokemon_icon_palettes/2.gbapal"),
+    INCBIN_U16("graphics/pokemon/meltan/normal.gbapal"),
+    INCBIN_U16("graphics/pokemon/melmetal/normal.gbapal"),
 };
 
 const u8 gUnknown_08E96738[] = INCBIN_U8("graphics/unknown/unknown_E96738.bin.lz");
@@ -1324,16 +1326,14 @@ const u8 gInterviewOutlineCursorTiles[] = INCBIN_U8("graphics/misc/interview_out
 const u8 gTitleScreenPressStart_Gfx[] = INCBIN_U8("graphics/title_screen/press_start.4bpp.lz");
 const u8 gTitleScreenLogoShinePalette[] = INCBIN_U8("graphics/title_screen/logo_shine.gbapal");
 
+const u8 gPokemonLogo[] = INCBIN_U8("graphics/title_screen/metronome_logo.8bpp.lz");
 #ifdef SAPPHIRE
-const u8 gUnknown_08E9D8CC[] = INCBIN_U8("graphics/title_screen/pokemon_sapphire.8bpp.lz");
 const u8 gVersionTiles[] = INCBIN_U8("graphics/title_screen/sapphireversion.8bpp.lz");
-const u16 gUnknown_08E9F624[] = INCBIN_U16("graphics/title_screen/logo_sapphire.gbapal");
-// for some reason, the sapphire palette is different even though the visible colors for the logo and version are not
 #else
-const u8 gUnknown_08E9D8CC[] = INCBIN_U8("graphics/title_screen/pokemon_ruby.8bpp.lz");
 const u8 gVersionTiles[] = INCBIN_U8("graphics/title_screen/rubyversion.8bpp.lz");
-const u16 gUnknown_08E9F624[] = INCBIN_U16("graphics/title_screen/logo_ruby.gbapal");
 #endif // SAPPHIRE
+const u16 gUnknown_08E9F624[] = INCBIN_U16("graphics/title_screen/metronome_logo.gbapal");
+
 
 const u8 gUnknown_08E9F7E4[] = INCBIN_U8("graphics/unknown/unknown_E9F7E4.bin.lz");
 const u16 gPokenavArrowsPalette[] = INCBIN_U16("graphics/pokenav/arrows.gbapal");

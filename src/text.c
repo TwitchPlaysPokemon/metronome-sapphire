@@ -2816,7 +2816,7 @@ static void AddToCursorY(struct Window *win, u8 deltaY)
     win->cursorY += deltaY;
 }
 
-static void EraseAtCursor(struct Window *win)
+void EraseAtCursor(struct Window *win)
 {
     switch (win->textMode)
     {
@@ -3394,7 +3394,7 @@ static u16 GetBlankTileNum(struct Window *win)
     return retVal;
 }
 
-static s32 Window_MoveCursor(struct Window *win, u8 x, u8 y)
+s32 Window_MoveCursor(struct Window *win, u8 x, u8 y)
 {
     win->cursorX = x;
     win->cursorY = y & 0xF8;

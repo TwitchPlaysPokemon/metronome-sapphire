@@ -32,7 +32,7 @@ extern u8 gBankSpriteIds[];
 extern u16 gUnknown_02024DE8;
 extern u8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[];
-extern struct Window gUnknown_03004210;
+extern struct Window gBattleMainTextWindow;
 extern void (*gBattleBankFunc[])(void);
 extern u8 gHealthboxIDs[];
 extern u8 gUnknown_0300434C[];

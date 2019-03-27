@@ -1,0 +1,286 @@
+[
+	[
+        { "id":"Version", "sapphire":"#POKéMON SAPPHIRE VERSION", "ruby":"#POKéMON RUBY VERSION" },
+        "#Credits"
+	],
+	[
+        "#Director",
+        "Junichi Masuda"
+	],
+	[
+        "#Art Director",
+        "Ken Sugimori"
+	],
+	[
+        "#Battle Director",
+        "Shigeki Morimoto"
+	],
+	[
+        "#Main Programmer",
+        "Tetsuya Watanabe"
+	],
+	[
+        "#Battle System Programmer",
+        "Hisashi Sogabe",
+        "#Field System Programmer",
+        "Sousuke Tamada"
+	],
+	[
+        "#Programmers",
+        "Akito Mori",
+        "Keita Kagaya",
+        "Yoshinori Matsuda"
+	],
+	[
+        "#Programmers",
+        "Hiroyuki Nakamura",
+        "Masao Taya",
+        "Satoshi Nohara"
+	],
+	[
+        "#Programmers",
+        "Tomomichi Ohta",
+        "Miyuki Iwasawa",
+        "Takenori Ohta"
+	],
+	[
+        "#Main Graphic Designer",
+        "Hironobu Yoshida"
+	],
+	[
+        "#POKéMON & Graphic Designers",
+        "Ken Sugimori",
+        "Hironobu Yoshida"
+	],
+	[
+        "#POKéMON & Graphic Designers",
+        "Motofumi Fujiwara",
+        "Satoshi Ohta",
+        "Asuka Iwashita"
+	],
+	[
+        "#POKéMON & Graphic Designers",
+        "Aimi Tomita",
+        "Takao Unno",
+        "Kanako Eo"
+	],
+	[
+        "#POKéMON Designers",
+        "Shigeki Morimoto",
+        "Jun Okutani",
+        "Atsuko Nishida"
+	],
+	[
+        "#POKéMON Designers",
+        "Muneo Saito",
+        "Rena Yoshikawa"
+	],
+	[
+        "#Music Composition",
+        "Go Ichinose",
+        "Morikazu Aoki",
+        "Junichi Masuda"
+	],
+	[
+        "#Sound Effects & POKéMON Voices",
+        "Morikazu Aoki"
+	],
+	[
+        "#Game Designers",
+        "Junichi Masuda",
+        "Shigeki Morimoto",
+        "Koji Nishino"
+	],
+	[
+        "#Game Designers",
+        "Kenji Matsushima",
+        "Tetsuji Ohta",
+        "Hitomi Sato",
+        "Takeshi Kawachimaru"
+	],
+	[
+        "#Game Designers",
+        "Teruyuki Shimoyamada",
+        "Shigeru Ohmori",
+        "Tadashi Takahashi"
+	],
+	[
+        "#Plot Scenario",
+        "Junichi Masuda",
+        "Akihito Tomisawa",
+        "Koji Nishino"
+	],
+	[
+        "#Game Scenario",
+        "Toshinobu Matsumiya",
+        "Akihito Tomisawa"
+	],
+	[
+        "#Script Designers",
+        "Satoshi Nohara",
+        "Tetsuji Ohta",
+        "Tomomichi Ohta"
+	],
+	[
+        "#Map Designers",
+        "Shigeru Ohmori",
+        "Tetsuji Ohta",
+        "Koji Nishino"
+	],
+	[
+        "#Map Data Designers",
+        "Tetsuji Ohta",
+        "Tadashi Takahashi"
+	],
+	[
+        "#Parametric Designers",
+        "Koji Nishino",
+        "Shigeki Morimoto",
+        "Tetsuji Ohta",
+        "Teruyuki Shimoyamada"
+	],
+	[
+        "#POKéDEX Text",
+        "Kenji Matsushima"
+	],
+	[
+        "#Environment & Tool Programmers",
+        "Hisashi Sogabe",
+        "Sousuke Tamada",
+        "Hiroyuki Nakamura",
+        "Akito Mori"
+	],
+	[
+        "#Product Testing",
+        "NCL Super Mario Club",
+        "Atsushi Tada",
+        "Takahiro Ohnishi",
+        "Norihide Okamura"
+	],
+	[
+        "#Special Thanks",
+        "Kenji Tominaga",
+        "Yoshio Tajiri",
+        "Teiko Sasaki"
+	],
+	[
+        "#Special Thanks",
+        "Sachiko Hamano",
+        "Chie Matsumiya",
+        "Akiko Shinozaki",
+        "Atsuko Fujii"
+	],
+	[
+        "#Special Thanks",
+        "Kazuya Suyama",
+        "Satoshi Mitsuhara",
+        "Tomotaka Komura",
+        "Mikiko Ohashi"
+	],
+	[
+        "#Special Thanks",
+        "Michiko Takizawa",
+        "Makiko Takada",
+        "Takanao Kondo",
+        "Ai Mashima"
+	],
+	[
+        "#Information Supervisors",
+        "Hiroki Enomoto",
+        "Kazuyuki Terada",
+        "Yuri Sakurai",
+        "Hiromi Sagawa"
+	],
+	[
+        "#Coordinators",
+        "Kyoko Watanabe",
+        "Takao Nakano"
+	],
+	[
+        "#Task Managers",
+        "Hitoshi Yamagami",
+        "Gakuji Nomoto"
+	],
+	[
+        "#Producers",
+        "Hiroyuki Jinnai",
+        "Takehiro Izushi",
+        "Hiroaki Tsuru"
+	],
+	[
+        "#Executive Director",
+        "Satoshi Tajiri"
+	],
+	[
+        "#Executive Producers",
+        "Satoru Iwata"
+	],
+	[
+        "#Executive Producers",
+        "Tsunekaz Ishihara"
+	],
+	[
+        "#English Version Coordinators",
+        "Hiro Nakamura",
+        "Seth McMahill"
+	],
+	[
+        "#Translator",
+        "Nob Ogasawara"
+	],
+	[
+        "#Programmers",
+        "Teruki Murakawa",
+        "Souichi Yamamoto",
+        "Masanori Funakoshi",
+        "Akira Kinashi"
+	],
+	[
+        "#Graphic Designers",
+        "Souichi Yamamoto",
+        "Akira Kinashi"
+	],
+	[
+        "#Product Support",
+        "Kimiko Nakamichi",
+        "Daisuke Hara"
+	],
+	[
+        "#Artwork",
+        "Atsushi Okada"
+	],
+	[
+        "#Text Editor",
+        "Teresa Lillygren"
+	],
+	[
+        "#NOA Product Testing",
+        "Thomas Hertzog",
+        "Ed Ridgeway"
+	],
+	[
+        "#Braille Code Check",
+        "National Federation of the Blind",
+        "Patricia A. Maurer",
+        "Japan Braille Library",
+        "European Blind Union"
+	],
+	[
+        "#Braille Code Check",
+        "Australian Braille Authority",
+        "Royal New Zealand Federation for the Blind"
+	],
+	[
+        "#Special Thanks",
+        "Sayoko Blodgett-Ford",
+        "Nicola Pratt-Barlow",
+        "Hiroyuki Uesugi",
+        "Koji Uyama"
+	],
+	[
+        "#Special Thanks",
+        "Anthony Howitt",
+        "Gail Tilden",
+        "Kazuhiro Fujihara"
+	]
+]

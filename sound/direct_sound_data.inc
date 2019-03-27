@@ -2021,3 +2021,11 @@ DirectSoundWaveData_Phoneme_Vowel57:: @ 8654170
 	.align 2
 DirectSoundWaveData_SC88_AccordionFr_Copy:: @ 8654C20
 	.incbin "sound/direct_sound_samples/synth/sc88_22_accordion_fr.bin"
+
+	.align 2
+Cry_Meltan::
+	.incbin "sound/direct_sound_samples/cries/cry_meltan.bin"
+
+	.align 2
+Cry_Melmetal::
+	.incbin "sound/direct_sound_samples/cries/cry_melmetal.bin"

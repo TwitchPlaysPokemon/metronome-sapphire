@@ -742,9 +742,9 @@ bool8 TayaDebugMenu_PokenavD(void)
             u32 otId = Random() + 1;
             u16 level = (Random() % 100) + 1;
             u16 species = (Random() % 386) + 1;
-            if (species >= SPECIES_OLD_UNOWN_B)
+            if (species >= SPECIES_MELTAN)
             {
-                species += SPECIES_TREECKO - SPECIES_OLD_UNOWN_B;
+                species += SPECIES_TREECKO - SPECIES_MELTAN;
                 if (species >= NUM_SPECIES)
                     species = SPECIES_BULBASAUR;
             }

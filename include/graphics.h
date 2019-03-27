@@ -1563,6 +1563,19 @@ extern const u8 gMonBackPic_Celebi[];
 extern const u8 gMonShinyPalette_Celebi[];
 extern const u8 gMonIcon_Celebi[];
 extern const u8 gMonFootprint_Celebi[];
+
+extern const u8 gMonFrontPic_Meltan[];
+extern const u8 gMonPalette_Meltan[];
+extern const u8 gMonBackPic_Meltan[];
+extern const u8 gMonShinyPalette_Meltan[];
+extern const u8 gMonIcon_Meltan[];
+
+extern const u8 gMonFrontPic_Melmetal[];
+extern const u8 gMonPalette_Melmetal[];
+extern const u8 gMonBackPic_Melmetal[];
+extern const u8 gMonShinyPalette_Melmetal[];
+extern const u8 gMonIcon_Melmetal[];
+
 extern const u8 gMonFrontPic_QuestionMark[];
 extern const u8 gMonPalette_QuestionMark[];
 extern const u8 gMonBackPic_QuestionMark[];
@@ -2727,7 +2740,7 @@ extern const u8 gUnknown_08E9AC4C[];
 extern const u8 gInterviewOutlineCursorTiles[];
 extern const u8 gTitleScreenPressStart_Gfx[];
 extern const u16 gTitleScreenLogoShinePalette[];
-extern const u8 gUnknown_08E9D8CC[];
+extern const u8 gPokemonLogo[];
 extern const u8 gVersionTiles[];
 extern const u16 gUnknown_08E9F624[];
 extern const u8 gUnknown_08E9F7E4[];

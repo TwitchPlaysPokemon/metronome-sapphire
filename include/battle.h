@@ -843,9 +843,9 @@ u8 BankGetTurnOrder(u8 bank);
 // asm/battle_5.o
 void nullsub_91(void);
 void SetBankFuncToPlayerBufferRunCommand(void);
-void sub_802C098();
+void BattleMenuAction();
 void c3_0802FDF4(u8);
-void sub_802E3E4(u8, int);
+void UpdateBattleMenuCursorPosition(u8, int);
 void nullsub_8(u8);
 void sub_802E414(void);
 void sub_802E424(void);

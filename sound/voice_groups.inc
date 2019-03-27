@@ -12522,9 +12522,11 @@ gCryTable:: @ 8452590
 	cry Cry_Jirachi
 	cry Cry_Deoxys
 	cry Cry_Chimecho
+	cry Cry_Meltan
+	cry Cry_Melmetal
 
 	.align 2
-gCryTable2:: @ 84537C0
+gCryTable2::
 	cry2 Cry_Bulbasaur
 	cry2 Cry_Ivysaur
 	cry2 Cry_Venusaur
@@ -12913,9 +12915,12 @@ gCryTable2:: @ 84537C0
 	cry2 Cry_Jirachi
 	cry2 Cry_Deoxys
 	cry2 Cry_Chimecho
+	cry2 Cry_Meltan
+	cry2 Cry_Melmetal
+
 
 	.align 2
-voicegroup112:: @ 84549F0
+voicegroup112::
 	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel7, 255, 0, 255, 0
 	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel8, 255, 0, 255, 0
 	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel9, 255, 0, 255, 0
@@ -12969,7 +12974,7 @@ voicegroup112:: @ 84549F0
 	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel57, 255, 0, 255, 0
 
 	.align 2
-voicegroup113:: @ 8454C54
+voicegroup113::
 	voice_keysplit_all voicegroup001
 	voice_square_1 0, 2, 0, 0, 15, 0
 	voice_square_1 0, 2, 0, 0, 15, 0

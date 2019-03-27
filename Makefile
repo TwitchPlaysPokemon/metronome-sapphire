@@ -27,7 +27,7 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 GBAFIX    := tools/gbafix/gbafix$(EXE)
 MAPJSON   := tools/mapjson/mapjson$(EXE)
 ITEMSJSON := tools/itemsjson/itemsjson$(EXE)
-PGEGEN    := python3 tools/pgegen/pgegen.py$(EXE)
+PGEGEN    := tools/pgegen/pgegen$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG) --defsym RANDOMIZE=$(RANDOMIZE) --defsym NO_LVL_DISPLAY=$(NO_LVL_DISPLAY)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -129,6 +129,7 @@ clean: tidy
 	$(MAKE) clean -C tools/gbafix
 	$(MAKE) clean -C tools/mapjson
 	$(MAKE) clean -C tools/itemsjson
+	$(MAKE) clean -C tools/pgegen
 
 tools:
 	@$(MAKE) -C tools/gbagfx
@@ -142,6 +143,7 @@ tools:
 	@$(MAKE) -C tools/gbafix
 	@$(MAKE) -C tools/mapjson
 	@$(MAKE) -C tools/itemsjson
+	@$(MAKE) -C tools/pgegen
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=metronome%{.gba,.elf,.map})
@@ -152,7 +154,7 @@ $(ROM): %.gba: %.elf
 	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(PGEINI): %.pge.ini: %.elf
-	$(PGEGEN) $< $@ --code $(GAME_CODE) --name "$(TITLE)"
+	$(PGEGEN) $< $@ --code $(GAME_CODE) --name "$(GAME_NAME)"
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
@@ -185,7 +187,7 @@ sapphire_rev2: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2
 ruby_de:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN
 sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
 ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
-
+norand:        ; @$(MAKE) GAME_VERSION=SAPPHIRE RANDOMIZE=0
 
 #### Graphics Rules ####
 

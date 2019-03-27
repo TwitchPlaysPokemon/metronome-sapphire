@@ -1023,7 +1023,11 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    if (PlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[2]);
+    }
+    else if (PlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
         sub_80A7094(taskId);
     }
