@@ -18,6 +18,7 @@
 #include "text.h"
 #include "trig.h"
 #include "util.h"
+#include "random.h"
 #include "ewram.h"
 
 #ifdef ENGLISH
@@ -991,7 +992,14 @@ static void CursorInit(void)
     gSprites[namingScreenDataPtr->cursorSpriteId].oam.objMode = 1;
     gSprites[namingScreenDataPtr->cursorSpriteId].data[6] = 1;
     gSprites[namingScreenDataPtr->cursorSpriteId].data[6] = 2;
+#if RANDOMIZE
+    {
+        u16 rval = Random();
+        SetCursorPos(rval % 9, (rval >> 8) % 4);
+    }
+#else
     SetCursorPos(0, 0);
+#endif // RANDOMIZE
 }
 
 static const u8 sKeyboardSymbolPositions[][COLUMN_COUNT] = {
