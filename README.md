@@ -2,7 +2,7 @@
 
 Based on [this](https://www.reddit.com/r/twitchplayspokemon/comments/6q06qu/idea_for_a_future_run/) subreddit post.
 
-Currently planned features:
+This game plays by the following rules:
 
 * All Pokémon only know Metronome during battle/contests.
 * All Pokémon are level 100
