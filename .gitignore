@@ -48,3 +48,5 @@ build/
 *.pyc
 src/data/items.h
 src/data/item_descriptions.h
+patch-staging/
+*.bsp
