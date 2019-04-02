@@ -1002,6 +1002,9 @@ static void PlayAmbientCry(void)
         return;
     pan = (Random() % 88) + 212;
     volume = (Random() % 30) + 50;
+#if RANDOMIZE
+    RANDOMIZE_SPECIES(sAmbientCrySpecies);
+#endif
     PlayCry2(sAmbientCrySpecies, pan, volume, 1);
 }
 

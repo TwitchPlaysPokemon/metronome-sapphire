@@ -19,7 +19,6 @@
 
 extern u16 gSpecialVar_Result;
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern const u16 gSpeciesToNationalPokedexNum[];
 
 //--------------------------------------------------
 // Graphics Data

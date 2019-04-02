@@ -30,8 +30,6 @@
 
 extern struct PaletteFadeControl gPaletteFade;
 
-extern const u16 gSpeciesToNationalPokedexNum[];
-
 extern const u8 gBirchSpeech_Welcome[];
 extern const u8 gBirchSpeech_ThisIsPokemon[];
 extern const u8 gBirchSpeech_WorldInhabitedByPokemon[];

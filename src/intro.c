@@ -22,8 +22,6 @@
 #include "scanline_effect.h"
 #include "ewram.h"
 
-extern const u16 gSpeciesToNationalPokedexNum[];
-
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_02039358;
 extern u16 gUnknown_0203935A;

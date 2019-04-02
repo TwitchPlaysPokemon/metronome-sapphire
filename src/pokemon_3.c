@@ -34,7 +34,6 @@ extern struct BattlePokemon gBattleMons[4];
 extern u8 gActiveBattler;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
 extern u16 gSpeciesToHoennPokedexNum[];
-extern u16 gSpeciesToNationalPokedexNum[];
 extern u16 gHoennToNationalOrder[];
 extern u16 gSpeciesIdToCryId[];
 extern u8 gBattleTextBuff1[];
