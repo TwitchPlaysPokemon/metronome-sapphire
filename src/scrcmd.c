@@ -45,6 +45,7 @@
 #include "constants/maps.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/species.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -2034,5 +2035,11 @@ bool8 ScrCmd_takecoins(struct ScriptContext *ctx)
         gSpecialVar_Result = 0;
     else
         gSpecialVar_Result = 1;
+    return FALSE;
+}
+
+bool8 ScrCmd_randpoke(struct ScriptContext *ctx)
+{
+    RANDOMIZE_SPECIES(gSpecialVar_Result);
     return FALSE;
 }

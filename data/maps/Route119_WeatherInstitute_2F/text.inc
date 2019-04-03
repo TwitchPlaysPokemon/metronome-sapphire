@@ -57,7 +57,7 @@ Route119_WeatherInstitute_2F_Text_19F231:: @ 819F231
 	.string "for this POKéMON.$"
 
 Route119_WeatherInstitute_2F_Text_19F267:: @ 819F267
-	.string "{PLAYER} received CASTFORM!$"
+	.string "{PLAYER} received {STR_VAR_1}!$"
 
 Route119_WeatherInstitute_2F_Text_19F27D:: @ 819F27D
 	.string "That POKéMON changes shape according\n"

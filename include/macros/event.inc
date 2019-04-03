@@ -1478,3 +1478,7 @@
 	setorcopyvar VAR_SPECIAL_0, \decoration
 	callstd 7
 	.endm
+
+	.macro randpoke
+	.byte 0xC6
+	.endm
