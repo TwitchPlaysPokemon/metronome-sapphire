@@ -168,6 +168,7 @@ extern u16 gUnknown_02024C2C[4]; //last used moves 2, used by sketch
 extern u16 gUnknown_02024C4C[4]; //last used moves by banks, another one
 extern u8 gCurrentTurnActionNumber;
 extern u16 gTrappingMoves[];
+extern u32 gTransformedPersonalities[];
 
 extern u8 BattleScript_MoveEffectSleep[];
 extern u8 BattleScript_MoveEffectPoison[];
@@ -15415,10 +15416,6 @@ void atkEF_handleballthrow(void)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 else
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                if (gBattleMons[gBankTarget].status2 & STATUS2_TRANSFORMED)
-                {
-                    SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankTarget]], MON_DATA_SPECIES, ewram17800[gBankTarget].transformedSpecies);
-                }
             }
             else //rip
             {
@@ -15439,15 +15436,27 @@ static void atkF0_givecaughtmon(void)
 
 static void atkF1_trysetcaughtmondexflags(void)
 {
-    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBankTarget].species), 1))
+    u16 species;
+    u32 personality;
+    if (gBattleMons[gBankTarget].status2 & STATUS2_TRANSFORMED)
+    {
+        species = ewram17800[gBankTarget].transformedSpecies;
+        personality = gTransformedPersonalities[gBankTarget];
+    }
+    else
+    {
+        species = gBattleMons[gBankTarget].species;
+        personality = gBattleMons[gBankTarget].personality;
+    }
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 1))
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
     {
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBankTarget].species), 3);
-        if (gBattleMons[gBankTarget].species == SPECIES_UNOWN)
-            gSaveBlock2.pokedex.unownPersonality = gBattleMons[gBankTarget].personality;
-        if (gBattleMons[gBankTarget].species == SPECIES_SPINDA) //else if
-            gSaveBlock2.pokedex.spindaPersonality = gBattleMons[gBankTarget].personality;
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 3);
+        if (species == SPECIES_UNOWN)
+            gSaveBlock2.pokedex.unownPersonality = personality;
+        if (species == SPECIES_SPINDA) //else if
+            gSaveBlock2.pokedex.spindaPersonality = personality;
         gBattlescriptCurrInstr += 5;
     }
 }
