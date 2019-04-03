@@ -221,6 +221,7 @@ static const u8 sFemaleTrainerGfxIds[] =
 
 const u16 gBattleTowerBannedSpecies[] =
 {
+#if !RANDOMIZE
     SPECIES_MEW,
     SPECIES_MEWTWO,
     SPECIES_HO_OH,
@@ -231,6 +232,7 @@ const u16 gBattleTowerBannedSpecies[] =
     SPECIES_RAYQUAZA,
     SPECIES_JIRACHI,
     SPECIES_DEOXYS,
+#endif
     0xFFFF,
 };
 
