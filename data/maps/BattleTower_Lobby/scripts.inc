@@ -200,6 +200,9 @@ BattleTower_Lobby_EventScript_1604BE:: @ 81604BE
 	case 127, BattleTower_Lobby_EventScript_160652
 
 BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
+	.if RANDOMIZE
+	setvar RESULT, 1
+	.else
 	message BattleTower_Lobby_Text_19A024
 	waitmessage
 	multichoice 18, 6, 24, 0
@@ -209,6 +212,7 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	special CheckPartyBattleTowerBanlist
 	compare VAR_SPECIAL_4, 1
 	goto_if_eq BattleTower_Lobby_EventScript_16060D
+	.endif
 	setvar VAR_SPECIAL_4, 1
 	copyvar VAR_SPECIAL_5, RESULT
 	copyvar VAR_SPECIAL_6, RESULT
