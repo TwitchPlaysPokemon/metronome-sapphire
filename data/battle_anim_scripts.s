@@ -8245,7 +8245,7 @@ Move_TRANSFORM: @ 81D3054
 	monbg ANIM_BATTLER_ATTACKER
 	playsewithpan SE_W100, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W107, SOUND_PAN_ATTACKER, 48
-	createvisualtask sub_812D7E8, 2, 0
+	createvisualtask AnimVisualTask_Transform, 2, 0
 	waitforvisualfinish
 	clearmonbg ANIM_BATTLER_ATTACKER
 	end
@@ -10302,7 +10302,7 @@ _81D63C8:
 	monbg ANIM_BATTLER_ATTACKER
 	playsewithpan SE_W100, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_W107, SOUND_PAN_ATTACKER, 48
-	createvisualtask sub_812D7E8, 2, 1
+	createvisualtask AnimVisualTask_Transform, 2, 1
 	waitforvisualfinish
 	clearmonbg ANIM_BATTLER_ATTACKER
 	end

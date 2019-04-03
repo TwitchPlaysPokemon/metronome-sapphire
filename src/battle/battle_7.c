@@ -629,7 +629,7 @@ void sub_8031F88(u8 a)
     ewram17800[a].invisible = gSprites[gBankSpriteIds[a]].invisible;
 }
 
-void sub_8031FC4(u8 a, u8 b, bool8 c)
+void SetTransformedStateData(u8 attacker, u8 target, bool8 c)
 {
     u16 paletteOffset;
     u16 species;
@@ -640,16 +640,16 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
 
     if (c)
     {
-        StartSpriteAnim(&gSprites[gBankSpriteIds[a]], ewram17840.unk0);
-        paletteOffset = 0x100 + a * 16;
+        StartSpriteAnim(&gSprites[gBankSpriteIds[attacker]], ewram17840.unk0);
+        paletteOffset = 0x100 + attacker * 16;
         LoadPalette(ewram16400 + ewram17840.unk0 * 32, paletteOffset, 32);
-        gBattleMonForms[a] = ewram17840.unk0;
-        if (ewram17800[a].transformedSpecies != 0)
+        gBattleMonForms[attacker] = ewram17840.unk0;
+        if (ewram17800[attacker].transformedSpecies != 0)
         {
             BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
             CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         }
-        gSprites[gBankSpriteIds[a]].pos1.y = sub_8077F68(a);
+        gSprites[gBankSpriteIds[attacker]].pos1.y = sub_8077F68(attacker);
     }
     else
     {
@@ -670,15 +670,15 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         }
         else
         {
-            r10 = GetBattlerPosition(a);
-            if (GetBattlerSide(b) == 1)
-                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[b]], MON_DATA_SPECIES);
+            r10 = GetBattlerPosition(attacker);
+            if (GetBattlerSide(target) == 1)
+                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[target]], MON_DATA_SPECIES);
             else
-                species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[b]], MON_DATA_SPECIES);
-            if (GetBattlerSide(a) == 0)
+                species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[target]], MON_DATA_SPECIES);
+            if (GetBattlerSide(attacker) == 0)
             {
-                personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_PERSONALITY);
-                otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_OT_ID);
+                personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[attacker]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[attacker]], MON_DATA_OT_ID);
                 HandleLoadSpecialPokePic(
                   &gMonBackPicTable[species],
                   gMonBackPicCoords[species].coords,
@@ -686,12 +686,12 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   eVoidSharedArr2,
                   gUnknown_081FAF4C[r10],
                   species,
-                  gTransformedPersonalities[a]);
+                  gTransformedPersonalities[attacker]);
             }
             else
             {
-                personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[a]], MON_DATA_PERSONALITY);
-                otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[a]], MON_DATA_OT_ID);
+                personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[attacker]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[attacker]], MON_DATA_OT_ID);
                 HandleLoadSpecialPokePic(
                   &gMonFrontPicTable[species],
                   gMonFrontPicCoords[species].coords,
@@ -699,11 +699,11 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   eVoidSharedArr2,
                   gUnknown_081FAF4C[r10],
                   species,
-                  gTransformedPersonalities[a]);
+                  gTransformedPersonalities[attacker]);
             }
         }
-        DmaCopy32Defvars(3, gUnknown_081FAF4C[r10], (void *)(VRAM + 0x10000 + gSprites[gBankSpriteIds[a]].oam.tileNum * 32), 0x800);
-        paletteOffset = 0x100 + a * 16;
+        DmaCopy32Defvars(3, gUnknown_081FAF4C[r10], (void *)(VRAM + 0x10000 + gSprites[gBankSpriteIds[attacker]].oam.tileNum * 32), 0x800);
+        paletteOffset = 0x100 + attacker * 16;
         lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
         LZDecompressWram(lzPaletteData, gSharedMem);
         LoadPalette(gSharedMem, paletteOffset, 32);
@@ -712,17 +712,17 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
             u16 *paletteSrc = (u16 *)ewram16400; // TODO: avoid casting?
 
             LZDecompressWram(lzPaletteData, paletteSrc);
-            LoadPalette(paletteSrc + gBattleMonForms[b] * 16, paletteOffset, 32);
+            LoadPalette(paletteSrc + gBattleMonForms[target] * 16, paletteOffset, 32);
         }
         BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         if (!IsContest())
         {
-            ewram17800[a].transformedSpecies = species;
-            gBattleMonForms[a] = gBattleMonForms[b];
+            ewram17800[attacker].transformedSpecies = species;
+            gBattleMonForms[attacker] = gBattleMonForms[target];
         }
-        gSprites[gBankSpriteIds[a]].pos1.y = sub_8077F68(a);
-        StartSpriteAnim(&gSprites[gBankSpriteIds[a]], gBattleMonForms[a]);
+        gSprites[gBankSpriteIds[attacker]].pos1.y = sub_8077F68(attacker);
+        StartSpriteAnim(&gSprites[gBankSpriteIds[attacker]], gBattleMonForms[attacker]);
     }
 }
 

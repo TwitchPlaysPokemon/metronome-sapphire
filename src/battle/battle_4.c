@@ -15415,6 +15415,10 @@ void atkEF_handleballthrow(void)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 else
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                if (gBattleMons[gBankTarget].status2 & STATUS2_TRANSFORMED)
+                {
+                    SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBankTarget]], MON_DATA_SPECIES, ewram17800[gBankTarget].transformedSpecies);
+                }
             }
             else //rip
             {

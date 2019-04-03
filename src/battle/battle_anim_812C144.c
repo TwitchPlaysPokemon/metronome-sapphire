@@ -2250,7 +2250,7 @@ void sub_812D790(u8 taskId)
     }
 }
 
-void sub_812D7E8(u8 taskId)
+void AnimVisualTask_Transform(u8 taskId)
 {
     int i, j;
     u8 position;
@@ -2285,7 +2285,7 @@ void sub_812D7E8(u8 taskId)
         }
         break;
     case 2:
-        sub_8031FC4(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
+        SetTransformedStateData(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
         sub_8078954(&subStruct, gBattleAnimAttacker);
 
         if (IsContest())
@@ -2373,7 +2373,7 @@ void c3_80DFBE4(u8 taskId)
 
 void sub_812DB58(u8 taskId)
 {
-    sub_8031FC4(gBattleAnimAttacker, gBattleAnimTarget, 1);
+    SetTransformedStateData(gBattleAnimAttacker, gBattleAnimTarget, 1);
     DestroyAnimVisualTask(taskId);
 }
 
