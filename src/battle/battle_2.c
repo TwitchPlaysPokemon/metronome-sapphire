@@ -3463,8 +3463,9 @@ void SwitchInClearSetData(void)
         gDisableStructs[gActiveBattler].perishSongTimer2 = sp0.perishSongTimer2;
     }
 
-    gDisableStructs[gActiveBattler].isFirstTurn= 2;
+    gDisableStructs[gActiveBattler].isFirstTurn = 2;
     gLastUsedMove[gActiveBattler] = 0;
+    gLastUsedMetronomeMove[gActiveBattler] = 0;
     gLastLandedMoves[gActiveBattler] = 0;
     gLastHitByType[gActiveBattler] = 0;
     gUnknown_02024C4C[gActiveBattler] = 0;
@@ -3529,6 +3530,7 @@ void UndoEffectsAfterFainting(void)
 
     gDisableStructs[gActiveBattler].isFirstTurn= 2;
     gLastUsedMove[gActiveBattler] = 0;
+    gLastUsedMetronomeMove[gActiveBattler] = 0;
     gLastLandedMoves[gActiveBattler] = 0;
     gLastHitByType[gActiveBattler] = 0;
     gUnknown_02024C4C[gActiveBattler] = 0;
