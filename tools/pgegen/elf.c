@@ -14,8 +14,6 @@ static int initialized = 0;
 unsigned int nSymbols = 0;
 static FILE * elfFile = NULL;
 
-static const char ElfMagic[4] = {'\x7F', 'E', 'L', 'F'};
-
 #ifdef _MSC_VER
 #define DEBUG_MSG(fmt, ...) // fprintf(stderr, fmt, __VA_ARGS__)
 #else
@@ -28,8 +26,11 @@ static void ReadElfHeader(void)
 
     fseek(elfFile, 0, SEEK_SET);
     fread(&elfHeader, sizeof(elfHeader), 1, elfFile);
-    if (memcmp(elfHeader.e_ident, ElfMagic, sizeof(ElfMagic)) != 0) {
+    if (memcmp(elfHeader.e_ident, ELFMAG, SELFMAG) != 0) {
         FATAL_ERROR("malformed ELF header\n");
+    }
+    if (elfHeader.e_ident[EI_CLASS] != ELFCLASS32) {
+        FATAL_ERROR("%s elf detected (this utility only supports 32-bit)\n", elfHeader.e_ident[EI_CLASS] == ELFCLASS64 ? "64-bit" : "unknown");
     }
     initialized = 1;
 }

@@ -6,6 +6,12 @@
 
 extern unsigned int nSymbols;
 
+typedef union {
+	Elf32_Ehdr e32;
+	Elf64_Ehdr e64;
+	unsigned char e_ident[EI_NIDENT];
+} Elf_Ehdr;
+
 Elf32_Sym * GetSymbol(unsigned int st_idx);
 Elf32_Sym * GetSymbolByName(const char * name);
 Elf32_Shdr * GetSectionHeader(unsigned int sh_idx);
